@@ -18,8 +18,6 @@ def UserDetailAPI(request):
   user = get_object_or_404(CustomUser, id=request.user.id)
   serializer = UserSerializer(user)
   return Response(serializer.data)
-  # def get(self,request,*args,**kwargs):
-  #   # user = CustomUser.objects.get(id=request.user.id)
 
 #Class based view to register user
 class RegisterUserAPIView(generics.CreateAPIView):
@@ -36,4 +34,4 @@ class LoginView(APIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
         login(request, user)
-        return Response({'is_ok': True})
+        return Response({'is_ok': True, 'username': user.username})
