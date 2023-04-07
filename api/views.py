@@ -8,6 +8,7 @@ from rest_framework.authentication import TokenAuthentication, SessionAuthentica
 from rest_framework import generics
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework import permissions
+from django.contrib.auth import login
 
 # Class based view to Get User Details using Token Authentication
 @api_view(["GET"])
@@ -35,4 +36,4 @@ class LoginView(APIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
         login(request, user)
-        return Response(None, status=status.HTTP_202_ACCEPTED)
+        return Response({'is_ok': True})
