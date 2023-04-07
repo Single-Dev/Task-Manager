@@ -1,11 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+
 # from django.urls import reverse
 
 GENDER = (('man', 'Man'), ('woman', 'Woman'))
 
 
 class CustomUser(AbstractUser):
+    id = models.AutoField(primary_key=True)
     email = models.EmailField(
         verbose_name='email address',
         max_length=250,
