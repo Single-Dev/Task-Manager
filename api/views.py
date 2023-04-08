@@ -15,9 +15,9 @@ from django.contrib.auth import login
 @permission_classes((permissions.AllowAny, ))
 def UserDetailAPI(request):
   authentication_classes = (TokenAuthentication,)
-  user = get_object_or_404(CustomUser, id=request.user.id)
+  user = CustomUser.objects.get(id=request.user.id)
   serializer = UserSerializer(user)
-  return Response(serializer.data)
+  return Response({'is_ok': True})
 
 #Class based view to register user
 class RegisterUserAPIView(generics.CreateAPIView):

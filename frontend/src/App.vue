@@ -1,8 +1,3 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
   <header>
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
@@ -13,12 +8,37 @@ import HelloWorld from './components/HelloWorld.vue'
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
+        <p>{{ message }}</p>
       </nav>
     </div>
   </header>
 
   <RouterView />
 </template>
+
+<script>
+import { RouterLink, RouterView } from 'vue-router'
+import HelloWorld from './components/HelloWorld.vue'
+import axios from 'axios'
+
+export default {
+  data() {
+    return {
+      message: ""
+    }
+  },
+  methods: {
+    async getApi() {
+      const login = await axios.get('http://127.0.0.1:8080/api/users/')
+        console.log(login.data);
+    }
+  },
+  mounted() {
+    this.getApi()
+  },
+}
+
+</script>
 
 <style scoped>
 header {
