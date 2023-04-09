@@ -13,8 +13,15 @@ SECRET_KEY = 'django-insecure-i5k%e6msk2s+)52wyr_0-q5=vis+l=84@rk%8%ak7cyw-%j1ey
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
 ALLOWED_HOSTS = ["*"]
 CORS_ORIGIN_ALLOW_ALL = True
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
 
 # CORS_ALLOW_METHODS = [
 #     "DELETE",
@@ -35,7 +42,9 @@ INSTALLED_APPS = [
     'api',
     'authentication',
     'rest_framework',
+    'djoser',
     'corsheaders',
+    'rest_framework_simplejwt'
 ]
 
 MIDDLEWARE = [
