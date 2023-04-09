@@ -23,6 +23,10 @@ REST_FRAMEWORK = {
     )
 }
 
+SIMPLE_JWT = {
+   'AUTH_HEADER_TYPES': ('JWT',),
+}
+
 # CORS_ALLOW_METHODS = [
 #     "DELETE",
 #     "GET",
@@ -43,8 +47,8 @@ INSTALLED_APPS = [
     'authentication',
     'rest_framework',
     'djoser',
+    'rest_framework_simplejwt',
     'corsheaders',
-    'rest_framework_simplejwt'
 ]
 
 MIDDLEWARE = [
