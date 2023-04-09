@@ -3,12 +3,9 @@
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
-        <p>{{ message }}</p>
       </nav>
     </div>
   </header>
@@ -18,19 +15,17 @@
 
 <script>
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
 import axios from 'axios'
 
 export default {
   data() {
-    return {
-      message: ""
-    }
+    return {}
   },
   methods: {
     async getApi() {
-      const login = await axios.get('http://127.0.0.1:8080/api/users/')
-        console.log(login.data);
+      const login = await axios.post('http://127.0.0.1:8000/api/login/',
+      {"username":"my_name", "password":"bek060625"})
+      console.log(login.data);
     }
   },
   mounted() {

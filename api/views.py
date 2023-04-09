@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -11,6 +12,7 @@ from rest_framework import permissions
 from django.contrib.auth import login
 
 # Class based view to Get User Details using Token Authentication
+# @login_required('api:login')
 @api_view(["GET"])
 @permission_classes((permissions.AllowAny, ))
 def UserDetailAPI(request):
