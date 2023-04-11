@@ -4,8 +4,10 @@
 
     <div class="wrapper">
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/">Home</RouterLink>|
+        <RouterLink to="/about">About</RouterLink>|
+        <RouterLink to="/singup">Sign Up</RouterLink>|
+        <RouterLink to="/login">login</RouterLink>|
       </nav>
     </div>
   </header>
