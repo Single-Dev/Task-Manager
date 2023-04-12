@@ -1,41 +1,24 @@
+<script setup>
+import { RouterLink, RouterView } from 'vue-router'
+import HelloWorld from './components/HelloWorld.vue'
+</script>
+
 <template>
   <header>
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
+      <HelloWorld msg="You did it!" />
+
       <nav>
-        <RouterLink to="/">Home</RouterLink>|
-        <RouterLink to="/about">About</RouterLink>|
-        <RouterLink to="/singup">Sign Up</RouterLink>|
-        <RouterLink to="/login">login</RouterLink>|
+        <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/about">About</RouterLink>
       </nav>
     </div>
   </header>
 
   <RouterView />
 </template>
-
-<script>
-import { RouterLink, RouterView } from 'vue-router'
-import axios from 'axios'
-
-export default {
-  data() {
-    return {}
-  },
-  methods: {
-    async getApi() {
-      const login = await axios.post('http://127.0.0.1:8000/api/login/',
-      {"username":"my_name", "password":"bek060625"})
-      console.log(login.data);
-    }
-  },
-  mounted() {
-    this.getApi()
-  },
-}
-
-</script>
 
 <style scoped>
 header {
