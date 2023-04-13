@@ -1,14 +1,7 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-</script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
@@ -20,6 +13,45 @@ import { RouterLink, RouterView } from 'vue-router'
 
   <RouterView />
 </template>
+
+<script>
+import { RouterLink, RouterView } from 'vue-router'
+import axios from 'axios'
+
+export default {
+  data(){
+    return{
+      state: {
+        access: '',
+        refresh: ''
+      }
+    }
+  },
+  methods: {
+    initializeStore(state) {
+      if (localStorage.getItem('access')) {
+        state.access = localStorage.getItem('access')
+      } else {
+        state.access = ''
+      }
+    },
+    setAccess(state, access) {
+      state.access = access
+    },
+    beforeCreate() {
+      if (this.access) {
+        axios.defaults.headers.common['Authorization'] = "JWT" + access
+      } else {
+        axios.defaults.headers.common['Authorization'] = ''
+      }
+    },
+    mounted() {
+      this.initializeStore
+      this.setAccess
+    },
+  }
+}
+</script>
 
 <style scoped>
 header {
