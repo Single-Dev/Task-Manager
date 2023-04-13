@@ -33,7 +33,7 @@ export default {
             } catch (error) {
                 alert(error.message)
             }finally{
-                this.$router.push('/')
+                this.$router.push('/login')
                 // this.username = ''
                 // this.email = ''
                 // this.password = ''

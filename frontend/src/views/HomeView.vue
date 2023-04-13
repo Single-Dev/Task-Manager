@@ -1,6 +1,34 @@
-<script setup>
-</script>
 
 <template>
-  <h1>Home</h1>
+  <h1 @click="getMe">Home</h1>
+  <span> {{ username }}</span>
 </template>
+
+<script>
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      username: ''
+    }
+  },
+  mounted() {
+    this.getMe
+  },
+  methods: {
+    getMe(e) {
+      try {
+        axios.get('api/v1/users/me')
+        .then(response => {
+          this.username = response.data.username
+          console.log(response);
+        })
+      } catch (error) {
+        alert(error.message)
+      }
+    }
+  },
+  
+}
+</script>
