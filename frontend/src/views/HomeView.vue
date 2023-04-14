@@ -19,7 +19,7 @@ export default {
   methods: {
     getMe(e) {
       try {
-        axios.get('api/v1/users/me/')
+        axios.get('api/v1/users/me/', {'csrf_token': localStorage.getItem('access')})
         .then(response => {
           // this.username = response
           console.log(response);

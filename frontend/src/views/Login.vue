@@ -1,4 +1,73 @@
-<template >
+<template>
+   <form @submit.prevent class="form w-50">
+            <input type="text" v-model="username" placeholder="Username" class="form-control mb-3">
+            <input type="password" v-model="password" placeholder="Password" class="form-control mb-3">
+            <button type="button" class="btn btn-outline-dark w-100" @click="authenticate">login</button>
+    </form>
+</template>
+  
+<script>
+import axios from "axios";
+
+export default {
+    data() {
+        return {
+            username: "",
+            password: "",
+            email: ""
+        };
+    },
+    methods: {
+        authenticate() {
+            const payload = {
+                username: this.username,
+                password: this.password,
+                email: this.email,
+            };
+            axios
+                .post('http://127.0.0.1:8000/api/v1/jwt/create/', payload)
+                .then((response) => {
+                    console.log(response.data.access);
+                    this.$store.commit("updateToken", response.data.access);
+                    // get and set auth user
+                    const base = {
+                        baseURL: 'http://127.0.0.1:8000/api/v1/users/me/',
+                        headers: {
+                            // Set your Authorization to 'JWT', not Bearer!!!
+                            Authorization: `JWT ${this.$store.state.jwt}`,
+                            "Content-Type": "application/json",
+                        },
+                        xhrFields: {
+                            withCredentials: true,
+                        },
+                    };
+                    // Even though the authentication returned a user object that can be
+                    // decoded, we fetch it again. This way we aren't super dependant on
+                    // JWT and can plug in something else.
+                    const axiosInstance = axios.create(base);
+                    axiosInstance({
+                        url: "/users/",
+                        method: "get",
+                        params: {},
+                    }).then((response) => {
+                        this.$store.commit("setAuthUser", {
+                            authUser: response.data,
+                            isAuthenticated: true,
+                        });
+                        this.$router.push({ name: "Home" });
+                    });
+                })
+                .catch((error) => {
+                    console.log(error);
+                    console.debug(error);
+                    console.dir(error);
+                });
+        },
+    },
+};
+</script>
+
+<!-- <template >
     <div class="container">
         <h1>Login</h1>
         <form @submit.prevent class="form w-50">
@@ -31,8 +100,8 @@ export default {
                 axios.post('api/v1/jwt/create/', FormData)
                 .then(response => {
                     const access =  response.data.access
-                    console.log(access);
-                    // this.$store.commit('setAccess', access)
+                    // console.log(access);
+                    // this.$store.commit('../store/setAccess', access)
 
                     axios.defaults.headers.common['Authorization'] = 'JWT' + access
 
@@ -51,4 +120,4 @@ export default {
 </script>
 <style>
     
-</style>
+</style> -->

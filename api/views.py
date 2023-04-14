@@ -10,7 +10,6 @@ from rest_framework import generics
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework import permissions
 from django.contrib.auth import login
-
 # Class based view to Get User Details using Token Authentication
 # @login_required('api:login')
 @api_view(["GET"])

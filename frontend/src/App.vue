@@ -1,10 +1,9 @@
 
 <template>
   <header>
-    <div class="wrapper">
+    <div class="wrapper container">
       <nav>
         <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
         <RouterLink to="/signup">Signup</RouterLink>
         <RouterLink to="/login">Login</RouterLink>
         <button @click="beforeCreate">click</button>
