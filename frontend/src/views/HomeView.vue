@@ -1,7 +1,7 @@
 
 <template>
   <h1 @click="getMe">Home</h1>
-  <span> {{ username }}</span>
+  <span></span>
 </template>
 
 <script>
@@ -19,9 +19,9 @@ export default {
   methods: {
     getMe(e) {
       try {
-        axios.get('api/v1/users/me')
+        axios.get('api/v1/users/me/')
         .then(response => {
-          this.username = response.data.username
+          // this.username = response
           console.log(response);
         })
       } catch (error) {

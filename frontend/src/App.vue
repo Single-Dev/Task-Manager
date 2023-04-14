@@ -7,6 +7,7 @@
         <RouterLink to="/about">About</RouterLink>
         <RouterLink to="/signup">Signup</RouterLink>
         <RouterLink to="/login">Login</RouterLink>
+        <button @click="beforeCreate">click</button>
       </nav>
     </div>
   </header>
@@ -19,36 +20,21 @@ import { RouterLink, RouterView } from 'vue-router'
 import axios from 'axios'
 
 export default {
-  data(){
-    return{
-      state: {
-        access: '',
-        refresh: ''
-      }
-    }
-  },
   methods: {
-    initializeStore(state) {
-      if (localStorage.getItem('access')) {
-        state.access = localStorage.getItem('access')
-      } else {
-        state.access = ''
-      }
-    },
-    setAccess(state, access) {
-      state.access = access
-    },
     beforeCreate() {
+      // this.$store.commit('initializeStore')
+      // const access = this.$store.state.access
+      let access = localStorage.getItem('access')
+      console.log(access);
       if (this.access) {
         axios.defaults.headers.common['Authorization'] = "JWT" + access
       } else {
         axios.defaults.headers.common['Authorization'] = ''
       }
     },
-    mounted() {
-      this.initializeStore
-      this.setAccess
-    },
+    // mounted() {
+    //   this.beforeCreate
+    // },
   }
 }
 </script>

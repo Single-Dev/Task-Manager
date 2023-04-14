@@ -1,14 +1,25 @@
-import {createStore} from 'vue'
+import Vuex from 'vuex'
+import Vue from 'vue'
 
-export default createStore({
-    initializeStore(state){
-        if (localStorage.getItem('access')){
-            state.access = localStorage.getItem('access')
-        } else{
-            state.access = ''
-        }
+Vue.use(Vuex)
+ 
+const store = new Vuex.Store({
+    state:{
+        access: "",
+        refresh:""
     },
-    setAccess(state, access){
-        state.access = access
-    }
+    mutations:{
+        initializeStore(state){
+            if (localStorage.getItem('access')){
+                state.access = localStorage.getItem('access')
+            } else{
+                state.access = ''
+            }
+        },
+        // setAccess(state){
+        //     state.access = 
+        // },
+    },
+    actions:{},
+    modules:{}
 })

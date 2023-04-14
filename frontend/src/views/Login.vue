@@ -10,7 +10,6 @@
 </template>
 <script>
 import axios from 'axios';
-
 export default {
     data(){
         return{
@@ -32,10 +31,13 @@ export default {
                 axios.post('api/v1/jwt/create/', FormData)
                 .then(response => {
                     const access =  response.data.access
+                    console.log(access);
                     // this.$store.commit('setAccess', access)
+
                     axios.defaults.headers.common['Authorization'] = 'JWT' + access
+
                     localStorage.setItem('access', access)
-                    console.log(response.data.access);
+                    
                 })
             } catch (error) {
                 alert(error.message)
