@@ -27,14 +27,14 @@ export default {
             axios
                 .post('http://127.0.0.1:8000/api/v1/jwt/create/', payload)
                 .then((response) => {
-                    console.log(response.data.access);
-                    this.$store.commit("updateToken", response.data.access);
+                    localStorage.setItem('token', response.data.access)
+                    this.$store.commit("updateToken", {newToken: response.data.access});
                     // get and set auth user
                     const base = {
-                        baseURL: 'http://127.0.0.1:8000/api/v1/users/me/',
+                        baseURL: 'http://127.0.0.1:8000/api/v1/users/',
                         headers: {
                             // Set your Authorization to 'JWT', not Bearer!!!
-                            Authorization: `JWT ${this.$store.state.jwt}`,
+                            Authorization: `JWT ${localStorage.getItem('token')}`,
                             "Content-Type": "application/json",
                         },
                         xhrFields: {
@@ -46,7 +46,7 @@ export default {
                     // JWT and can plug in something else.
                     const axiosInstance = axios.create(base);
                     axiosInstance({
-                        url: "/users/",
+                        url: "/me/",
                         method: "get",
                         params: {},
                     }).then((response) => {
@@ -59,8 +59,6 @@ export default {
                 })
                 .catch((error) => {
                     console.log(error);
-                    console.debug(error);
-                    console.dir(error);
                 });
         },
     },
