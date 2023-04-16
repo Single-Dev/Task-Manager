@@ -1,9 +1,10 @@
 <template>
   <nav>
     <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link to="/signup">SignUp</router-link> |
+    <router-link to="/login">Login</router-link> 
   </nav>
-  <router-view/>
+  <router-view />
 </template>
 
 <style lang="scss">
@@ -28,3 +29,23 @@ nav {
   }
 }
 </style>
+
+<script>
+export default {
+  methods: {
+    beforeCreate() {
+      this.$store.commit('initializeStore')
+      const access = this.$store.state.access
+      console.log(access);
+      if (this.access) {
+        axios.defaults.headers.common['Authorization'] = "JWT" + access
+      } else {
+        axios.defaults.headers.common['Authorization'] = ''
+      }
+    },
+    // mounted() {
+    //   this.beforeCreate
+    // },
+  }
+}
+</script>

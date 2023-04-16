@@ -1,18 +1,32 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1 @click="getMe">Home</h1>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
-export default {
-  name: 'HomeView',
-  components: {
-    HelloWorld
-  }
+import axios from 'axios';
+export default{
+  data() {
+    return {
+      username:''
+    }
+  },
+  methods:{
+    getMe(e) {
+      try {
+        axios.get('api/v1/users/me/',)
+        .then(response => {
+          // this.username = response
+          console.log(response);
+        })
+      } catch (error) {
+        alert(error.message)
+      }
+    }
+  },
+  mounted() {
+    this.getMe
+  },
 }
 </script>
