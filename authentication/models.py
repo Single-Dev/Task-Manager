@@ -1,8 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
-# from django.urls import reverse
-
 GENDER = (('man', 'Man'), ('woman', 'Woman'))
 
 
@@ -25,10 +23,14 @@ class CustomUser(AbstractUser):
     def __str__(self):
         return self.email
     
-    # def get_absolute_url(self):
-    #     """
-    #     this way we can redirect user to profile inside template
-    #     using get absolute url function
-    #     """
-    #     return reverse('authenticate:user-profile', args=[str(self.username)])
-    
+
+class Profile(models.Model):
+    class Meta:
+        verbose_name = "Profile"
+        verbose_name_plural = "Profile"
+    user = models.OneToOneField(CustomUser(), on_delete=models.CASCADE)
+    profile_photo = models.ImageField(default="profile/profile.jpg", upload_to="profile")
+    bio = models.CharField(max_length=100, null=True, blank=True, default="")
+    verifyed = models.BooleanField(default=False)
+    def __str__(self):
+        return f"id: {self.id}, {self.user}"
