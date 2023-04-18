@@ -14,16 +14,16 @@ export default{
   },
   methods:{
     getMe(e) {
-      try {
         axios.get('api/v1/users/me/',)
         .then(response => {
           // this.username = response
-          console.log(response);
+          console.log(response.data);
         })
-      } catch (error) {
-        alert(error.message)
-      }
-    }
+        .catch(error=>{
+          console.log(error.response.data);
+        })
+    },
+    
   },
   mounted() {
     this.getMe

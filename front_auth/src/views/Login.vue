@@ -18,32 +18,31 @@ export default {
         }
     },
     methods:{
-        SubmitForm(){
+        SubmitForm(e){
             axios.defaults.headers.common['Authorization'] = ''
             localStorage.removeItem("access")
-
+            
             const FormData = {
                 username : this.username,
-                email: this.email,
                 password: this.password,
             }
-            try {
                 axios.post('api/v1/jwt/create/', FormData)
                 .then(response => {
-                    const access =  response.data.access
-                    // console.log(access);
+                    const access = response.data.access
+                    console.log(response.data);
                     this.$store.commit('setAccess', access)
 
                     axios.defaults.headers.common['Authorization'] = 'JWT' + access
 
                     localStorage.setItem('access', access)
                     
+                    this.$router.push('/')
+                    
                 })
-            } catch (error) {
-                alert(error.message)
-            } finally{
-                this.$router.push('/')
-            }
+                .catch(error =>{
+                    console.log(error);
+                })
+
 
         }
     }
