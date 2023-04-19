@@ -13,14 +13,14 @@ export default{
     }
   },
   methods:{
-    getMe(e) {
+    getMe() {
         axios.get('api/v1/users/me/',)
         .then(response => {
           // this.username = response
           console.log(response.data);
         })
         .catch(error=>{
-          console.log(error.response.data);
+          console.log(error);
         })
     },
     

@@ -24,7 +24,7 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-   'AUTH_HEADER_TYPES': ('JWT',),
+   'AUTH_HEADER_TYPES': ('JWT'),
    "ACCESS_TOKEN_LIFETIME": timedelta(hours=1),
 }
 
@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'api',
+    'app',
     'authentication',
     'rest_framework',
     'djoser',

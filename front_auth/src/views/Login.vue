@@ -18,7 +18,7 @@ export default {
         }
     },
     methods:{
-        SubmitForm(e){
+        SubmitForm(){
             axios.defaults.headers.common['Authorization'] = ''
             localStorage.removeItem("access")
             
