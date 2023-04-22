@@ -12,8 +12,8 @@ class ToDo(models.Model):
     # ]
     # mark = models.CharField(max_length=15, choices=mark_symbols)
     created_on = models.DateTimeField(("Craeted oN"), default=timezone.now)
-    reminder = models.DateField(('Reminder'), blank=True)
-    attachment = models.FileField(upload_to='base/attachments')
+    reminder = models.DateField(('Reminder'), blank=True, null=True)
+    attachment = models.FileField(upload_to='base/attachments', blank=True, null=True)
     
     def __str__(self):
         return self.name
