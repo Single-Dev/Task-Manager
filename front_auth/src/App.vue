@@ -38,12 +38,12 @@ export default {
     beforeCreate() {
       this.$store.commit('initializeStore')
       const access = this.$store.state.access
+      console.log(access);
       if (access) {
-        console.log(access);
         axios.defaults.headers.common['Authorization'] = "JWT" + access
       } else {
         axios.defaults.headers.common['Authorization'] = ''
-        console.log('Noksand');
+        console.log('not access');
       }
     },
     // mounted() {

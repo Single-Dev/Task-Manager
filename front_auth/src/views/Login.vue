@@ -28,8 +28,9 @@ export default {
             }
                 axios.post('api/v1/jwt/create/', FormData)
                 .then(response => {
-                    const access = response.data.access
                     console.log(response.data);
+                    const access = response.data.access
+                    
                     this.$store.commit('setAccess', access)
 
                     axios.defaults.headers.common['Authorization'] = 'JWT' + access
