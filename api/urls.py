@@ -5,9 +5,6 @@ from .views import *
 app_name="api"
 
 urlpatterns = [
-  # path('obtain_jwt_token/', obtain_jwt_token),
-  # path('refresh_jwt_token/', refresh_jwt_token),
-  # path("get-details/",UserDetailAPI, name='get-details'),
-  # path("login/",LoginView.as_view(), name='login'),
-  # path('register/',RegisterUserAPIView.as_view(), name='signup'),
+  path('users/', UsersApiView, name='users'),
+  path('todo/', ToDoApiView, name='todo'),
 ]
