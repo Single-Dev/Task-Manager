@@ -2,7 +2,8 @@
   <nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/signup">SignUp</router-link> |
-    <router-link to="/login">Login</router-link> 
+    <router-link to="/login">Login</router-link> |
+    <router-link to="/login-simple">Login Simple</router-link>
     <button @click="beforeCreate">Click</button>
   </nav>
   <router-view />

@@ -22,7 +22,10 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.email
-    
+
+    class Meta:
+        ordering = ['-id']
+        # (-) yoki (+) modellar ro'yahti qanday tuzish keark ekanligiga ta'sir qiladi
 
 class Profile(models.Model):
     class Meta:
