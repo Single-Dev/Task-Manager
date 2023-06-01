@@ -26,7 +26,7 @@ export default {
                 password: this.password,
             }
             axios
-                .post('api/v1/jwt/create/', formData)
+                .post('api/v1/token/login/', formData)
                 .then(response => {
                     console.log(response);
 
