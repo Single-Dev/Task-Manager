@@ -27,13 +27,13 @@ class CustomUser(AbstractUser):
         ordering = ['-id']
         # (-) yoki (+) modellar ro'yahti qanday tuzish keark ekanligiga ta'sir qiladi
 
-# class Profile(models.Model):
-#     class Meta:
-#         verbose_name = "Profile"
-#         verbose_name_plural = "Profile"
-#     user = models.OneToOneField(CustomUser(), on_delete=models.CASCADE)
-#     profile_photo = models.ImageField(default="profile/profile.jpg", upload_to="profile")
-#     bio = models.CharField(max_length=100, null=True, blank=True, default="")
-#     verifyed = models.BooleanField(default=False)
-#     def __str__(self):
-#         return f"id: {self.id}, {self.user}"
+class Profile(models.Model):
+    class Meta:
+        verbose_name = "Profile"
+        verbose_name_plural = "Profile"
+    user = models.OneToOneField(CustomUser(), on_delete=models.CASCADE)
+    profile_photo = models.ImageField(default="profile/profile.jpg", upload_to="profile")
+    bio = models.CharField(max_length=100, null=True, blank=True, default="")
+    verifyed = models.BooleanField(default=False)
+    def __str__(self):
+        return f"id: {self.id}, {self.user}"
