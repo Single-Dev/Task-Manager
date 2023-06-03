@@ -1,17 +1,37 @@
 <template>
   <div class="home">
-    <HelloWorld />
+    {{ username }}
+    <todo />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import todo from '@/components/todo.vue'
+import axios from 'axios'
 export default {
   name: 'HomeView',
+  data() {
+    return {
+      username: ''
+    }
+  },
   components: {
-    HelloWorld
-  }
+    todo
+  },
+  methods:{
+    getMe() {
+        axios.get('/api/v1/users/me/',)
+        .then(response => {
+          this.username = response.data.username
+          console.log(response.data);
+        })
+        .catch(error=>{
+          console.log(error);
+        })
+    },
+  },
+  mounted() {
+    this.getMe()
+  },
 }
 </script>
