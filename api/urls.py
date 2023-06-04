@@ -7,4 +7,5 @@ app_name="api"
 urlpatterns = [
   path('users/', UsersApiView, name='users'),
   path('todo/', ToDoApiView, name='todo'),
+  path('mytodo/', UsersToDoApiView, name='users_todo')
 ]

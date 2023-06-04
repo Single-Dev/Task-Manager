@@ -20,3 +20,10 @@ def ToDoApiView(request):
     todo = ToDo.objects.all()
     serializer = ToDoSerializer(todo, many=True)
     return Response(serializer.data)
+
+@api_view(["GET"])
+@permission_classes((permissions.AllowAny, ))
+def UsersToDoApiView(request):
+    todo = ToDo.objects.get(owner=request.user)
+    serializer = ToDoSerializer(todo, many=False)
+    return Response(serializer.data)
