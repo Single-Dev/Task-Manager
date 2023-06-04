@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     {{ username }}
-    <todo />
+    <todo :user_id="user_id"/>
   </div>
 </template>
 
@@ -12,7 +12,8 @@ export default {
   name: 'HomeView',
   data() {
     return {
-      username: ''
+      username: '',
+      user_id:''
     }
   },
   components: {
@@ -23,6 +24,7 @@ export default {
         axios.get('/api/v1/users/me/',)
         .then(response => {
           this.username = response.data.username
+          this.user_id = response.data.id
           console.log(response.data);
         })
         .catch(error=>{

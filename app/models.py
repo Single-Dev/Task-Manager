@@ -21,4 +21,4 @@ class ToDo(models.Model):
     attachment = models.FileField(upload_to='base/attachments', blank=True, null=True)
     
     def __str__(self):
-        return f'{self.name}, {self.mark}'
+        return f'{self.name}'

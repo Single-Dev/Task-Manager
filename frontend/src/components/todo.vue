@@ -6,7 +6,7 @@
 
                     <div class="card">
                         <div class="card-body p-5">
-                            <newTodo/>
+                            <newTodo :user_id="user_id"/>
                             <!-- Tabs navs -->
                             <ul class="nav nav-tabs mb-4 pb-2" id="ex1" role="tablist">
                                 <li class="nav-item" role="presentation">
@@ -114,6 +114,12 @@ import newTodo from '@/components/newTodo.vue'
 export default {
     components:{
         newTodo
+    },
+    props:{
+        user_id:{
+            type: Number,
+            required: true
+        }
     }
 }
 </script>

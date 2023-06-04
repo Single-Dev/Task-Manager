@@ -1,16 +1,46 @@
 <template>
     <div>   
-        <form class="d-flex justify-content-center align-items-center mb-4">
+        <form @submit.prevent class="d-flex justify-content-center align-items-center mb-4">
             <div class="form-outline flex-fill">
-                <input type="text" id="form2" class="form-control" placeholder="New Task.." />
+                <input type="text" v-model="name" id="form2" class="form-control" placeholder="New Task.." />
             </div>
-            <button type="submit" class="btn btn-info ms-2">Add</button>
+            <button type="submit" class="btn btn-info ms-2" @click="CreateTask">Add</button>
         </form>
     </div>
 </template>
 <script>
+import axios from 'axios';
 export default {
-
+    data() {
+        return {
+            name:'',
+            owner:'',
+            created_on: ''
+        }
+    },
+    props:{
+        user_id:{
+            type:Number,
+            required: false
+        }
+    },
+    methods: {
+        CreateTask(){
+            const formData ={
+                name: this.name,
+                owner: this.user_id,
+                created_on: '2023-06-04T06:25:06Z'
+            }
+            axios
+            .post('/api/create-task/', formData)
+            .then(response => {
+                console.log(response);
+            })
+            .catch(error => {
+                    console.log(error);
+            })
+        }
+    },
 }
 </script>
 <style ></style>
