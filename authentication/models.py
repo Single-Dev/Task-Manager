@@ -21,7 +21,7 @@ class CustomUser(AbstractUser):
     last_login = models.DateTimeField(null=True)
 
     def __str__(self):
-        return self.email
+        return self.username
 
     class Meta:
         ordering = ['-id']

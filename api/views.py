@@ -24,6 +24,16 @@ def ToDoApiView(request):
 @api_view(["GET"])
 @permission_classes((permissions.AllowAny, ))
 def UsersToDoApiView(request):
-    todo = ToDo.objects.get(owner=request.user)
-    serializer = ToDoSerializer(todo, many=False)
+    todo = ToDo.objects.get(owner=request.user.id)
+    serializer = ToDoSerializer(todo, many=True)
     return Response(serializer.data)
+
+@api_view(['POST'])
+@permission_classes((permissions.AllowAny,))
+def CreateToDoApiView(request):
+    serializer = ToDoSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    else:
+        return Response(serializer.error_messages)

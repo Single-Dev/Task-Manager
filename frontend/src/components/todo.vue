@@ -6,15 +6,7 @@
 
                     <div class="card">
                         <div class="card-body p-5">
-
-                            <form class="d-flex justify-content-center align-items-center mb-4">
-                                <div class="form-outline flex-fill">
-                                    <input type="text" id="form2" class="form-control" />
-                                    <label class="form-label" for="form2">New task...</label>
-                                </div>
-                                <button type="submit" class="btn btn-info ms-2">Add</button>
-                            </form>
-
+                            <newTodo/>
                             <!-- Tabs navs -->
                             <ul class="nav nav-tabs mb-4 pb-2" id="ex1" role="tablist">
                                 <li class="nav-item" role="presentation">
@@ -118,8 +110,11 @@
         </div>
     </section></template>
 <script>
+import newTodo from '@/components/newTodo.vue'
 export default {
-
+    components:{
+        newTodo
+    }
 }
 </script>
 <style></style>
