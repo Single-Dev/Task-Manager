@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import todo from '@/components/todo.vue'
+import todo from '@/components/todo/todo.vue'
 import axios from 'axios'
 export default {
   name: 'HomeView',
