@@ -29,11 +29,12 @@ export default {
             const formData ={
                 name: this.name,
                 owner: this.user_id,
-                created_on: '2023-06-04T06:25:06Z'
+                created_on: new Date()
             }
             axios
             .post('/api/create-task/', formData)
             .then(response => {
+                this.name= ''
                 console.log(response);
             })
             .catch(error => {

@@ -8,5 +8,5 @@ urlpatterns = [
   path('users/', UsersApiView, name='users'),
   path('todo/', ToDoApiView, name='todo'),
   path('mytodo/', UsersToDoApiView, name='users_todo'),
-  path('create-task/', CreateToDoApiView, name='post_todo'),
+  path('create-task/', CreateTaskApiView, name='post_todo'),
 ]

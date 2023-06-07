@@ -30,7 +30,7 @@ def UsersToDoApiView(request):
 
 @api_view(['POST'])
 @permission_classes((permissions.AllowAny,))
-def CreateToDoApiView(request):
+def CreateTaskApiView(request):
     serializer = ToDoSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
