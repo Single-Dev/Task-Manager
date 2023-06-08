@@ -5,7 +5,7 @@ from authentication.models import CustomUser
 from app.models import ToDo
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework import permissions
-
+from django.shortcuts import get_object_or_404
 @api_view(["GET"])
 @permission_classes((permissions.AllowAny, ))
 def UsersApiView(request):
@@ -23,9 +23,9 @@ def ToDoApiView(request):
 
 @api_view(["GET"])
 @permission_classes((permissions.AllowAny, ))
-def UsersToDoApiView(request):
-    todo = ToDo.objects.get(owner=request.user.id)
-    serializer = ToDoSerializer(todo, many=True)
+def MyTasksApiView(request):
+    tasks = ToDo.objects.get(owner=request.user.id)
+    serializer = ToDoSerializer(tasks, many=False)
     return Response(serializer.data)
 
 @api_view(['POST'])
