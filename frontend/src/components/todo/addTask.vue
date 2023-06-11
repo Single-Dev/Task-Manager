@@ -26,20 +26,13 @@ export default {
     },
     methods: {
         CreateTask(){
-            const formData ={
+            const newTask ={
                 name: this.name,
                 owner: this.user_id,
                 created_on: new Date()
             }
-            axios
-            .post('/api/create-task/', formData)
-            .then(response => {
-                this.name= ''
-                console.log(response);
-            })
-            .catch(error => {
-                    console.log(error);
-            })
+            this.$emit("CreateTask", newTask)
+            this.name = ''
         }
     },
 }

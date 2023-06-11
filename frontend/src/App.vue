@@ -10,7 +10,7 @@
   <div>
     {{ username }}
   </div>
-  <router-view :user_id="user_id" :tasks="tasks"/>
+  <router-view :user_id="user_id" :tasks="tasks" @CreateTask="CreateTask" />
 </template>
 
 <script>
@@ -73,7 +73,7 @@ export default {
         this.isLoading = false
       }
     },
-    async logout(){
+    async logout() {
       try {
         const response = await axios.post('/api/v1/token/logout/')
         localStorage.removeItem('token')
@@ -81,11 +81,24 @@ export default {
         console.log(response);
       } catch (error) {
         alert(error.message)
-      } finally{
+      } finally {
         this.beforeCrete()
         this.getMe()
         this.getTasks()
       }
+    },
+    CreateTask(item) {
+      this.getTasks()
+      axios
+        .post('/api/create-task/', item)
+        .then(response => {
+          this.tasks.push(response.data)
+          console.log(response);
+        })
+        .catch(error => {
+          console.log(error);
+        })
+      console.log('added');
     }
   },
   mounted() {

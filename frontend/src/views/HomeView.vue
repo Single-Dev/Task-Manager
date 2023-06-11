@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <todo :user_id="user_id" :tasks="tasks"/>
+    <todo :user_id="user_id" :tasks="tasks" @CreateTask="$emit('CreateTask', $event)"/>
   </div>
 </template>
 

@@ -6,7 +6,7 @@
 
                     <div class="card">
                         <div class="card-body p-5">
-                            <newTodo :user_id="user_id" />
+                            <addTask :user_id="user_id" @CreateTask="$emit('CreateTask', $event)"/>
                             <navUl />
                             <content  :tasks="tasks" :user_id="user_id"/>
                         </div>
@@ -18,13 +18,13 @@
     </section>
 </template>
 <script>
-import newTodo from '@/components/todo/newTodo.vue'
+import addTask from '@/components/todo/addTask.vue'
 import navUl from '@/components/todo/nav.vue'
 import content from '@/components/todo/content.vue'
 
 export default {
     components: {
-        newTodo,
+        addTask,
         navUl,
         content
     },
