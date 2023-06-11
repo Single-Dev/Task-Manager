@@ -17,7 +17,7 @@ export default {
   name: "App",
   data() {
     return {
-      IsAuthenticated: false
+      IsAuthenticated: false,
     }
   },
   methods: {
@@ -30,21 +30,10 @@ export default {
       } else {
         axios.defaults.headers.common['Authorization'] = ''
       }
-    },
-    getToDo() {
-      axios
-        .get('/api/mytasks/')
-        .then(response => {
-          console.log(response);
-        })
-        .catch(error => {
-          console.log(error);
-        })
     }
   },
   mounted() {
     this.beforeCrete()
-    this.getToDo()
   },
 }
 

@@ -8,7 +8,7 @@
                         <div class="card-body p-5">
                             <newTodo :user_id="user_id" />
                             <navUl />
-                            <content />
+                            <content  :tasks="tasks" :user_id="user_id"/>
                         </div>
                     </div>
 
@@ -31,6 +31,10 @@ export default {
     props: {
         user_id: {
             type: Number,
+            required: true
+        },
+        tasks: {
+            type: Array,
             required: true
         }
     }

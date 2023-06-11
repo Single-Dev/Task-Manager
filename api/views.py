@@ -16,7 +16,7 @@ def UsersApiView(request):
 
 @api_view(["GET"])
 @permission_classes((permissions.AllowAny, ))
-def ToDoApiView(request):
+def TasksApiView(request):
     todo = ToDo.objects.all()
     serializer = ToDoSerializer(todo, many=True)
     return Response(serializer.data)
