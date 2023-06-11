@@ -5,6 +5,7 @@
       <router-link to="/signup">SignUp</router-link> |
       <router-link to="/login">Login</router-link>
     </div>
+    <button v-if="IsAuthenticated === true" @click="logout">Logout</button>
   </nav>
   <router-view />
 </template>
@@ -29,6 +30,17 @@ export default {
         axios.defaults.headers.common['Authorization'] = "Token " + token
       } else {
         axios.defaults.headers.common['Authorization'] = ''
+      }
+    },
+    async logout(){
+      try {
+        const response = await axios.post('http://127.0.0.1:8000/api/v1/token/logout/')
+        localStorage.removeItem('token')
+        axios.defaults.headers.common['Authorization'] = ''
+        this.$router.push('/')
+        console.log(response);
+      } catch (error) {
+        alert(error.message)
       }
     }
   },
