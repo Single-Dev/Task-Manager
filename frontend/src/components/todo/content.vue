@@ -7,7 +7,9 @@
                     <input
                     class="form-check-input me-2"
                     type="checkbox" 
-                    :checked="task.done"/>
+                    :checked="task.done"
+                    @click="$emit('checkToggle', task)"
+                    />
                     {{ task.name }}
                 </li>
             </ul>

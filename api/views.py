@@ -37,3 +37,12 @@ def CreateTaskApiView(request):
         return Response(serializer.data)
     else:
         return Response(serializer.error_messages)
+
+@api_view(['POST'])
+@permission_classes((permissions.AllowAny,))
+def UpdataTaskApiView(request, pk):
+    task = ToDo.objects.get(id=pk)
+    serializer = ToDoSerializer(instance=task, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+    return Response(serializer.data)

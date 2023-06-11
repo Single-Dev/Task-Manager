@@ -1,6 +1,11 @@
 <template>
   <div class="home">
-    <todo :user_id="user_id" :tasks="tasks" @CreateTask="$emit('CreateTask', $event)"/>
+    <todo
+    :user_id="user_id"
+    :tasks="tasks"
+    @CreateTask="$emit('CreateTask', $event)"
+    @checkToggle="$emit('checkToggle', $event)"
+    />
   </div>
 </template>
 

@@ -10,7 +10,7 @@
   <div>
     {{ username }}
   </div>
-  <router-view :user_id="user_id" :tasks="tasks" @CreateTask="CreateTask" />
+  <router-view :user_id="user_id" :tasks="tasks" @CreateTask="CreateTask" @checkToggle="checkToggle" />
 </template>
 
 <script>
@@ -46,10 +46,9 @@ export default {
         .then(response => {
           this.username = response.data.username
           this.user_id = response.data.id
-          console.log(response.data);
         })
         .catch(error => {
-          console.log(error);
+          alert.log(error);
         })
     },
     async getTasks() {
@@ -66,7 +65,6 @@ export default {
           owner: item.owner
         }))
         this.tasks = newArr
-        console.log(this.tasks);
       } catch (error) {
         alert(error.message)
       } finally {
@@ -93,12 +91,18 @@ export default {
         .post('/api/create-task/', item)
         .then(response => {
           this.tasks.push(response.data)
-          console.log(response);
         })
         .catch(error => {
           console.log(error);
         })
-      console.log('added');
+    },
+    async checkToggle(item) {
+      item.done = !item.done
+      try {
+        const response = await axios.post(`/api/updata/${item.id}/`, item)
+      } catch (error) {
+        alert(error.message)
+      }
     }
   },
   mounted() {

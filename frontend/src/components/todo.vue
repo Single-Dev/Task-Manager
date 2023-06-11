@@ -8,7 +8,7 @@
                         <div class="card-body p-5">
                             <addTask :user_id="user_id" @CreateTask="$emit('CreateTask', $event)"/>
                             <navUl />
-                            <content  :tasks="tasks" :user_id="user_id"/>
+                            <content  :tasks="tasks" :user_id="user_id" @checkToggle="$emit('checkToggle', $event)"/>
                         </div>
                     </div>
 
