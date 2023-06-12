@@ -6,9 +6,12 @@
 
                     <div class="card">
                         <div class="card-body p-5">
-                            <addTask :user_id="user_id" @CreateTask="$emit('CreateTask', $event)"/>
-                            <navUl />
-                            <content  :tasks="tasks" :user_id="user_id" @checkToggle="$emit('checkToggle', $event)"/>
+                            <addTask :user_id="user_id" @CreateTask="$emit('CreateTask', $event)" />
+                            <Filter :UpdateFilterHandler="UpdateFilterHandler" />
+                            <content
+                            :tasks="onFilterHandler(tasks, filter)"
+                            :user_id="user_id"
+                            @checkToggle="$emit('checkToggle', $event)" />
                         </div>
                     </div>
 
@@ -19,14 +22,19 @@
 </template>
 <script>
 import addTask from '@/components/todo/addTask.vue'
-import navUl from '@/components/todo/nav.vue'
+import Filter from '@/components/todo/filter.vue'
 import content from '@/components/todo/content.vue'
 
 export default {
     components: {
         addTask,
-        navUl,
+        Filter,
         content
+    },
+    data() {
+        return {
+            filter: 'all'
+        }
     },
     props: {
         user_id: {
@@ -36,7 +44,22 @@ export default {
         tasks: {
             type: Array,
             required: true
-        }
+        },
+    },
+    methods: {
+        onFilterHandler(arr, filter) {
+            switch (filter) {
+                case 'completed':
+                    return arr.filter(c => c.done == true)
+                case 'active':
+                    return arr.filter(c => c.done == false)
+                default:
+                    return arr
+            }
+        },
+        UpdateFilterHandler(filter) {
+            this.filter = filter
+        },
     }
 }
 </script>

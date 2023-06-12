@@ -10,7 +10,12 @@
   <div>
     {{ username }}
   </div>
-  <router-view :user_id="user_id" :tasks="tasks" @CreateTask="CreateTask" @checkToggle="checkToggle" />
+  <router-view
+  :user_id="user_id"
+  :tasks="tasks"
+  @CreateTask="CreateTask"
+  @checkToggle="checkToggle"
+  />
 </template>
 
 <script>
@@ -25,7 +30,8 @@ export default {
       username: '',
       user_id: '',
       isLoading: false,
-      tasks: []
+      tasks: [],
+      filter: 'all'
     }
   },
   methods: {
@@ -48,7 +54,7 @@ export default {
           this.user_id = response.data.id
         })
         .catch(error => {
-          alert.log(error);
+          this.$router.push('/login')
         })
     },
     async getTasks() {
@@ -76,7 +82,6 @@ export default {
         const response = await axios.post('/api/v1/token/logout/')
         localStorage.removeItem('token')
         axios.defaults.headers.common['Authorization'] = ''
-        console.log(response);
       } catch (error) {
         alert(error.message)
       } finally {
@@ -91,9 +96,10 @@ export default {
         .post('/api/create-task/', item)
         .then(response => {
           this.tasks.push(response.data)
+          console.log(response);
         })
         .catch(error => {
-          console.log(error);
+          alert(error.message)
         })
     },
     async checkToggle(item) {
@@ -103,7 +109,7 @@ export default {
       } catch (error) {
         alert(error.message)
       }
-    }
+    },
   },
   mounted() {
     this.beforeCrete()

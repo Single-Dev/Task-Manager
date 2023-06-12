@@ -1,0 +1,47 @@
+<template>
+    <div class="btn-group">
+        <button v-for="btn in FilterBtns" type="button"
+        :class="[filterName == btn.name ? 'btn-dark' : 'btn-outline-dark']"
+            @click="FilterFunc(btn.name)">
+            {{ btn.title }}
+        </button>
+    </div>
+</template>
+<script>
+export default {
+    props:{
+        UpdateFilterHandler:{
+            type: Function,
+            required: true
+        },
+    },
+    data(){
+        return{
+            filter: "all",
+            FilterBtns:[
+            {
+                title: 'All',
+                name:'all'
+            },
+            {
+                title: 'Active',
+                name:'active'
+            },
+            {
+                title: "Completed",
+                name:'completed'
+            }
+            ]
+        }
+    },
+    methods: {
+        FilterFunc(filter){
+            this.filter = filter
+            this.UpdateFilterHandler(this.filter)
+        }
+    },
+}
+</script>
+<style lang="">
+    
+</style>

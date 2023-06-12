@@ -4,7 +4,7 @@
             <div class="form-outline flex-fill">
                 <input type="text" v-model="name" id="form2" class="form-control" placeholder="New Task.." />
             </div>
-            <button type="submit" class="btn btn-info ms-2" @click="CreateTask">Add</button>
+            <button type="submit" class="btn btn-outline-primary ms-2" @click="CreateTask">Add</button>
         </form>
     </div>
 </template>
@@ -30,6 +30,9 @@ export default {
                 name: this.name,
                 owner: this.user_id,
                 created_on: new Date()
+            }
+            if(this.name == ''){
+                alert('Nimadir Xato ketdi')
             }
             this.$emit("CreateTask", newTask)
             this.name = ''
