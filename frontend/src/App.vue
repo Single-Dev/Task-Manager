@@ -35,18 +35,6 @@ export default {
     }
   },
   methods: {
-    beforeCrete() {
-      this.$store.commit('initializeStore')
-      const token = this.$store.state.token
-      this.IsAuthenticated = this.$store.state.IsAuthenticated
-      if (token) {
-        axios.defaults.headers.common['Authorization'] = "Token " + token
-      } else {
-        axios.defaults.headers.common['Authorization'] = ''
-      }
-      this.getMe()
-      this.getTasks()
-    },
     getMe() {
       axios.get('/api/v1/users/me/',)
         .then(response => {
@@ -60,7 +48,7 @@ export default {
     async getTasks() {
       try {
         this.isLoading = true
-        const response = await axios.get('/api/mytasks/',)
+        const response = await axios.get('/api/tasks/',)
         const newArr = response.data.map(item => ({
           id: item.id,
           name: item.name,
@@ -72,35 +60,41 @@ export default {
         }))
         this.tasks = newArr
       } catch (error) {
-        alert(error.message)
+        console.log(error.message)
       } finally {
         this.isLoading = false
       }
     },
+    beforeCrete() {
+      this.$store.commit('initializeStore')
+      const token = this.$store.state.token
+      this.IsAuthenticated = this.$store.state.IsAuthenticated
+      if (token) {
+        axios.defaults.headers.common['Authorization'] = "Token " + token
+      } else {
+        axios.defaults.headers.common['Authorization'] = ''
+      }
+      this.getMe()
+      this.getTasks()
+    },
     async logout() {
       try {
-        const response = await axios.post('/api/v1/token/logout/')
+        await axios.post('/api/v1/token/logout/')
         localStorage.removeItem('token')
         axios.defaults.headers.common['Authorization'] = ''
       } catch (error) {
         alert(error.message)
       } finally {
         this.beforeCrete()
-        this.getMe()
-        this.getTasks()
       }
     },
-    CreateTask(item) {
-      this.getTasks()
-      axios
-        .post('/api/create-task/', item)
-        .then(response => {
-          this.tasks.push(response.data)
-          console.log(response);
-        })
-        .catch(error => {
-          alert(error.message)
-        })
+    async CreateTask(item) {
+      try {
+        const response = await axios.post('/api/create-task/', item)
+        this.tasks.push(response.data)
+      } catch (error) {
+        alert(error.message)
+      }
     },
     async checkToggle(item) {
       item.done = !item.done
