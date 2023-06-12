@@ -60,7 +60,7 @@ export default {
     async getTasks() {
       try {
         this.isLoading = true
-        const response = await axios.get('/api/tasks/',)
+        const response = await axios.get('/api/mytasks/',)
         const newArr = response.data.map(item => ({
           id: item.id,
           name: item.name,

@@ -6,8 +6,16 @@
 
                     <div class="card">
                         <div class="card-body p-5">
-                            <addTask :user_id="user_id" @CreateTask="$emit('CreateTask', $event)" />
-                            <Filter :UpdateFilterHandler="UpdateFilterHandler" />
+                            <addTask
+                            :user_id="user_id"
+                            @CreateTask="$emit('CreateTask', $event)" />
+
+                            <Filter
+                            :UpdateFilterHandler="UpdateFilterHandler"
+                            :filterName="filter"
+                            />
+
+
                             <content
                             :tasks="onFilterHandler(tasks, filter)"
                             :user_id="user_id"

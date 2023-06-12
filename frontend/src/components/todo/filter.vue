@@ -14,6 +14,10 @@ export default {
             type: Function,
             required: true
         },
+        filterName:{
+            type: String,
+            required: true
+        }
     },
     data(){
         return{

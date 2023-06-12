@@ -7,7 +7,7 @@ class UsersSerializer(serializers.ModelSerializer):
         model = CustomUser
         fields = ["id", "first_name", "last_name", "username"]
 
-class ToDoSerializer(serializers.ModelSerializer):
+class TaskSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ToDo
+        model = Task
         fields = '__all__'
