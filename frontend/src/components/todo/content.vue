@@ -11,6 +11,7 @@
                     @click="$emit('checkToggle', task)"
                     />
                     {{ task.name }}
+                    <button @click="$emit('deleteTask', task)" class="btn btn-danger">D</button>
                 </li>
             </ul>
         </div>

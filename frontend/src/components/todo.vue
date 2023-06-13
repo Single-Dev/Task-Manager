@@ -19,7 +19,9 @@
                             <content
                             :tasks="onFilterHandler(tasks, filter)"
                             :user_id="user_id"
-                            @checkToggle="$emit('checkToggle', $event)" />
+                            @checkToggle="$emit('checkToggle', $event)"
+                            @deleteTask="$emit('deleteTask', $event)"
+                            />
                         </div>
                     </div>
 

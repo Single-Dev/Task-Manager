@@ -5,6 +5,7 @@
     :tasks="tasks"
     @CreateTask="$emit('CreateTask', $event)"
     @checkToggle="$emit('checkToggle', $event)"
+    @deleteTask="$emit('deleteTask', $event)"
     />
   </div>
 </template>

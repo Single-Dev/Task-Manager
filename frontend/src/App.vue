@@ -15,6 +15,7 @@
   :tasks="tasks"
   @CreateTask="CreateTask"
   @checkToggle="checkToggle"
+  @deleteTask="deleteTask"
   />
 </template>
 
@@ -99,7 +100,15 @@ export default {
     async checkToggle(item) {
       item.done = !item.done
       try {
-        const response = await axios.post(`/api/updata/${item.id}/`, item)
+        await axios.post(`/api/updata/${item.id}/`, item)
+      } catch (error) {
+        alert(error.message)
+      }
+    },
+    async deleteTask(item) {
+      try {
+        await axios.delete(`/api/delete/${item.id}/`, item)
+        this.getTasks()
       } catch (error) {
         alert(error.message)
       }

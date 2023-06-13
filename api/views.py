@@ -43,3 +43,10 @@ def UpdataTaskApiView(request, pk):
     if serializer.is_valid():
         serializer.save()
     return Response(serializer.data)
+
+@api_view(['DELETE'])
+@permission_classes((permissions.AllowAny,))
+def DeleteTaskApiView(request, pk):
+    task = Task.objects.get(id=pk)
+    task.delete()
+    return Response({"deleted": "done"})

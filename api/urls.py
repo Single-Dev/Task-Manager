@@ -8,5 +8,6 @@ urlpatterns = [
   path('users/', UsersApiView, name='users'),
   path('tasks/', TasksApiView, name='tasks'), #Read
   path('create-task/', CreateTaskApiView, name='post_task'), #Create
-  path('updata/<int:pk>/', UpdataTaskApiView, name='updata_task') #Updata
+  path('updata/<int:pk>/', UpdataTaskApiView, name='updata_task'), #Updata
+  path('delete/<int:pk>/', DeleteTaskApiView, name='delete_task') #Delete
 ]
