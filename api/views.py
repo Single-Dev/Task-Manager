@@ -40,7 +40,7 @@ def CreateTaskApiView(request):
 def UpdataTaskApiView(request, pk):
     task = Task.objects.get(id=pk)
     serializer = TaskSerializer(instance=task, data=request.data)
-    if serializer.is_valid():
+    if serializer.is_valid() and task.owner == request.user:
         serializer.save()
     return Response(serializer.data)
 
@@ -48,5 +48,6 @@ def UpdataTaskApiView(request, pk):
 @permission_classes((permissions.AllowAny,))
 def DeleteTaskApiView(request, pk):
     task = Task.objects.get(id=pk)
-    task.delete()
+    if task.owner == request.user:
+        task.delete()
     return Response({"deleted": "done"})
