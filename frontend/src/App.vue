@@ -36,8 +36,8 @@ export default {
     }
   },
   methods: {
-    getMe() {
-      axios.get('/api/v1/users/me/',)
+    async getMe() {
+      axios.get('/api/v1/users/me/')
         .then(response => {
           this.username = response.data.username
           this.user_id = response.data.id
@@ -49,7 +49,7 @@ export default {
     async getTasks() {
       try {
         this.isLoading = true
-        const response = await axios.get('/api/tasks/',)
+        const response = await axios.get('/api/tasks/')
         const newArr = response.data.map(item => ({
           id: item.id,
           name: item.name,
@@ -108,7 +108,7 @@ export default {
     async deleteTask(item) {
       try {
         await axios.delete(`/api/delete/${item.id}/`, item)
-        this.getTasks()
+        this.tasks = this.tasks.filter(c => c.id != item.id)
       } catch (error) {
         alert(error.message)
       }
