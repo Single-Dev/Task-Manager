@@ -32,10 +32,11 @@ export default {
                 created_on: new Date()
             }
             if(this.name == ''){
-                alert('Nimadir Xato ketdi')
+                alert('Nimadir Xato ketdi')                
+            }else{
+                this.$emit("CreateTask", newTask)
+                this.name = ''
             }
-            this.$emit("CreateTask", newTask)
-            this.name = ''
         }
     },
 }
