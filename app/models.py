@@ -16,10 +16,22 @@ class Task(models.Model):
     #     (WARNING, "⚠️")
     # ]
     # mark = models.CharField(max_length=15, choices=mark_symbols)
-    created_on = models.DateTimeField(("Craeted oN"), default=timezone.now)
+    created_on = models.DateTimeField(("Craeted on"), default=timezone.now)
     reminder = models.DateField(('Reminder'), blank=True, null=True)
     # attachment = models.FileField(upload_to='base/attachments', blank=True, null=True)
     
+    def __str__(self):
+        return f'{self.name}'
+
+    class Meta:
+        ordering = ['-id']
+
+
+class SharredTask(models.Model):
+    name = models.CharField(max_length=15)
+    task = models.ForeignKey(Task, on_delete=models.CASCADE)
+    users = models.ManyToManyField(User,blank=True, related_name="sharred", symmetrical=False)
+
     def __str__(self):
         return f'{self.name}'
 

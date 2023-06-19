@@ -51,3 +51,14 @@ def DeleteTaskApiView(request, pk):
     if task.owner == request.user:
         task.delete()
     return Response({"deleted": "done"})
+
+
+@api_view(["GET"])
+@permission_classes((permissions.AllowAny, ))
+def SharredTaskApiView(request):
+    sharred_task = SharredTask.objects.filter(owner=request.user.id)
+    serializer = SharredTaskSerializer(sharred_task, many=True)
+    return Response(serializer.data)
+    # if request.user.is_authenticated:
+    # else:
+    #     return Response({"detail": "Authentication credentials were not provided."})
