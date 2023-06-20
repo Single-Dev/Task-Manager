@@ -1,15 +1,16 @@
 <template>
   <nav>
-    <router-link to="/">Home</router-link>
+    <router-link to="/">Home</router-link> |
     <div v-if="IsAuthenticated === false">
       <router-link to="/signup">SignUp</router-link> |
       <router-link to="/login">Login</router-link>
     </div>
+    <router-link to="/shared-tasks">Shared Tasks</router-link>
     <button v-if="IsAuthenticated === true" @click="logout">Logout</button>
+    <div>
+      {{ username }}
+    </div>
   </nav>
-  <div>
-    {{ username }}
-  </div>
   <router-view
   :user_id="user_id"
   :tasks="tasks"

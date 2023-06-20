@@ -5,7 +5,7 @@
 </template>
 <script>
 export default {
-    name: 'SharredTasks'
+    name: 'SharedTasks'
 }
 </script>
 <style lang="">

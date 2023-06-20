@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import SignUp from '../views/SignUp.vue'
 import Login from '../views/Login.vue'
-import SharredTasks from '../views/SharredTasks.vue'
+import SharedTasks from '../views/SharedTasks.vue'
 
 const routes = [
   {
@@ -18,9 +18,9 @@ const routes = [
     name: 'Login',
     component: Login
   },{
-    path: '/sharred-tasks',
-    name: 'SharredTasks',
-    component: SharredTasks
+    path: '/shared-tasks',
+    name: 'SharedTasks',
+    component: SharedTasks
   },
 ]
 

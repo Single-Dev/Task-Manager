@@ -26,6 +26,13 @@ def TasksApiView(request):
     else:
         return Response({"detail": "Authentication credentials were not provided."})
 
+@api_view(["GET"])
+@permission_classes((permissions.AllowAny, ))
+def TaskApiView(request, pk):
+    task = Task.objects.get(id=pk)
+    serializer = TaskSerializer(task, many=False)
+    return Response(serializer.data)
+
 @api_view(['POST'])
 @permission_classes((permissions.AllowAny,))
 def CreateTaskApiView(request):
