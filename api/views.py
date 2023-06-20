@@ -7,6 +7,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework import permissions
 from django.shortcuts import get_object_or_404
 
+#---------- users api ----------------
 @api_view(["GET"])
 @permission_classes((permissions.AllowAny, ))
 def UsersApiView(request):
@@ -14,7 +15,7 @@ def UsersApiView(request):
     serializer = UsersSerializer(user, many=True)
     return Response(serializer.data)
 
-
+#---------- Task api ----------------
 @api_view(["GET"])
 @permission_classes((permissions.AllowAny, ))
 def TasksApiView(request):
@@ -50,13 +51,15 @@ def DeleteTaskApiView(request, pk):
     task = Task.objects.get(id=pk)
     if task.owner == request.user:
         task.delete()
-    return Response({"deleted": "done"})
+        return Response({"deleted": "true"})
+    else:
+        return Response({"deleted": "false"})
 
-
+#---------- Sharred Task api ----------------
 @api_view(["GET"])
 @permission_classes((permissions.AllowAny, ))
 def SharredTaskApiView(request):
-    sharred_task = SharredTask.objects.filter(owner=request.user.id)
+    sharred_task = SharredTask.objects.all()
     serializer = SharredTaskSerializer(sharred_task, many=True)
     return Response(serializer.data)
     # if request.user.is_authenticated:
