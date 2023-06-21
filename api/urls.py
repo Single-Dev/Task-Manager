@@ -11,5 +11,5 @@ urlpatterns = [
   path('create-task/', CreateTaskApiView, name='post_task'), #Create
   path('updata/<int:pk>/', UpdataTaskApiView, name='updata_task'), #Updata
   path('delete/<int:pk>/', DeleteTaskApiView, name='delete_task'), #Delete
-  path('sharred-task/', SharredTaskApiView, name='sharred_task'),
+  path('shared-task/', SharedTaskApiView, name='shared_task'),
 ]

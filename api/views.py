@@ -62,10 +62,10 @@ def DeleteTaskApiView(request, pk):
     else:
         return Response({"deleted": "false"})
 
-#---------- Sharred Task api ----------------
+#---------- Shared Task api ----------------
 @api_view(["GET"])
 @permission_classes((permissions.AllowAny, ))
-def SharredTaskApiView(request):
+def SharedTaskApiView(request):
     sharred_task = SharredTask.objects.all()
     serializer = SharredTaskSerializer(sharred_task, many=True)
     return Response(serializer.data)
