@@ -5,8 +5,10 @@
       <router-link to="/signup">SignUp</router-link> |
       <router-link to="/login">Login</router-link>
     </div>
-    <router-link to="/shared-tasks">Shared Tasks</router-link>
-    <button v-if="IsAuthenticated === true" @click="logout">Logout</button>
+    <div v-if="IsAuthenticated === true">
+      <router-link to="/shared-tasks">Shared Tasks</router-link> |
+      <button @click="logout">Logout</button>
+    </div>
     <div>
       {{ username }}
     </div>

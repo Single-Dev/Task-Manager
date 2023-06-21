@@ -1,7 +1,7 @@
 <template>
     <div class="btn-group">
         <button v-for="btn in FilterBtns" type="button"
-        :class="[filterName == btn.name ? 'btn-dark' : 'btn-outline-dark']"
+        :class="[filterName == btn.name ? 'btn btn-dark' : 'btn btn-outline-dark']"
             @click="FilterFunc(btn.name)">
             {{ btn.title }}
         </button>
