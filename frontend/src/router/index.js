@@ -3,7 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import SignUp from '../views/SignUp.vue'
 import Login from '../views/Login.vue'
 import SharedTasks from '../views/SharedTasks.vue'
-import Profile from '../components/profile.vue'
+import Profile from '../views/Profile.vue'
 
 const routes = [
   {
@@ -23,7 +23,7 @@ const routes = [
     name: 'SharedTasks',
     component: SharedTasks
   },{
-    path: '/user/:username',
+    path: '/@:username',
     name: 'profile',
     component: Profile
   }

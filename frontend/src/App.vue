@@ -16,6 +16,7 @@
   <router-view
   :user_id="user_id"
   :tasks="tasks"
+  :username="username"
   @CreateTask="CreateTask"
   @checkToggle="checkToggle"
   @deleteTask="deleteTask"
