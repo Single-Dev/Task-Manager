@@ -5,12 +5,15 @@
 </template>
 <script>
 import axios from 'axios';
+import {useRoute} from 'vue-router'
+
 export default {
     name: 'profile',
     data() {
         return {
             users: [],
-            userDetail: []
+            userDetail: [],
+            username: ''
         }
     },
 
@@ -20,12 +23,14 @@ export default {
             this.users = response.data
         },
         getUser() {
-            this.users.forEach(e => {
-                if (e.username == this.$route.params.username) {
-                    this.userDetail = e;
-                }
-                console.log(e);
-            });
+            // this.users.forEach(e => {
+            //     if (e.username == this.$route.params.username) {
+            //         this.userDetail = e;
+            //     }
+            //     console.log(e);
+            // });
+            const route=useRoute()
+            this.username = route.params
         }
     },
 
