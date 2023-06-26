@@ -6,7 +6,8 @@
         <div v-else>
             <button>Follow</button>
         </div>
-        <h1>@{{ profile_username }}</h1>
+        <h1 v-if="user_found">@{{ profile_username }}</h1>
+        <h1 v-else>Siz buni band qiling: @{{ profile_username }}</h1>
     </div>
 </template>
 <script>
@@ -17,6 +18,7 @@ export default {
     data() {
         return {
             profile_username: '',
+            user_found: false,
         }
     },
     props:{
@@ -29,8 +31,11 @@ export default {
         async getUser() {
             const users = await axios.get('/api/users/')
             users.data.forEach(e => {
+                this.profile_username = this.$route.params.username
                 if (this.$route.params.username == e.username) {
-                    this.profile_username = this.$route.params.username
+                    this.user_found = true
+                }else{
+                    this.user_found = false
                 }
             });
         }
