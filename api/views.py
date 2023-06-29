@@ -21,7 +21,8 @@ def UsersApiView(request):
 def UpdataUserApiView(request, pk):
     user = User.objects.get(id=pk)
     serializer = UsersSerializer(instance=user, data=request.data)
-    serializer.save()
+    if serializer.is_valid():
+        serializer.save()
     return Response(serializer.data)
 
 #---------- Task api ----------------
