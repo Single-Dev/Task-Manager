@@ -15,6 +15,15 @@ def UsersApiView(request):
     serializer = UsersSerializer(user, many=True)
     return Response(serializer.data)
 
+
+@api_view(['POST'])
+@permission_classes((permissions.AllowAny,))
+def UpdataUserApiView(request, pk):
+    user = User.objects.get(id=pk)
+    serializer = UsersSerializer(instance=user, data=request.data)
+    serializer.save()
+    return Response(serializer.data)
+
 #---------- Task api ----------------
 @api_view(["GET"])
 @permission_classes((permissions.AllowAny, ))
