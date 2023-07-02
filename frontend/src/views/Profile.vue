@@ -19,30 +19,35 @@ export default {
         return {
             profile_username: '',
             user_found: false,
+            user_datails: []
         }
     },
-    props:{
-        username:{
-            type:String,
+    props: {
+        username: {
+            type: String,
             required: false
         }
     },
     methods: {
         async getUser() {
             const users = await axios.get('/api/users/')
+            this.profile_username = this.$route.params.username
             users.data.forEach(e => {
-                this.profile_username = this.$route.params.username
-                if (this.$route.params.username == e.username) {
+                if (this.profile_username == e.username) {
                     this.user_found = true
-                }else{
-                    this.user_found = false
                 }
             });
+        },
+        async getUserDetails() {
+            const response = await axios.get(`/api/users/${this.$route.params.username}/`)
+            this.user_datails = response.data
+            console.log(this.user_datails);
         }
     },
 
     mounted() {
         this.getUser()
+        this.getUserDetails()
     }
 }
 </script>
