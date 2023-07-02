@@ -6,6 +6,7 @@ app_name="api"
 
 urlpatterns = [
   path('users/', UsersApiView, name='users'), # Read
+  path('users/<str:username>/', UserApiView, name='users'), # Read
   path('users/<int:pk>/', UpdataUserApiView, name='_updata_user'), # Updata
   path('tasks/', TasksApiView, name='tasks'), #Read
   path('tasks/<int:pk>/', TaskApiView, name='task'), #Read

@@ -15,6 +15,12 @@ def UsersApiView(request):
     serializer = UsersSerializer(user, many=True)
     return Response(serializer.data)
 
+@api_view(["GET"])
+@permission_classes((permissions.AllowAny, ))
+def UserApiView(request, username):
+    user = User.objects.get(username=username)
+    serializer = UsersSerializer(user, many=False)
+    return Response(serializer.data)
 
 @api_view(['POST'])
 @permission_classes((permissions.AllowAny,))
