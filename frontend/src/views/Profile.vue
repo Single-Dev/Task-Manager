@@ -41,7 +41,6 @@ export default {
         async getUserDetails() {
             const response = await axios.get(`/api/users/${this.$route.params.username}/`)
             this.user_datails = response.data
-            console.log(this.user_datails);
         }
     },
 

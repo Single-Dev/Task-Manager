@@ -47,7 +47,10 @@ def TasksApiView(request):
 def TaskApiView(request, pk):
     task = Task.objects.get(id=pk)
     serializer = TaskSerializer(task, many=False)
-    return Response(serializer.data)
+    if request.user in task.task.users.all() or request.user == task.owner:
+        return Response(serializer.data)
+    else:
+        return Response({"detail": "You can not get this data"})
 
 @api_view(['POST'])
 @permission_classes((permissions.AllowAny,))
