@@ -47,7 +47,8 @@ def TasksApiView(request):
 def TaskApiView(request, pk):
     task = Task.objects.get(id=pk)
     serializer = TaskSerializer(task, many=False)
-    if request.user in task.task.users.all() or request.user == task.owner:
+    sharred_task = task.task.get(task__id=pk)
+    if request.user in sharred_task.users.all() or request.user == task.owner:
         return Response(serializer.data)
     else:
         return Response({"detail": "You can not get this data"})
