@@ -117,16 +117,11 @@ export default {
         alert(error.message)
       }
     },
-    async test(){
-      let r = await axios.get('/api/tasks/85/')
-      console.log(r);
-    }
   },
   mounted() {
     this.beforeCrete()
     this.getMe()
     this.getTasks()
-    this.test()
   },
 }
 

@@ -6,8 +6,9 @@ app_name="api"
 
 urlpatterns = [
   path('users/', UsersApiView, name='users'), # Read
-  path('users/<str:username>/', UserApiView, name='users'), # Read
-  path('users/<int:pk>/', UpdataUserApiView, name='_updata_user'), # Updata
+  path('users/<str:username>/', UserApiView, name='user'), # Read
+  path('user/id/<int:pk>/', UserIDApiView, name='user_id'), # Updata
+  path('users/update/<int:pk>/', UpdataUserApiView, name='updata_user'), # Updata
   path('tasks/', TasksApiView, name='tasks'), #Read
   path('tasks/<int:pk>/', TaskApiView, name='task'), #Read
   path('create-task/', CreateTaskApiView, name='post_task'), #Create

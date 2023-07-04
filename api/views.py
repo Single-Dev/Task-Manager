@@ -22,6 +22,13 @@ def UserApiView(request, username):
     serializer = UsersSerializer(user, many=False)
     return Response(serializer.data)
 
+@api_view(["GET"])
+@permission_classes((permissions.AllowAny, ))
+def UserIDApiView(request, pk):
+    user = User.objects.get(id=pk)
+    serializer = UsersSerializer(user, many=False)
+    return Response(serializer.data)
+
 @api_view(['POST'])
 @permission_classes((permissions.AllowAny,))
 def UpdataUserApiView(request, pk):
