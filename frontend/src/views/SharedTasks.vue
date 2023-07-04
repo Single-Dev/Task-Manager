@@ -51,8 +51,18 @@
     </div>
 </template>
 <script>
+import axios from 'axios'
 export default {
-    name: 'SharedTasks'
+    name: 'SharedTasks',
+    methods: {
+        async getSharedTasks(){
+            const response = await axios.get('/api/shared-task/')
+            console.log(response);
+        }
+    },
+    mounted() {
+        this.getSharedTasks()
+    },
 }
 </script>
 <style lang="">
