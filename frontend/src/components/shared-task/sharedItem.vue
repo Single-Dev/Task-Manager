@@ -18,7 +18,7 @@
                 </p>
                 <span v-for="user in SharedTaskUsers">
                     <a :href="'/@' + user.username">
-                        <img src="#"  alt="avatar"
+                        <img :src="'http://127.0.0.1:8000'+ user.profile_photo"  alt="avatar"
                         class="img-fluid rounded-circle me-1" width="35">
                         @{{ user.username }}
                     </a>
@@ -47,18 +47,33 @@ export default {
         }
     },
     methods: {
-        async getUsers(){
-            const response = await axios.get('/api/users/')
-            const profiles = await axios.get('/api/profiles/')
-            console.log(profiles.data);
-            response.data.forEach(e => {
-                this.sharredTask.users.forEach(r =>{
-                    if (r == e.id) {
-                        this.SharedTaskUsers.push(e)
-                }
-                })
-            });
-        }
+            async getUsers(){
+                const response = await axios.get('/api/users/')
+                const profiles = await axios.get('/api/profiles/')
+                response.data.forEach(e => {
+                    this.sharredTask.users.forEach(user_id =>{
+                        if (user_id == e.id) {
+                            const profile = profiles.data.find(profile => profile.user === e.id);
+                            const newArr = {
+                                id: e.id,
+                                first_name: e.first_name,
+                                username: e.username,
+                                profile_photo: profile.profile_photo
+                            }
+                            this.SharedTaskUsers.push(newArr)
+                    }
+                    })
+                });
+                // profiles.data.forEach(profile =>{
+                //     this.sharredTask.users.forEach(r =>{
+                //         if (r == profile.user) {
+                //             this.SharedTaskUsers.forEach(user_id =>{
+                //                 user_id.profile_photo = profile.profile_photo
+                //             })
+                //     }
+                //     })
+                // })
+            }
     },
     mounted() {
         this.getUsers()
