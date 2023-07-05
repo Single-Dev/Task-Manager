@@ -64,15 +64,6 @@ export default {
                     }
                     })
                 });
-                // profiles.data.forEach(profile =>{
-                //     this.sharredTask.users.forEach(r =>{
-                //         if (r == profile.user) {
-                //             this.SharedTaskUsers.forEach(user_id =>{
-                //                 user_id.profile_photo = profile.profile_photo
-                //             })
-                //     }
-                //     })
-                // })
             }
     },
     mounted() {
