@@ -16,7 +16,7 @@
                         class="text-muted small">program link</span>
                     <span class="ms-3 me-4">|</span>
                 </p>
-                <span v-for="user in users">
+                <span v-for="user in SharedTaskUsers">
                     <a :href="'/@' + user.username">
                         <img src="#"  alt="avatar"
                         class="img-fluid rounded-circle me-1" width="35">
@@ -43,17 +43,18 @@ export default {
     },
     data() {
         return {
-            users:[],
+            SharedTaskUsers:[],
         }
     },
     methods: {
         async getUsers(){
             const response = await axios.get('/api/users/')
+            const profiles = await axios.get('/api/profiles/')
+            console.log(profiles.data);
             response.data.forEach(e => {
                 this.sharredTask.users.forEach(r =>{
                     if (r == e.id) {
-                        console.log(e.username);
-                        this.users.push(e)
+                        this.SharedTaskUsers.push(e)
                 }
                 })
             });

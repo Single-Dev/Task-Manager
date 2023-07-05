@@ -4,7 +4,7 @@ from .serializers import *
 from authentication.models import CustomUser
 from app.models import Task
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework import permissions
+from rest_framework import permissions, generics, filters
 from django.shortcuts import get_object_or_404
 
 #---------- users api ----------------
@@ -37,6 +37,16 @@ def UpdataUserApiView(request, pk):
     if serializer.is_valid():
         serializer.save()
     return Response(serializer.data)
+
+#------------- Profile API
+
+@api_view(["GET"])
+@permission_classes((permissions.AllowAny, ))
+def ProfileApiView(request):
+    profile = Profile.objects.all()
+    serializer = ProfileSerializer(profile, many=True)
+    return Response(serializer.data)
+
 
 #---------- Task api ----------------
 @api_view(["GET"])

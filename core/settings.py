@@ -27,10 +27,12 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES':(
-        'rest_framework.permissions.IsAuthenticated'
-    )
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_FILTER_BACKENDS':(
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ),
 }
-
 
 # Application definition
 
@@ -47,7 +49,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'authentication',
     'app',
-    'api'
+    'api',
+    'django_filters',
 ]
 
 MIDDLEWARE = [

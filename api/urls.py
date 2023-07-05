@@ -9,6 +9,7 @@ urlpatterns = [
   path('users/<str:username>/', UserApiView, name='user'), # Read
   path('user/id/<int:pk>/', UserIDApiView, name='user_id'), # Updata
   path('users/update/<int:pk>/', UpdataUserApiView, name='updata_user'), # Updata
+  path('profiles/', ProfileApiView, name='profiles'), #Read
   path('tasks/', TasksApiView, name='tasks'), #Read
   path('tasks/<int:pk>/', TaskApiView, name='task'), #Read
   path('create-task/', CreateTaskApiView, name='post_task'), #Create
