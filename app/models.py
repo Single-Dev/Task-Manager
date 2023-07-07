@@ -28,10 +28,11 @@ class Task(models.Model):
 
 
 class SharredTask(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=15)
     task = models.ForeignKey(Task, on_delete=models.CASCADE, related_name="task")
     users = models.ManyToManyField(User,blank=True, related_name="sharred", symmetrical=False)
-
+    created_on = models.DateTimeField(("Craeted on"), default=timezone.now)
     def __str__(self):
         return f'{self.name}'
 

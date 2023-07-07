@@ -1,10 +1,9 @@
 <template>
     <div class="card" style="border-radius: 15px;">
         <div class="card-body p-4">
-            <h3 class="mb-3">{{ sharredTask.name }}</h3>
+            <h3 class="mb-3">{{ sharedTask.name }}</h3>
             <p class="small mb-0"><i class="fas fa-star fa-lg text-warning"></i> <span class="mx-2">|</span>
-                Public <span class="mx-2">|</span> Updated by <strong>MDBootstrap</strong> on 11 April ,
-                2021
+                Public <span class="mx-2">|</span> Created by <strong>{{sharedTaskOwner}}</strong> on {{ sharedTask.created_on }}
             </p>
             <hr class="my-4">
             <div class="d-flex justify-content-start align-items-center">
@@ -36,7 +35,7 @@ import axios from 'axios'
 export default {
     
     props:{
-        sharredTask:{
+        sharedTask:{
             type: Array,
             required: true
         }
@@ -44,6 +43,7 @@ export default {
     data() {
         return {
             SharedTaskUsers:[],
+            sharedTaskOwner: ''
         }
     },
     methods: {
@@ -51,7 +51,7 @@ export default {
                 const response = await axios.get('/api/users/')
                 const profiles = await axios.get('/api/profiles/')
                 response.data.forEach(e => {
-                    this.sharredTask.users.forEach(user_id =>{
+                    this.sharedTask.users.forEach(user_id =>{
                         if (user_id == e.id) {
                             const profile = profiles.data.find(profile => profile.user === e.id);
                             const newArr = {
@@ -64,10 +64,15 @@ export default {
                     }
                     })
                 });
+            },
+            async getSharedTaskOwnerInfo(){
+                const response = await axios.get(`/api/user/id/${this.sharedTask.owner}/`)
+                this.sharedTaskOwner = response.data.username
             }
     },
     mounted() {
         this.getUsers()
+        this.getSharedTaskOwnerInfo()
     },
 }
 </script>

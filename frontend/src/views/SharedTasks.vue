@@ -3,9 +3,9 @@
         <section class="vh-100" style="background-color: #5f59f7;">
             <div class="container py-5 h-100">
                 <div class="row d-flex justify-content-center align-items-center h-100">
-                    <div v-for="sharredTask in sharredTasks" class="col col-xl-10">
+                    <div v-for="sharedTask in sharedTasks" class="col col-xl-10">
                       <sharedItem 
-                      :sharredTask="sharredTask"
+                      :sharedTask="sharedTask"
                       />
                     </div>
                 </div>
@@ -20,7 +20,7 @@ export default {
     name: 'SharedTasks',
     data() {
         return {
-            sharredTasks:[]
+            sharedTasks:[]
         }
     },
     components:{
@@ -30,8 +30,8 @@ export default {
         async getSharedTasks(){
             try {
                 const response = await axios.get('/api/shared-task/')
-                this.sharredTasks = response.data
-                console.log(this.sharredTasks);
+                this.sharedTasks = response.data
+                console.log(this.sharedTasks);
             } catch (error) {
                 alert(error.message)
             }

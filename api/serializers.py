@@ -20,4 +20,4 @@ class TaskSerializer(serializers.ModelSerializer):
 class SharredTaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = SharredTask
-        fields = ['id', 'name', 'task', 'users']
+        fields = '__all__'
