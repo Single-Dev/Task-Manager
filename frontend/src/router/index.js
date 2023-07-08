@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import SignUp from '../views/SignUp.vue'
-import Login from '../views/Login.vue'
-import SharedTasks from '../views/SharedTasks.vue'
-import Profile from '../views/Profile.vue'
+import HomeView from '../views/base/HomeView.vue'
+import SignUp from '../views/auth/SignUp.vue'
+import Login from '../views/auth/Login.vue'
+import SharedTasks from '../views/shared/SharedTasks.vue'
+import Profile from '../views/profile/Profile.vue'
 
 const routes = [
   {

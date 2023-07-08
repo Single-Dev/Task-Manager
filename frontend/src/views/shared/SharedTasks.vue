@@ -29,9 +29,10 @@ export default {
     methods: {
         async getSharedTasks(){
             try {
-                const response = await axios.get('/api/shared-task/')
+                const response = await axios.get('/api/shared-tasks/')
+                const r = await axios.get('/api/shared-tasks/1/')
+                console.log(r)
                 this.sharedTasks = response.data
-                console.log(this.sharedTasks);
             } catch (error) {
                 alert(error.message)
             }
