@@ -9,11 +9,10 @@
             <div class="d-flex justify-content-start align-items-center">
                 <p class="mb-0 text-uppercase"><i class="fas fa-cog me-2"></i> <span
                         class="text-muted small">settings</span></p>
-                <p class="mb-0 text-uppercase"><i class="fas fa-link ms-4 me-2"></i> <span class="text-muted small">program
-                        link</span></p>
-                <p class="mb-0 text-uppercase"><i class="fas fa-ellipsis-h ms-4 me-2"></i> <span
-                        class="text-muted small">program link</span>
-                    <span class="ms-3 me-4">|</span>
+                <p class="mb-0 text-uppercase">
+                    <span class="ms-2 me-2">|</span>
+                    <router-link class="text-muted small" :to="'shared/' + sharedTask.id">Visit</router-link>
+                    <span class="ms-2 me-2">|</span>
                 </p>
                 <span v-for="user in SharedTaskUsers">
                     <router-link :to="'/@' + user.username">
