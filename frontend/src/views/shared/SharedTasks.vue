@@ -15,9 +15,9 @@
 </template>
 <script>
 import axios from 'axios'
-import sharedItem from '@/components/shared-task/sharedItem.vue'
+import sharedItem from '@/components/shared/sharedItem.vue'
 export default {
-    name: 'SharedTasks',
+    name: 'sharedTasks',
     data() {
         return {
             sharedTasks:[]

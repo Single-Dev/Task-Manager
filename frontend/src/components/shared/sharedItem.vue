@@ -16,11 +16,11 @@
                     <span class="ms-3 me-4">|</span>
                 </p>
                 <span v-for="user in SharedTaskUsers">
-                    <a :href="'/@' + user.username">
-                        <img :src="'http://127.0.0.1:8000'+ user.profile_photo"  alt="avatar"
+                    <router-link :to="'/@' + user.username">
+                        <img :src="apiBaseURL + user.profile_photo"  alt="avatar"
                         class="img-fluid rounded-circle me-1" width="35">
-                        @{{ user.username }}
-                    </a>
+                    @{{ user.username }}
+                    </router-link>
                 </span>
 
                 <button type="button" class="btn btn-outline-dark btn-sm btn-floating">
@@ -43,7 +43,8 @@ export default {
     data() {
         return {
             SharedTaskUsers:[],
-            sharedTaskOwner: ''
+            sharedTaskOwner: '',
+            apiBaseURL: axios.defaults.baseURL
         }
     },
     methods: {
