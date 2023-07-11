@@ -5,6 +5,7 @@ import Login from '../views/auth/Login.vue'
 import SharedTasks from '../views/shared/SharedTasks.vue'
 import SharedTask from '@/views/shared/SharedTask.vue'
 import Profile from '../views/profile/Profile.vue'
+import Task from '@/views/task/Task.vue'
 
 const routes = [
   {
@@ -31,6 +32,10 @@ const routes = [
     path: '/shared/:pk',
     name: 'sharedTask',
     component: SharedTask
+  },{
+    path: '/task/:pk',
+    name: 'task',
+    component: Task
   }
 ]
 
