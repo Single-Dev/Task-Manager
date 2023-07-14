@@ -1,6 +1,7 @@
 <template>
     <div>
-        <h1>Hello</h1>
+        <h1>{{taskDetails.name}}</h1>
+        <p>{{ taskDetails.caption }}</p>
     </div>
 </template>
 <script>

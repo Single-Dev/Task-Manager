@@ -64,11 +64,12 @@ def TasksApiView(request):
 def TaskApiView(request, pk):
     task = Task.objects.get(id=pk)
     serializer = TaskSerializer(task, many=False)
-    sharred_task = task.task.get(task__id=pk)
-    if request.user in sharred_task.users.all() or request.user == task.owner:
-        return Response(serializer.data)
-    else:
-        return Response({"detail": "You can not get this data"})
+    return Response(serializer.data)
+    # sharred_task = task.task.get(task__id=pk)
+    # if request.user in sharred_task.users.all() or request.user == task.owner:
+    #     return Response(serializer.data)
+    # else:
+    #     return Response({"detail": "You can not get this data"})
 
 @api_view(['POST'])
 @permission_classes((permissions.AllowAny,))
