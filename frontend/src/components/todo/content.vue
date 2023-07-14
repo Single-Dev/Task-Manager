@@ -10,7 +10,7 @@
                     :checked="task.done"
                     @click="$emit('checkToggle', task)"
                     />
-                    {{ task.name }}
+                    <router-link :to="'/task/' + task.id">{{ task.name }}</router-link>
                     <button @click="$emit('deleteTask', task)" class="danger fa-solid fa-trash"></button>
                 </li>
             </ul>
