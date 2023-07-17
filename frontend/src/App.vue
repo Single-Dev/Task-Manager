@@ -1,34 +1,33 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <div v-if="IsAuthenticated === false">
-      <router-link to="/signup">SignUp</router-link> |
-      <router-link to="/login">Login</router-link>
-    </div>
-    <div v-if="IsAuthenticated === true">
-      <router-link to="/shared-tasks">Shared Tasks</router-link> |
-      <button @click="logout">Logout</button>
-    </div>
-    <div>
-      {{ username }}
-    </div>
-  </nav>
-  <router-view
-  :user_id="user_id"
-  :tasks="tasks"
-  :username="username"
-  @CreateTask="CreateTask"
-  @checkToggle="checkToggle"
-  @deleteTask="deleteTask"
-  />
+  <div class="wrapper d-flex align-items-stretch">
+
+    <sideBar/>
+
+    <navBar/>
+
+    <router-view
+    :user_id="user_id"
+    :tasks="tasks"
+    :username="username"
+    @CreateTask="CreateTask"
+    @checkToggle="checkToggle"
+    @deleteTask="deleteTask"
+    />
+  </div>
 </template>
 
 <script>
 
-import axios from 'axios';
+import axios from 'axios'
+import navBar from '@/components/ui-components/navBar.vue'
+import sideBar from '@/components/ui-components/sideBar.vue'
 
 export default {
   name: "App",
+  components:{
+    navBar,
+    sideBar
+  },
   data() {
     return {
       IsAuthenticated: false,
