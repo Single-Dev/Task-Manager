@@ -5,6 +5,7 @@
 
     <navBar/>
 
+   <div>
     <router-view
     :user_id="user_id"
     :tasks="tasks"
@@ -13,6 +14,7 @@
     @checkToggle="checkToggle"
     @deleteTask="deleteTask"
     />
+   </div>
   </div>
 </template>
 
