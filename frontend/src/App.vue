@@ -1,7 +1,6 @@
 <template>
   
-    <VueSidebarMenuAkahon
-    :menuItems="menuItems"
+    <SidebarMenu
     :menuTitle="menuTitle"
     :menuIcon="menuIcon"
     :isExitButton="false"
@@ -9,6 +8,8 @@
     :profileRole="''"
     :profileImg="'http://127.0.0.1:8000/media/profile/profile.jpg'"
     :isUsedVueRouter="true"
+    :isLoggedIn="IsAuthenticated"
+    :username="username"
     />
    <div>
     <router-view
@@ -25,10 +26,10 @@
 <script>
 
 import axios from 'axios'
-import VueSidebarMenuAkahon from "vue-sidebar-menu-akahon";
+import SidebarMenu from "@/components/navigations/SideBar.vue";
 export default {
   name: "App",
-  components: {VueSidebarMenuAkahon},
+  components: {SidebarMenu},
   data() {
     return {
       IsAuthenticated: false,
@@ -40,26 +41,7 @@ export default {
       // Side Bar
       menuTitle: "Task Manager",
       menuIcon:"bx-task",
-      menuItems:[
-      {
-      link: "/",
-      name: "Home",
-      tooltip: "HomeView",
-      icon:"bx-home-alt"
-      },
-      {
-      link: "/@" + this.username,
-      name: "Profile",
-      tooltip: "profile",
-      icon:"bx-user"
-      },
-      {
-      link: "/shared-tasks",
-      name: "Shared Tasks",
-      tooltip: "sharedTask",
-      icon:"bx-share-alt"
-      }
-      ]
+     
     }
   },
   methods: {
