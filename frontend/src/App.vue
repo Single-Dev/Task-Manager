@@ -1,10 +1,6 @@
 <template>
   <div class="wrapper d-flex align-items-stretch">
-
-    <sideBar/>
-
-    <navBar/>
-
+    <VueSidebarMenuAkahon />
    <div>
     <router-view
     :user_id="user_id"
@@ -21,15 +17,10 @@
 <script>
 
 import axios from 'axios'
-import navBar from '@/components/ui-components/navBar.vue'
-import sideBar from '@/components/ui-components/sideBar.vue'
-
+import VueSidebarMenuAkahon from "vue-sidebar-menu-akahon";
 export default {
   name: "App",
-  components:{
-    navBar,
-    sideBar
-  },
+  components: {VueSidebarMenuAkahon},
   data() {
     return {
       IsAuthenticated: false,

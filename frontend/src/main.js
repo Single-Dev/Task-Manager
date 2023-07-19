@@ -5,12 +5,8 @@ import router from './router'
 import store from './store'
 import axios from 'axios'
 import '@/assets/css/style.css'
-// import '@/assets/js/jquery.min.js'
-// import '@/assets/js/bootstrap.min.js'
-// import '@/assets/js/main.js'
-// import '@/assets/js/popper.js';
-// global.jQuery = require('jquery');
-// require('bootstrap');
+import VueSidebarMenuAkahon from "vue-sidebar-menu-akahon";
+Vue.component('vue-sidebar-menu-akahon', VueSidebarMenuAkahon);
 
 
 axios.defaults.baseURL = 'http://127.0.0.1:8000'
