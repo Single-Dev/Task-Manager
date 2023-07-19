@@ -1,6 +1,15 @@
 <template>
-  <div class="wrapper d-flex align-items-stretch">
-    <VueSidebarMenuAkahon />
+  
+    <VueSidebarMenuAkahon
+    :menuItems="menuItems"
+    :menuTitle="menuTitle"
+    :menuIcon="menuIcon"
+    :isExitButton="false"
+    :profileName="'@' + username"
+    :profileRole="''"
+    :profileImg="'http://127.0.0.1:8000/media/profile/profile.jpg'"
+    :isUsedVueRouter="true"
+    />
    <div>
     <router-view
     :user_id="user_id"
@@ -11,7 +20,6 @@
     @deleteTask="deleteTask"
     />
    </div>
-  </div>
 </template>
 
 <script>
@@ -28,7 +36,30 @@ export default {
       user_id: '',
       isLoading: false,
       tasks: [],
-      filter: 'all'
+      filter: 'all',
+      // Side Bar
+      menuTitle: "Task Manager",
+      menuIcon:"bx-task",
+      menuItems:[
+      {
+      link: "/",
+      name: "Home",
+      tooltip: "HomeView",
+      icon:"bx-home-alt"
+      },
+      {
+      link: "/@" + this.username,
+      name: "Profile",
+      tooltip: "profile",
+      icon:"bx-user"
+      },
+      {
+      link: "/shared-tasks",
+      name: "Shared Tasks",
+      tooltip: "sharedTask",
+      icon:"bx-share-alt"
+      }
+      ]
     }
   },
   methods: {
