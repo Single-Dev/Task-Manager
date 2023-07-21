@@ -1,13 +1,66 @@
 <template >
-    <div>
-        <h1>SignUp</h1>
-        <form @submit.prevent>
-            <input type="text" name="username" v-model="username">
-            <input type="email" name="email" v-model="email">
-            <input type="password" name="username" v-model="password">
-            <button type="submit" @click="submitForm">Submit</button>
-        </form>
-    </div>
+    <!-- Section: Design Block -->
+    <section class="text-center">
+        <!-- Background image -->
+        <div class="p-5 bg-image bg"></div>
+        <!-- Background image -->
+
+        <div class="card mx-4 mx-md-5 shadow-5-strong bg_2">
+            <div class="card-body py-5 px-md-5">
+
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-8">
+                        <h2 class="fw-bold mb-5">Sign up now</h2>
+                        <form @submit.prevent>
+                            <!-- Email input -->
+                            <div class="form-outline mb-4">
+                                <input type="email" id="form3Example3" class="form-control" v-model="email"/>
+                                <label class="form-label" for="form3Example3">Email address</label>
+                            </div>
+                            <div class="form-outline mb-4">
+                                <input type="text" id="form3Example3" class="form-control" v-model="username"/>
+                                <label class="form-label" for="form3Example3">Username</label>
+                            </div>
+                            <!-- Password input -->
+                            <div class="form-outline mb-4">
+                                <input type="password" id="form3Example4" class="form-control" v-model="password"/>
+                                <label class="form-label" for="form3Example4">Password</label>
+                            </div>
+
+                            <!-- Submit button -->
+                            <button
+                            @click="submitForm"
+                            type="submit"
+                            class="btn btn-outline-dark btn-block mb-4"
+                            >
+                                Sign up
+                            </button>
+
+                            <!-- Register buttons -->
+                            <div class="text-center">
+                                <p>or sign up with:</p>
+                                <button type="button" class="btn btn-link btn-floating mx-1">
+                                    <i class="fab fa-facebook-f"></i>
+                                </button>
+
+                                <button type="button" class="btn btn-link btn-floating mx-1">
+                                    <i class="fab fa-google"></i>
+                                </button>
+
+                                <button type="button" class="btn btn-link btn-floating mx-1">
+                                    <i class="fab fa-twitter"></i>
+                                </button>
+
+                                <button type="button" class="btn btn-link btn-floating mx-1">
+                                    <i class="fab fa-github"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </template>
 <script>
 import axios from 'axios'
@@ -41,4 +94,14 @@ export default {
     }
 }
 </script>
-<style ></style>
+<style scoped>
+.bg{
+    background-image: url('https://mdbootstrap.com/img/new/textures/full/171.jpg');
+    height: 300px;
+}
+.bg_2{
+    margin-top: -100px;
+    background: hsla(0, 0%, 100%, 0.8);
+    backdrop-filter: blur(30px);
+}
+</style>
