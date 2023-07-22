@@ -1,8 +1,7 @@
 <template>
   <div class="sidebar" :class="isOpened ? 'open' : ''" :style="cssVars">
     <div class="logo-details" style="margin: 6px 14px 0 14px">
-
-      <i class="bx icon" :class="menuIcon" />
+      <i class='bx icon bx-task' ></i>
       <div class="logo_name">
         {{ menuTitle }}
       </div>
@@ -85,12 +84,6 @@ export default {
       type: String,
       required: true
     },
-    menuIcon: {
-      type: String,
-      required: true
-    },
-
-    //! Menu items
 
     //! Search
     isSearch: {

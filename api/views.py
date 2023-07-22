@@ -38,6 +38,12 @@ def UpdataUserApiView(request, pk):
         serializer.save()
     return Response(serializer.data)
 
+class UserListView(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UsersSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['username', 'email']
+
 #------------- Profile API
 
 @api_view(["GET"])
