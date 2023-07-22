@@ -134,7 +134,7 @@ export default {
         {
           link: "/shared-tasks",
           name: "Shared Tasks",
-          tooltip: "sharedTask",
+          tooltip: "Shared Tasks",
           icon: "bx-share-alt"
         }
       ]

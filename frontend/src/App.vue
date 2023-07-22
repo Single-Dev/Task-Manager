@@ -2,7 +2,6 @@
   
     <SidebarMenu
     :menuTitle="menuTitle"
-    :menuIcon="menuIcon"
     :isExitButton="false"
     :profileName="'@' + username"
     :profileRole="''"
@@ -39,9 +38,7 @@ export default {
       tasks: [],
       filter: 'all',
       // Side Bar
-      menuTitle: "Task Manager",
-      menuIcon:"bx-task",
-     
+      menuTitle: "Task Manager",     
     }
   },
   methods: {
@@ -87,6 +84,10 @@ export default {
       this.getMe()
       this.getTasks()
     },
+    async searchUsers(){
+      const response = await axios.get('/api/users/?search=bekzodbek')
+      console.log(response.data);
+    },
     async logout() {
       try {
         await axios.post('/api/v1/token/logout/')
@@ -127,6 +128,7 @@ export default {
     this.beforeCrete()
     this.getMe()
     this.getTasks()
+    this.searchUsers()
   },
 }
 

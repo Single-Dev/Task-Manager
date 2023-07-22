@@ -5,7 +5,6 @@ from .views import *
 app_name="api"
 
 urlpatterns = [
-  # path('users/', UsersApiView, name='users'), # Read
   path('users/', UserListView.as_view(), name='users'), # Read
   path('users/<str:username>/', UserApiView, name='user'), # Read
   path('user/id/<int:pk>/', UserIDApiView, name='user_id'), # Updata

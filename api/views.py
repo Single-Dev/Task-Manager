@@ -10,13 +10,6 @@ from django.shortcuts import get_object_or_404
 #---------- users api ----------------
 @api_view(["GET"])
 @permission_classes((permissions.AllowAny, ))
-def UsersApiView(request):
-    user = User.objects.all()
-    serializer = UsersSerializer(user, many=True)
-    return Response(serializer.data)
-
-@api_view(["GET"])
-@permission_classes((permissions.AllowAny, ))
 def UserApiView(request, username):
     user = User.objects.get(username=username)
     serializer = UsersSerializer(user, many=False)
@@ -42,7 +35,7 @@ class UserListView(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UsersSerializer
     filter_backends = [filters.SearchFilter]
-    search_fields = ['username', 'email']
+    search_fields = ['username', 'first_name']
 
 #------------- Profile API
 
