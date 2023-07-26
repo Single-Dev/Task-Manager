@@ -35,7 +35,6 @@ export default {
       user_id: '',
       isLoading: false,
       tasks: [],
-      filter: 'all',
       // Side Bar
       menuTitle: "Task Manager",     
     }

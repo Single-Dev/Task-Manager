@@ -21,7 +21,7 @@ export default {
     },
     data(){
         return{
-            filter: "all",
+            filter: "",
             FilterBtns:[
             {
                 title: 'All',
