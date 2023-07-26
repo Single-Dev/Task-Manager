@@ -1,5 +1,5 @@
 <template >
-    <form @submit.prevent class="w-100 text-center p-5">
+    <form @submit.prevent class="w-75 text-center p-5">
         <div class="p-5 card mx-4 mx-md-5">
             <h2>Login</h2>
             <!-- Email input -->

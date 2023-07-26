@@ -1,5 +1,4 @@
 <template>
-  
     <SidebarMenu
     :menuTitle="menuTitle"
     :isExitButton="false"
@@ -85,8 +84,11 @@ export default {
       this.getTasks()
     },
     async searchUsers(){
-      const response = await axios.get('/api/users/?search=bekzodbek')
-      console.log(response.data);
+      try {
+        const response = await axios.get('/api/users/?search=bekzodbek')
+      } catch (error) {
+        console.log(error.message);
+      }
     },
     async logout() {
       try {
@@ -128,7 +130,7 @@ export default {
     this.beforeCrete()
     this.getMe()
     this.getTasks()
-    // this.searchUsers()
+    this.searchUsers()
   },
 }
 
