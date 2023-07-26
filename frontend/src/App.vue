@@ -1,13 +1,10 @@
 <template>
     <SidebarMenu
-    :menuTitle="menuTitle"
-    :isExitButton="false"
     :profileName="'@' + username"
-    :profileRole="''"
     :profileImg="'http://127.0.0.1:8000/media/profile/profile.jpg'"
-    :isUsedVueRouter="true"
     :isLoggedIn="IsAuthenticated"
     :username="username"
+    @onExit="logout"
     />
    <div>
     <router-view
@@ -35,8 +32,6 @@ export default {
       user_id: '',
       isLoading: false,
       tasks: [],
-      // Side Bar
-      menuTitle: "Task Manager",     
     }
   },
   methods: {

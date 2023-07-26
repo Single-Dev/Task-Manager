@@ -3,7 +3,7 @@
     <div class="logo-details" style="margin: 6px 14px 0 14px">
       <i class='bx icon bx-task' ></i>
       <div class="logo_name">
-        {{ menuTitle }}
+        Task Manager
       </div>
       <i class="bx" :class="isOpened ? 'bx-menu-alt-right' : 'bx-menu'" id="btn" @click="isOpened = !isOpened" />
     </div>
@@ -25,8 +25,8 @@
             </span>
           </li>
           <div v-if="isLoggedIn == false">
-            <li >
-              <router-link to="/login" id="login">
+            <li id="login">
+              <router-link to="/login">
                 <i class="bx bxs-log-in bx-square-rounded"></i>
                 <span class="links_name">Login</span>
               </router-link>
@@ -34,8 +34,8 @@
                 Login
               </span>
             </li>
-            <li>
-              <router-link to="/signup" id="signup">
+            <li id="signup">
+              <router-link to="/signup">
                 <i class="bx bx-user-plus bx-square-rounded"></i>
                 <span class="links_name">Signup</span>
               </router-link>
@@ -45,13 +45,22 @@
             </li>
           </div>
           <div v-else>
-            <li v-for="(menuItem, index) in menuItems" :key="index" :id="'links_' + index">
+            <li id="profile">
+              <router-link :to="'/@' + username">
+                <i class="bx bx-user bx-square-rounded"></i>
+                <span class="links_name">Profile</span>
+              </router-link>
+              <span data-target="profile" class="tooltip">
+                Profile
+              </span>
+            </li>
+            <li v-for="(menuItem, index) in menuItems" :id="index">
               <router-link :to="menuItem.link">
                 <i class="bx" :class="menuItem.icon || 'bx-square-rounded'" />
                 <span class="links_name">{{ menuItem.name }}</span>
               </router-link>
 
-              <span :data-target="'links_' + index" class="tooltip">{{
+              <span :data-target="index" class="tooltip">{{
                 menuItem.tooltip || menuItem.name
               }}</span>
             </li>
@@ -70,7 +79,7 @@
           </div>
         </router-link>
 
-        <i v-if="isExitButton" class="bx bx-log-out" id="log_out" @click.stop="$emit('button-exit-clicked')" />
+        <i class="bx bx-log-out" id="log_out" @click="$emit('onExit')" />
       </div>
     </div>
   </div>
