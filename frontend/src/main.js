@@ -5,8 +5,13 @@ import router from './router'
 import store from './store'
 import axios from 'axios'
 import '@/assets/css/style.css'
-
+import uiComponents from '@/components/ui-components'
 
 axios.defaults.baseURL = 'http://127.0.0.1:8000'
-createApp(App).use(store).use(router).mount('#app')
+const app = createApp(App)
+app.use(store).use(router)
+uiComponents.map(component =>{
+    app.component(component.name, component)
+})
+app.mount('#app')
 

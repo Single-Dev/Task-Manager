@@ -128,7 +128,7 @@ export default {
     this.beforeCrete()
     this.getMe()
     this.getTasks()
-    this.searchUsers()
+    // this.searchUsers()
   },
 }
 

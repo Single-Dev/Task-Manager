@@ -14,17 +14,17 @@
                         <form @submit.prevent>
                             <!-- Email input -->
                             <div class="form-outline mb-4">
-                                <input type="email" id="form3Example3" class="form-control" v-model="email"/>
-                                <label class="form-label" for="form3Example3">Email address</label>
+                                <input type="email" id="email" class="form-control" v-model="email"/>
+                                <label class="form-label" for="email">Email address</label>
                             </div>
                             <div class="form-outline mb-4">
-                                <input type="text" id="form3Example3" class="form-control" v-model="username"/>
-                                <label class="form-label" for="form3Example3">Username</label>
+                                <input type="text" id="username" class="form-control" v-model="username"/>
+                                <label class="form-label" for="username">Username</label>
                             </div>
                             <!-- Password input -->
                             <div class="form-outline mb-4">
-                                <input type="password" id="form3Example4" class="form-control" v-model="password"/>
-                                <label class="form-label" for="form3Example4">Password</label>
+                                <input type="password" id="password" class="form-control" v-model="password"/>
+                                <label class="form-label" for="password">Password</label>
                             </div>
 
                             <!-- Submit button -->
