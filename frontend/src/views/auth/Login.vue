@@ -31,7 +31,7 @@
             </div>
 
             <!-- Submit button -->
-            <button @click="submitForm" type="submit" class="btn btn-outline-dark btn-block mb-4">Login</button>
+            <button @click="$emit('Login', username, password)" type="submit" class="btn btn-outline-dark btn-block mb-4">Login</button>
 
             <!-- Register buttons -->
             <div class="text-center">
@@ -67,32 +67,6 @@ export default {
             password: '',
         }
     },
-    methods: {
-        submitForm(e) {
-            const formData = {
-                username: this.username,
-                password: this.password,
-            }
-            axios
-                .post('/api/v1/token/login/', formData)
-                .then(response => {
-                    console.log(response);
-
-                    const token = response.data.auth_token
-
-                    this.$store.commit('setToken', token)
-
-                    axios.defaults.headers.common['Authorization'] = "Token " + token
-
-                    localStorage.setItem('token', token)
-
-                    this.$router.push('/')
-                })
-                .catch(error => {
-                    console.log(error);
-                })
-        }
-    }
 }
 </script>
 <style ></style>

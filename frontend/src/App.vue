@@ -14,6 +14,8 @@
     @CreateTask="CreateTask"
     @checkToggle="checkToggle"
     @deleteTask="deleteTask"
+    @Login="Login"
+    @Signup="Signup"
     />
    </div>
 </template>
@@ -74,9 +76,41 @@ export default {
       } else {
         axios.defaults.headers.common['Authorization'] = ''
       }
-      this.getMe()
-      this.getTasks()
     },
+    async Signup(email, username, password){
+      const formData = {
+                email: email,
+                username: username, // Lowercase
+                password: password,
+            }
+      try {
+        const response = await axios.post('/api/v1/users/', formData)
+        this.$router.push('/login')
+      } catch (error) {
+        alert(error.message)
+      }
+    },
+    async Login(username, password){
+      const formData = {username: username, password: password}
+      try {
+        const response = await axios.post('/api/v1/token/login/', formData)
+        
+        const token = response.data.auth_token
+
+        this.$store.commit('setToken', token)
+
+        axios.defaults.headers.common['Authorization'] = "Token " + token
+
+        localStorage.setItem('token', token)
+        this.IsAuthenticated = true
+        this.getTasks()
+        this.getMe()
+        this.$router.push('/')
+      } catch (error) {
+        alert(error.message)
+      }
+    },
+    // Search User
     async searchUsers(){
       try {
         const response = await axios.get('/api/users/?search=bekzodbek')
@@ -84,6 +118,7 @@ export default {
         console.log(error.message);
       }
     },
+    // LogOut
     async logout() {
       try {
         await axios.post('/api/v1/token/logout/')
@@ -124,7 +159,6 @@ export default {
     this.beforeCrete()
     this.getMe()
     this.getTasks()
-    this.searchUsers()
   },
 }
 

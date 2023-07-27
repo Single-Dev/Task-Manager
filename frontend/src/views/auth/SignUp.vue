@@ -29,7 +29,7 @@
 
                             <!-- Submit button -->
                             <button
-                            @click="submitForm"
+                            @click="$emit('Signup', email, username, password)"
                             type="submit"
                             class="btn btn-outline-dark btn-block mb-4"
                             >
@@ -74,24 +74,6 @@ export default {
             password: '',
         }
     },
-    methods: {
-        submitForm(e) {
-            const formData = {
-                email: this.email,
-                username: this.username,
-                password: this.password,
-            }
-            axios
-                .post('/api/v1/users/', formData)
-                .then(response => {
-                    this.$router.push('/login')
-                    console.log(response);
-                })
-                .catch(error => {
-                    console.log(error);
-                })
-        }
-    }
 }
 </script>
 <style scoped>

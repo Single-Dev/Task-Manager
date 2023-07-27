@@ -34,6 +34,10 @@ export default {
             {
                 title: "Completed",
                 name:'completed'
+            },
+            {
+                title: "Schudle",
+                name:'schudle'
             }
             ]
         }

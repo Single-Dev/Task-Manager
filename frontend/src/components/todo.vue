@@ -62,7 +62,9 @@ export default {
                 case 'completed':
                     return arr.filter(c => c.done == true)
                 case 'active':
-                    return arr.filter(c => c.done == false)
+                    return arr.filter(c => c.done == false  && c.reminder == null)
+                case 'schudle':
+                    return arr.filter(c => c.reminder)
                 default:
                     return arr
             }
