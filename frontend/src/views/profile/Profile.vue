@@ -1,5 +1,9 @@
 <template>
-    <div>
+    <div v-if="isLoading">
+        loading
+        <loader/>
+    </div>
+    <div v-else>
         <div v-if="username == profile_username">
             <button>Edit</button>
         </div>
@@ -8,10 +12,6 @@
         </div>
         <h1 v-if="user_found">@{{ profile_username }}</h1>
         <h1 v-else>Siz buni band qiling: @{{ profile_username }}</h1>
-    </div>
-    <div v-if="isLoading">
-        loading
-        <loader/>
     </div>
 </template>
 <script>
