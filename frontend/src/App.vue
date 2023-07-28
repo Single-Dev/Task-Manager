@@ -1,7 +1,7 @@
 <template>
     <SidebarMenu
     :profileName="'@' + username"
-    :profileImg="'http://127.0.0.1:8000/media/profile/profile.jpg'"
+    :profileImg="'s'"
     :isLoggedIn="IsAuthenticated"
     :username="username"
     @onExit="logout"
@@ -80,7 +80,7 @@ export default {
     async Signup(email, username, password){
       const formData = {
                 email: email,
-                username: username, // Lowercase
+                username: username.toLowerCase(), // Lowercase
                 password: password,
             }
       try {
