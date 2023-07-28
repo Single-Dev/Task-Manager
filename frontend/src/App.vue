@@ -26,10 +26,10 @@
 
 import axios from 'axios'
 import SidebarMenu from "@/components/navigations/SideBar.vue";
-import loader from '@/components/ui-components/Loader.vue'
+
 export default {
   name: "App",
-  components: {SidebarMenu, loader},
+  components: {SidebarMenu},
   data() {
     return {
       IsAuthenticated: false,
@@ -167,7 +167,7 @@ export default {
 
 </script>
 
-<style lang="scss">
+<style >
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -175,7 +175,9 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
-
+body {
+  transition: all 0.5s ease;
+}
 nav {
   padding: 30px;
 
