@@ -19,7 +19,6 @@ class CustomUser(AbstractUser):
     is_admin = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     last_login = models.DateTimeField(null=True)
-    followers = models.ManyToManyField("self", blank=True, related_name="following", symmetrical=False)
     
     def __str__(self):
         return self.username
