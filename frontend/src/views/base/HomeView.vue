@@ -3,6 +3,7 @@
     <todo
     :user_id="user_id"
     :tasks="tasks"
+    :isLoading="isLoading"
     @CreateTask="$emit('CreateTask', $event)"
     @checkToggle="$emit('checkToggle', $event)"
     @deleteTask="$emit('deleteTask', $event)"
@@ -18,6 +19,10 @@ export default {
     todo
   },
   props:{
+    isLoading:{
+      type: Boolean,
+      required: true
+    },
     user_id:{
       type:Number,
       required: true

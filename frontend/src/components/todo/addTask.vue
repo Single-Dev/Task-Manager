@@ -4,6 +4,7 @@
             <div class="form-outline flex-fill">
                 <input type="text" v-model="name" id="form2" class="form-control" placeholder="New Task.." />
             </div>
+            <button class="btn btn-outline-dark">remind</button>
             <button type="submit" class="btn btn-outline-primary ms-2" @click="CreateTask">Add</button>
         </form>
     </div>

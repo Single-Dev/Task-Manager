@@ -6,22 +6,14 @@
 
                     <div class="card">
                         <div class="card-body p-5">
-                            <addTask
-                            :user_id="user_id"
-                            @CreateTask="$emit('CreateTask', $event)" />
+                            <addTask :user_id="user_id" @CreateTask="$emit('CreateTask', $event)" />
 
-                            <Filter
-                            :UpdateFilterHandler="UpdateFilterHandler"
-                            :filterName="filter"
-                            />
-
-
-                            <content
-                            :tasks="onFilterHandler(tasks, filter)"
-                            :user_id="user_id"
-                            @checkToggle="$emit('checkToggle', $event)"
-                            @deleteTask="$emit('deleteTask', $event)"
-                            />
+                            <Filter :UpdateFilterHandler="UpdateFilterHandler" :filterName="filter" />
+                            <div v-if="isLoading" class="d-flex justify-content-center p-5">
+                                <loader />
+                            </div>
+                            <content v-else :tasks="onFilterHandler(tasks, filter)" :user_id="user_id"
+                                @checkToggle="$emit('checkToggle', $event)" @deleteTask="$emit('deleteTask', $event)" />
                         </div>
                     </div>
 
@@ -47,6 +39,10 @@ export default {
         }
     },
     props: {
+        isLoading: {
+            type: Boolean,
+            required: true
+        },
         user_id: {
             type: Number,
             required: true
@@ -62,8 +58,8 @@ export default {
                 case 'completed':
                     return arr.filter(c => c.done == true)
                 case 'active':
-                    return arr.filter(c => c.done == false  && c.reminder == null)
-                case 'schudle':
+                    return arr.filter(c => c.done == false && c.reminder == null)
+                case 'schedule':
                     return arr.filter(c => c.reminder)
                 default:
                     return arr

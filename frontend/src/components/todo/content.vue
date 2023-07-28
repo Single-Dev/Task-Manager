@@ -1,7 +1,10 @@
 <template>
     <!-- Tabs content -->
     <div class="tab-content" id="ex1-content">
-        <div class="tab-pane fade show active" id="ex1-tabs-1" role="tabpanel" aria-labelledby="ex1-tab-1">
+        <div v-if="!tasks.length" class="p-3">
+            <h2>Topilamdi</h2>
+        </div>
+        <div v-else class="tab-pane fade show active" id="ex1-tabs-1" role="tabpanel" aria-labelledby="ex1-tab-1">
             <ul v-for="task in tasks" class="list-group mb-0">
                 <li class="list-group-item d-flex align-items-center border-0 mb-2 rounded mt-3 justify-content-between">
                     <div class="mx-4">

@@ -3,8 +3,11 @@
         <section class="vh-100" style="background-color: #5f59f7;">
             <div class="container py-5 h-100">
                 <div class="row d-flex justify-content-center align-items-center h-100">
-                    <div v-if="isFound == false">
+                    <div v-if="!sharedTasks.length  && !isLoading">
                         <h1>Topilmadi...</h1>
+                    </div>
+                    <div v-else-if="isLoading">
+                        <loader/>
                     </div>
                     <div v-else v-for="sharedTask in sharedTasks" class="col col-xl-10">
                       <sharedItem 
@@ -24,7 +27,6 @@ export default {
     data() {
         return {
             sharedTasks:[],
-            isFound: false,
             isLoading: false
         }
     },
@@ -34,14 +36,9 @@ export default {
     methods: {
         async getSharedTasks(){
             try {
+                this.isLoading = true
                 const response = await axios.get('/api/shared-tasks/')
                 this.sharedTasks = response.data
-                if(this.sharedTasks.length > 0){
-                this.isFound = true
-                }else{
-                    this.isFound = false
-                }
-                this.isLoading = true
             } catch (error) {
                 alert(error.message)
             }finally{

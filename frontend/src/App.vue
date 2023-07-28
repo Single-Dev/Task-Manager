@@ -1,13 +1,15 @@
 <template>
     <SidebarMenu
     :profileName="'@' + username"
-    :profileImg="'s'"
+    :profileImg="''"
     :isLoggedIn="IsAuthenticated"
     :username="username"
     @onExit="logout"
     />
    <div>
+   
     <router-view
+    :isLoading="isLoading"
     :user_id="user_id"
     :tasks="tasks"
     :username="username"
@@ -24,9 +26,10 @@
 
 import axios from 'axios'
 import SidebarMenu from "@/components/navigations/SideBar.vue";
+import loader from '@/components/ui-components/Loader.vue'
 export default {
   name: "App",
-  components: {SidebarMenu},
+  components: {SidebarMenu, loader},
   data() {
     return {
       IsAuthenticated: false,

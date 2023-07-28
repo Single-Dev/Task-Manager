@@ -36,8 +36,8 @@ export default {
                 name:'completed'
             },
             {
-                title: "Schudle",
-                name:'schudle'
+                title: "Schedule",
+                name:'schedule'
             }
             ]
         }
