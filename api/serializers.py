@@ -17,7 +17,7 @@ class TaskSerializer(serializers.ModelSerializer):
         model = Task
         fields = '__all__'
 
-class SharredTaskSerializer(serializers.ModelSerializer):
+class SharedTaskSerializer(serializers.ModelSerializer):
     class Meta:
-        model = SharredTask
+        model = SharedTask
         fields = '__all__'

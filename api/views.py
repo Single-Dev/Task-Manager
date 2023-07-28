@@ -98,13 +98,13 @@ def DeleteTaskApiView(request, pk):
 @api_view(["GET"])
 @permission_classes((permissions.AllowAny, ))
 def SharedTasksApiView(request):
-    shared_task = SharredTask.objects.filter(users=request.user)
-    serializer = SharredTaskSerializer(shared_task, many=True)
+    shared_task = SharedTask.objects.filter(users=request.user)
+    serializer = SharedTaskSerializer(shared_task, many=True)
     return Response(serializer.data)
 
 @api_view(["GET"])
 @permission_classes((permissions.AllowAny, ))
 def SharedTaskApiView(request, pk):
-    shared_task = SharredTask.objects.filter(users=request.user).get(id=pk)
-    serializer = SharredTaskSerializer(shared_task, many=False)
+    shared_task = SharedTask.objects.filter(users=request.user).get(id=pk)
+    serializer = SharedTaskSerializer(shared_task, many=False)
     return Response(serializer.data)
