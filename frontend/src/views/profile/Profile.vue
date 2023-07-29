@@ -7,6 +7,7 @@
 
 			<div class="profile-card__cnt js-profile-cnt">
 				<div class="profile-card__name">{{ user_datails.first_name }}</div>
+				<h3 class="profile-card__name text-dark">@{{ user_datails.username }}</h3>
 				<div class="profile-card__txt">{{ user_datails.bio }}</div>
 
 				<div class="profile-card-social">
@@ -66,10 +67,24 @@
 
 			</div>
 
-			<div class="profile-card-message js-message">
+			<div class="profile-card-message js-message p-5">
 				<form class="profile-card-form" @submit.prevent>
-					<div class="profile-card-form__container">
-						<textarea placeholder="Say something..."></textarea>
+					<div class="profile-card-form__container p-2">
+						<div class="row">
+							<div >
+							<input class="form-control mt-1" type="text" placeholder="Username">
+							<input class="form-control mt-1" type="text" placeholder="Bio">
+							<input class="form-control mt-1" type="text" placeholder="First name">
+							<input class="form-control mt-1" type="text" placeholder="Last name">
+						</div>
+						<div>
+							<input class="form-control mt-1" type="text" placeholder="instagram username">
+							<input class="form-control mt-1" type="text" placeholder="twitter username">
+							<input class="form-control mt-1" type="text" placeholder="github username">
+							<input class="form-control mt-1" type="text" placeholder="facebook username">
+							<input class="form-control mt-1" type="text" placeholder="website link">
+						</div>
+						</div>
 					</div>
 
 					<div class="profile-card-form__bottom">
@@ -627,6 +642,7 @@ a:hover {
 .profile-card-form__bottom {
 	justify-content: space-between;
 	display: flex;
+	margin-left: -25px;
 }
 
 @media screen and (max-width: 576px) {
