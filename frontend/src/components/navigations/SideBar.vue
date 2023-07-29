@@ -70,8 +70,7 @@
 
       <div v-if="isLoggedIn" class="profile">
         <router-link :to="'/@' + username" class="profile-details">
-          <img v-if="profileImg" :src="profileImg" :alt="profileName">
-          <i v-else class="bx bxs-user-rectangle" />
+          <i class="bx bxs-user-rectangle" />
           <div class="name_job">
             <div class="name">
               {{ profileName }}

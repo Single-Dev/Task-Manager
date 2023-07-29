@@ -35,5 +35,10 @@ class Profile(models.Model):
     profile_photo = models.ImageField(default="profile/profile.jpg", upload_to="profile")
     bio = models.CharField(max_length=100, null=True, blank=True, default="")
     verifyed = models.BooleanField(default=False)
+    instagram = models.CharField(max_length=150, null=True, blank=True)
+    twitter = models.CharField(max_length=150, null=True, blank=True)
+    github = models.CharField(max_length=150, null=True, blank=True)
+    facebook = models.CharField(max_length=150, null=True, blank=True)
+    website = models.CharField(max_length=150, null=True, blank=True)
     def __str__(self):
         return f"id: {self.id}, {self.user}"

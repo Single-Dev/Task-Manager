@@ -10,8 +10,7 @@ class UsersSerializer(serializers.ModelSerializer):
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ['id', 'user', 'profile_photo', 'bio', 'verifyed']
-
+        fields = '__all__'
 class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task

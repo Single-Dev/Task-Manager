@@ -41,11 +41,17 @@ class UserListView(generics.ListAPIView):
 
 @api_view(["GET"])
 @permission_classes((permissions.AllowAny, ))
-def ProfileApiView(request):
-    profile = Profile.objects.all()
-    serializer = ProfileSerializer(profile, many=True)
+def ProfilesApiView(request):
+    profiles = Profile.objects.all()
+    serializer = ProfileSerializer(profiles, many=True)
     return Response(serializer.data)
 
+@api_view(["GET"])
+@permission_classes((permissions.AllowAny, ))
+def ProfileApiView(request, user):
+    profile = Profile.objects.get(user=user)
+    serializer = ProfileSerializer(profile, many=False)
+    return Response(serializer.data)
 
 #---------- Task api ----------------
 @api_view(["GET"])

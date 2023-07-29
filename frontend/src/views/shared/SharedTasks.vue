@@ -6,7 +6,7 @@
                     <div v-if="!sharedTasks.length  && !isLoading">
                         <h1>Topilmadi...</h1>
                     </div>
-                    <div v-else-if="isLoading">
+                    <div class="d-flex justify-content-center" v-else-if="isLoading">
                         <loader/>
                     </div>
                     <div v-else v-for="sharedTask in sharedTasks" class="col col-xl-10">
