@@ -32,7 +32,7 @@ class Profile(models.Model):
         verbose_name = "Profile"
         verbose_name_plural = "Profile"
     user = models.OneToOneField(CustomUser(), on_delete=models.CASCADE)
-    profile_photo = models.ImageField(default="profile/profile.jpg", upload_to="profile")
+    profile_photo = models.ImageField(default="profile/profile.jpg", upload_to="profile", null=True, blank=True)
     bio = models.CharField(max_length=100, null=True, blank=True, default="")
     verifyed = models.BooleanField(default=False)
     instagram = models.CharField(max_length=150, null=True, blank=True)

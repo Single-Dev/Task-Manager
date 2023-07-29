@@ -53,6 +53,15 @@ def ProfileApiView(request, user):
     serializer = ProfileSerializer(profile, many=False)
     return Response(serializer.data)
 
+@api_view(['POST'])
+@permission_classes((permissions.AllowAny,))
+def UpdataProfileApiView(request, user):
+    profile = Profile.objects.get(user=user)
+    serializer = ProfileSerializer(instance=profile, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors)
 #---------- Task api ----------------
 @api_view(["GET"])
 @permission_classes((permissions.AllowAny, ))

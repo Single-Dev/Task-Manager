@@ -11,7 +11,7 @@
 				<div class="profile-card__txt">{{ user_datails.bio }}</div>
 
 				<div class="profile-card-social">
-					<a v-if="user_datails.facebook" :href="'https://www.facebook.com' + user_datails.facebook"
+					<a v-if="user_datails.facebook" :href="'https://www.facebook.com/' + user_datails.facebook"
 						class="profile-card-social__item facebook" target="_blank">
 						<span class="icon-font">
 							<svg class="icon">
@@ -72,24 +72,26 @@
 					<div class="profile-card-form__container p-2">
 						<div class="row">
 							<div >
-							<input class="form-control mt-1" type="text" placeholder="Username">
-							<input class="form-control mt-1" type="text" placeholder="Bio">
-							<input class="form-control mt-1" type="text" placeholder="First name">
-							<input class="form-control mt-1" type="text" placeholder="Last name">
+							<input class="form-control mt-1" type="text" placeholder="Username" v-model="user_datails.username">
+							<input class="form-control mt-1" type="text" placeholder="Bio" v-model="user_datails.bio">
+							<input class="form-control mt-1" type="text" placeholder="First name" v-model="user_datails.first_name">
+							<input class="form-control mt-1" type="text" placeholder="Last name" v-model="user_datails.last_name">
 						</div>
 						<div>
-							<input class="form-control mt-1" type="text" placeholder="instagram username">
-							<input class="form-control mt-1" type="text" placeholder="twitter username">
-							<input class="form-control mt-1" type="text" placeholder="github username">
-							<input class="form-control mt-1" type="text" placeholder="facebook username">
-							<input class="form-control mt-1" type="text" placeholder="website link">
+							<input class="form-control mt-1" type="text" placeholder="instagram username" v-model="user_datails.instagram">
+							<input class="form-control mt-1" type="text" placeholder="twitter username" v-model="user_datails.twitter">
+							<input class="form-control mt-1" type="text" placeholder="github username" v-model="user_datails.github">
+							<input class="form-control mt-1" type="text" placeholder="facebook username" v-model="user_datails.facebook">
+							<input class="form-control mt-1" type="text" placeholder="website link" v-model="user_datails.website">
 						</div>
 						</div>
 					</div>
 
 					<div class="profile-card-form__bottom">
-						<button class="profile-card__button button--blue js-message-close">
-							Submit
+						<button
+						@click="editProfile"
+						class="profile-card__button button--blue js-message-close">
+							Edit
 						</button>
 
 						<button @click="editProfileBtn" class="profile-card__button button--gray js-message-close">
@@ -212,7 +214,6 @@ export default {
 			try {
 				// this.isLoading = true
 				const user = await axios.get(`/api/users/${this.$route.params.username}/`)
-				console.log(user.data.id);
 				const profile = await axios.get(`/api/profiles/${user.data.id}/`)
 				let user_details_arr = {
 					id: user.data.id,
@@ -240,6 +241,37 @@ export default {
 		editProfileBtn() {
 			let card = document.querySelector('.js-profile-card')
 			card.classList.toggle('active')
+		},
+		async editProfile(){
+			const userFormData= {
+				id: this.user_datails.id,
+				email: this.user_datails.email,
+				username: this.user_datails.username,
+				gender: this.user_datails.gender,
+				last_name: this.user_datails.last_name,
+				first_name: this.user_datails.first_name
+			}
+			const profileFormData=
+				{
+					bio: this.user_datails.bio,
+					verifyed: this.user_datails.verifyed,
+					instagram: this.user_datails.instagram,
+					twitter: this.user_datails.twitter,
+					github: this.user_datails.github,
+					facebook: this.user_datails.facebook,
+					website: this.user_datails.website,
+					user: this.user_datails.id
+				}
+			try {
+				await axios.post(`/api/users/updata/${this.user_datails.id}/`, userFormData )
+				const reqponse = await axios.post(`/api/profiles/updata/${this.user_datails.id}/`, profileFormData)
+				console.log(reqponse);
+			} catch (error) {
+				alert(error.message)
+			}finally{
+				this.$router.push('@'+ this.user_datails.username)
+				this.editProfileBtn()
+			}
 		}
 	},
 
