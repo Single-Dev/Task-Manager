@@ -8,14 +8,20 @@
             <ul v-for="task in tasks" class="list-group mb-0">
                 <li class="list-group-item d-flex align-items-center border-0 mb-2 rounded mt-3 justify-content-between">
                     <div class="mx-4">
-                        <input v-if="task.reminder == null" class="form-check-input my-2" type="checkbox" :checked="task.done"
-                            @click="$emit('checkToggle', task)" />
-                        <router-link class="text-dark" :to="'/task/' + task.id">{{ task.name }}</router-link>
+                        <input
+                        @click="$emit('checkToggle', task)"
+                        v-if="task.reminder == null" class="form-check-input my-2" type="checkbox" :checked="task.done"/>
+                        <label
+                        @click="$emit('checkToggle', task)"
+                        >{{ task.name }}</label>
                     </div>
                     <div v-if="task.reminder">
                         {{ task.reminder }}
                     </div>
-                    <i @click="$emit('deleteTask', task)" class="mx-4 text-danger fa-solid fa-trash"></i>
+                    <div>
+                        <router-link class="fa-solid fa-pen text-dark" :to="'/task/' + task.id"></router-link>
+                        <i @click="$emit('deleteTask', task)" class="mx-4 text-danger fa-solid fa-trash"></i>
+                    </div>
                 </li>
             </ul>
         </div>
