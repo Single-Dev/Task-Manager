@@ -1,6 +1,5 @@
 <template>
     <SidebarMenu
-    :profileName="'@' + username"
     :isLoggedIn="IsAuthenticated"
     :username="username"
     @onExit="logout"

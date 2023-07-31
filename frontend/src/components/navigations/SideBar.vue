@@ -1,7 +1,7 @@
 <template>
   <div class="sidebar" :class="isOpened ? 'open' : ''" :style="cssVars">
     <div class="logo-details" style="margin: 6px 14px 0 14px">
-      <i class='bx icon bx-task' ></i>
+      <i class='bx icon bx-task'></i>
       <div class="logo_name">
         Task Manager
       </div>
@@ -68,31 +68,27 @@
         </ul>
       </div>
 
-      <div v-if="isLoggedIn" class="profile">
+      <div v-if="isLoggedIn" class="profile align-items-center">
         <router-link :to="'/@' + username" class="profile-details">
           <i class="bx bxs-user-rectangle" />
           <div class="name_job">
             <div class="name">
-              {{ profileName }}
+              @{{ username }}
             </div>
           </div>
         </router-link>
 
-        <i class="bx bx-log-out" id="log_out" @click="$emit('onExit')" />
+        <i class="bx bx-log-out mt-2" id="log_out" @click="$emit('onExit')" />
       </div>
     </div>
   </div>
+
 </template>
   
 <script>
 export default {
   name: 'SidebarMenu',
   props: {
-    menuTitle: {
-      type: String,
-      required: true
-    },
-
     //! Search
     isSearch: {
       type: Boolean,
@@ -105,20 +101,6 @@ export default {
     searchTooltip: {
       type: String,
       default: 'Search',
-    },
-
-    //! Profile detailes
-    profileImg: {
-      type: String,
-      required: true
-    },
-    profileName: {
-      type: String,
-      required: true
-    },
-    profileRole: {
-      type: String,
-      required: true
     },
     isLoggedIn: {
       type: Boolean,
@@ -147,6 +129,12 @@ export default {
         }
       ]
     }
+  },
+  methods:{
+    editProfileBtn() {
+			let card = document.querySelector('.js-profile-card')
+			card.classList.toggle('active')
+		}
   },
   mounted() {
     this.tooltipAttached()
@@ -216,6 +204,10 @@ export default {
 
 body {
   transition: all 0.5s ease;
+}
+
+#log_out {
+  cursor: pointer;
 }
 
 .name_job {

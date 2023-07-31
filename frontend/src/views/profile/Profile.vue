@@ -99,8 +99,6 @@
 						</button>
 					</div>
 				</form>
-
-				<div class="profile-card__overlay js-message-close"></div>
 			</div>
 
 		</div>
@@ -683,25 +681,6 @@ a:hover {
 	}
 }
 
-.profile-card textarea {
-	width: 100%;
-	resize: none;
-	height: 210px;
-	margin-bottom: 20px;
-	border: 2px solid #dcdcdc;
-	border-radius: 10px;
-	padding: 15px 20px;
-	color: #324e63;
-	font-weight: 500;
-	font-family: 'Quicksand', sans-serif;
-	outline: none;
-	transition: all 0.3s;
-}
-
-.profile-card textarea:focus {
-	outline: none;
-	border-color: #8a979e;
-}
 
 .profile-card__overlay {
 	width: 100%;
@@ -714,4 +693,6 @@ a:hover {
 	background: rgba(22, 33, 72, 0.35);
 	border-radius: 12px;
 	transition: all 0.3s;
-}</style>
+}
+
+</style>
