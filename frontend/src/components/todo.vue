@@ -77,4 +77,8 @@ export default {
     height: auto;
     background-image: linear-gradient(-20deg, #ff2846 0%, #6944ff 100%);
 }
+
+.card{
+    box-shadow: 0px 8px 60px -10px rgba(13, 28, 39, 0.6);
+}
 </style>

@@ -8,18 +8,12 @@
       <i class="bx" :class="isOpened ? 'bx-menu-alt-right' : 'bx-menu'" id="btn" @click="isOpened = !isOpened" />
     </div>
 
-    <div style="
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          flex-grow: 1;
-          max-height: calc(100% - 60px);
-        ">
+    <div class="side_bar_div">
       <div id="my-scroll" style="margin: 6px 14px 0 14px">
         <ul class="nav-list" style="overflow: visible">
           <li id="links_search" v-if="isSearch" @click="isOpened = true">
-            <i class="bx bx-search" />
-            <input type="text" :placeholder="searchPlaceholder" @input="$emit('search-input-emit', $event.target.value)">
+            <i class="bx bx-search"/>
+            <input type="text" placeholder="Search for user" @input="UpdateTerm"  v-model="term">
             <span data-target="links_search" class="tooltip">
               Search
             </span>
@@ -94,10 +88,6 @@ export default {
       type: Boolean,
       default: true,
     },
-    searchPlaceholder: {
-      type: String,
-      default: 'Search...',
-    },
     searchTooltip: {
       type: String,
       default: 'Search',
@@ -109,11 +99,16 @@ export default {
     username: {
       type: String,
       required: true
-    }
+    },
+    Term:{
+      type: Function,
+      required: true
+     }
   },
   data() {
     return {
       isOpened: false,
+      term:'',
       menuItems: [
         {
           link: "/",
@@ -131,13 +126,10 @@ export default {
     }
   },
   methods:{
-    editProfileBtn() {
-			let card = document.querySelector('.js-profile-card')
-			card.classList.toggle('active')
-		}
-  },
-  mounted() {
-    this.tooltipAttached()
+    UpdateTerm(){
+      console.log('HELLO');
+      // this.Term(this.term)
+    }
   },
   computed: {
     cssVars() {
@@ -234,6 +226,14 @@ body {
   /* padding: 6px 14px 0 14px; */
   z-index: 99;
   transition: all 0.5s ease;
+}
+
+.side_bar_div{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+  max-height: calc(100% - 60px);
 }
 
 .sidebar.open {

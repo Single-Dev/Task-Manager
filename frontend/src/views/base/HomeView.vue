@@ -31,6 +31,9 @@ export default {
       type: Array,
       required: true
     },
-  }
+    IsAuthenticated:{
+      type: Boolean
+    }
+  },
 }
 </script>

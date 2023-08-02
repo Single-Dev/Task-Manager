@@ -2,6 +2,7 @@
     <SidebarMenu
     :isLoggedIn="IsAuthenticated"
     :username="username"
+    :Term="onTermHandler"
     @onExit="logout"
     />
    <div>
@@ -35,6 +36,7 @@ export default {
       user_id: '',
       isLoading: false,
       tasks: [],
+      term:''
     }
   },
   methods: {
@@ -111,13 +113,22 @@ export default {
         alert(error.message)
       }
     },
-    // Search User
-    async searchUsers(){
+     // Search for User
+     async searchForUser(){
       try {
-        const response = await axios.get('/api/users/?search=bekzodbek')
+        const response = await axios.get(`/api/users/?search=${this.term}`)
+        console.log(response);
       } catch (error) {
         console.log(error.message);
+      }finally{
+        this.$router.push('/result')
       }
+    },
+    onTermHandler(term){
+      // localStorage.setItem('term', term)
+      this.term = term
+      console.log(this.term);
+      this.searchForUser()
     },
     // LogOut
     async logout() {
@@ -128,7 +139,9 @@ export default {
       } catch (error) {
         alert(error.message)
       } finally {
-        this.beforeCrete()
+        this.getTasks()
+        this.IsAuthenticated = false
+        this.$router.push('/login')
       }
     },
     async CreateTask(item) {
