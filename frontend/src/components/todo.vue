@@ -71,4 +71,10 @@ export default {
     }
 }
 </script>
-<style></style>
+<style scoped>
+.gradient-custom{
+    width: 100%;
+    height: auto;
+    background-image: linear-gradient(-20deg, #ff2846 0%, #6944ff 100%);
+}
+</style>

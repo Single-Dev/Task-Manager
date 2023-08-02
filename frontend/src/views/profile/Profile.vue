@@ -1,5 +1,12 @@
 <template>
-	<div class="wrapper">
+	<div class="d-flex justify-content-center align-items-center wrapper" v-if="!user_found && !isLoading">
+		<h1>@{{ profile_username }} topilmadi..</h1>
+	</div>
+	<div class="wrapper d-flex justify-content-center align-items-center" v-else-if="isLoading">
+		<loader/>
+	</div>
+	<div v-else>
+		<div class="wrapper">
 		<div class="profile-card js-profile-card">
 			<div class="profile-card__img">
 				<img :src="baseUrl + user_datails.profile_photo" alt="profile card">
@@ -171,6 +178,7 @@
 			</symbol>
 		</defs>
 	</svg>
+	</div>
 </template>
 <script>
 import axios from 'axios';
@@ -178,10 +186,10 @@ export default {
 	name: 'profile',
 	data() {
 		return {
+			isLoading: false,
 			profile_username: '',
 			user_found: false,
 			user_datails: [],
-			isLoading: false,
 			baseUrl: axios.defaults.baseURL
 		}
 	},
@@ -203,14 +211,15 @@ export default {
 					}
 				});
 			} catch (error) {
-				alert(error.message)
+				this.user_found = false
+				console.log(error.message);
 			} finally {
 				this.isLoading = false
 			}
 		},
 		async getUserDetails() {
 			try {
-				// this.isLoading = true
+				this.isLoading = true
 				const user = await axios.get(`/api/users/${this.$route.params.username}/`)
 				const profile = await axios.get(`/api/profiles/${user.data.id}/`)
 				let user_details_arr = {
@@ -231,9 +240,9 @@ export default {
 				}
 				this.user_datails = user_details_arr
 			} catch (error) {
-				alert(error.message)
+				console.log(error.message)
 			} finally {
-				// this.isLoading = false
+				this.isLoading = false
 			}
 		},
 		editProfileBtn() {
@@ -244,7 +253,7 @@ export default {
 			const userFormData= {
 				id: this.user_datails.id,
 				email: this.user_datails.email,
-				username: this.user_datails.username,
+				username: this.user_datails.username.toLowerCase(),
 				gender: this.user_datails.gender,
 				last_name: this.user_datails.last_name,
 				first_name: this.user_datails.first_name
@@ -267,7 +276,7 @@ export default {
 			} catch (error) {
 				alert(error.message)
 			}finally{
-				this.$router.push('@'+ this.user_datails.username)
+				this.$router.push('@'+ this.user_datails.username.toLowerCase())
 				this.editProfileBtn()
 			}
 		}
@@ -312,7 +321,6 @@ a:hover {
 
 .wrapper {
 	width: 100%;
-	width: 100%;
 	height: auto;
 	min-height: 100vh;
 	padding: 50px 20px;
@@ -320,7 +328,6 @@ a:hover {
 	display: flex;
 	background-image: linear-gradient(-20deg, #ff2846 0%, #6944ff 100%);
 	display: flex;
-	background-image: linear-gradient(-20deg, #ff2846 0%, #6944ff 100%);
 }
 
 @media screen and (max-width: 768px) {

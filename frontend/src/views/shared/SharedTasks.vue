@@ -1,6 +1,6 @@
 <template>
     <div>
-        <section class="vh-100" style="background-color: #5f59f7;">
+        <section class="vh-100 gradient-custom">
             <div class="container py-5 h-100">
                 <div class="row d-flex justify-content-center align-items-center h-100">
                     <div v-if="!sharedTasks.length  && !isLoading">
@@ -52,6 +52,10 @@ export default {
     },
 }
 </script>
-<style lang="">
-    
+<style scoped>
+    .gradient-custom{
+        width: 100%;
+        height: auto;
+        background-image: linear-gradient(-20deg, #ff2846 0%, #6944ff 100%);
+    }
 </style>
