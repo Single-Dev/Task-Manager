@@ -47,6 +47,7 @@ export default {
         return {
             SharedTaskUsers:[],
             sharedTaskOwner: '',
+            apiBaseURL: axios.defaults.baseURL
         }
     },
     methods: {
