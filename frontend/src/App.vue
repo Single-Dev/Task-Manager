@@ -1,24 +1,18 @@
 <template>
-    <SidebarMenu
-    :isLoggedIn="IsAuthenticated"
-    :username="username"
-    :Term="onTermHandler"
-    @onExit="logout"
-    />
-   <div>
-   
+  <SidebarMenu :isLoggedIn="IsAuthenticated" :username="username" @UpdateTerm="onTermHandler" @onExit="logout" />
+  <div>
     <router-view
     :isLoading="isLoading"
     :user_id="user_id"
     :tasks="tasks"
     :username="username"
+    :users="users"
     @CreateTask="CreateTask"
     @checkToggle="checkToggle"
     @deleteTask="deleteTask"
     @Login="Login"
-    @Signup="Signup"
-    />
-   </div>
+    @Signup="Signup" />
+  </div>
 </template>
 
 <script>
@@ -28,7 +22,7 @@ import SidebarMenu from "@/components/navigations/SideBar.vue";
 
 export default {
   name: "App",
-  components: {SidebarMenu},
+  components: { SidebarMenu },
   data() {
     return {
       IsAuthenticated: false,
@@ -36,7 +30,9 @@ export default {
       user_id: '',
       isLoading: false,
       tasks: [],
-      term:''
+      term: '',
+      users:[],
+      getting_users: false
     }
   },
   methods: {
@@ -80,12 +76,12 @@ export default {
         axios.defaults.headers.common['Authorization'] = ''
       }
     },
-    async Signup(email, username, password){
+    async Signup(email, username, password) {
       const formData = {
-                email: email,
-                username: username.toLowerCase(), // Lowercase
-                password: password,
-            }
+        email: email,
+        username: username.toLowerCase(),
+        password: password,
+      }
       try {
         const response = await axios.post('/api/v1/users/', formData)
         this.$router.push('/login')
@@ -93,11 +89,11 @@ export default {
         alert(error.message)
       }
     },
-    async Login(username, password){
-      const formData = {username: username, password: password}
+    async Login(username, password) {
+      const formData = { username: username, password: password }
       try {
         const response = await axios.post('/api/v1/token/login/', formData)
-        
+
         const token = response.data.auth_token
 
         this.$store.commit('setToken', token)
@@ -113,22 +109,23 @@ export default {
         alert(error.message)
       }
     },
-     // Search for User
-     async searchForUser(){
+    async searchForUser() {
       try {
         const response = await axios.get(`/api/users/?search=${this.term}`)
-        console.log(response);
+        this.users = response.data
+        this.getting_users = true
       } catch (error) {
         console.log(error.message);
-      }finally{
-        this.$router.push('/result')
+      } finally {
+        this.getting_users = false
       }
     },
-    onTermHandler(term){
-      // localStorage.setItem('term', term)
+    onTermHandler(term) {
       this.term = term
-      console.log(this.term);
-      this.searchForUser()
+      if(this.term.length > 3 || this.term){
+        this.searchForUser()
+        this.$router.push('/result')
+      }
     },
     // LogOut
     async logout() {
@@ -186,9 +183,11 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+
 body {
   transition: all 0.5s ease;
 }
+
 nav {
   padding: 30px;
 

@@ -13,7 +13,9 @@
         <ul class="nav-list" style="overflow: visible">
           <li id="links_search" v-if="isSearch" @click="isOpened = true">
             <i class="bx bx-search"/>
-            <input type="text" placeholder="Search for user" @input="UpdateTerm"  v-model="term">
+            <input type="text" placeholder="Search for user"
+            @input="$emit('UpdateTerm', $event.target.value)"
+            >
             <span data-target="links_search" class="tooltip">
               Search
             </span>
@@ -100,15 +102,15 @@ export default {
       type: String,
       required: true
     },
-    Term:{
-      type: Function,
+    term:{
+      type: String,
       required: true
      }
   },
   data() {
     return {
       isOpened: false,
-      term:'',
+      // term:'',
       menuItems: [
         {
           link: "/",
@@ -125,12 +127,12 @@ export default {
       ]
     }
   },
-  methods:{
-    UpdateTerm(){
-      console.log('HELLO');
-      // this.Term(this.term)
-    }
-  },
+  // methods:{
+  //   UpdateTerm(e){
+  //     this.term= e.target.value
+  //     this.Term(this.term)
+  //   }
+  // },
   computed: {
     cssVars() {
       return {

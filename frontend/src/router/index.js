@@ -6,7 +6,7 @@ import SharedTasks from '../views/shared/SharedTasks.vue'
 import SharedTask from '@/views/shared/SharedTask.vue'
 import Profile from '../views/profile/Profile.vue'
 import Task from '@/views/task/Task.vue'
-import Search from '@/views/search/Search.vue'
+import Results from '@/views/search/Results.vue'
 
 const routes = [
   {
@@ -39,8 +39,8 @@ const routes = [
     component: Task
   },{
     path: '/result',
-    name: 'Search',
-    component: Search
+    name: 'Results',
+    component: Results
   }
 ]
 
