@@ -1,14 +1,18 @@
 <template>
-    <div v-if="getting_users">
-        <loader/>
-        loading
-    </div>
-    <div v-else class="gradient-custom">
+    <div class="gradient-custom">
         <div class="container py-5 h-100">
             <div class="d-flex justify-content-center align-items-center h-100">
                 <div class="card">
                     <div class="card-body p-5">
-                        {{ users }}
+                        <div v-if="!users.length && !getting_users">
+                            <h4>Topilmadi...</h4>
+                        </div>
+                        <div class="d-flex justify-content-center align-items-center" v-else-if="getting_users">
+                            <loader />
+                        </div>
+                        <div v-else>
+                            {{ users }}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -38,7 +42,8 @@ export default {
 }
 
 .card {
-    width:800px;
+    width: 800px;
     box-shadow: 0px 8px 60px -10px rgba(13, 28, 39, 0.6);
 }
+
 </style>

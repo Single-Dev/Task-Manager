@@ -9,7 +9,7 @@
 		<div class="wrapper">
 		<div class="profile-card js-profile-card">
 			<div class="profile-card__img">
-				<img :src="baseUrl + user_datails.profile_photo" alt="profile card">
+				<img :src="apiBaseURL + user_datails.profile_photo" alt="profile card">
 			</div>
 
 			<div class="profile-card__cnt js-profile-cnt">
@@ -190,14 +190,17 @@ export default {
 			profile_username: '',
 			user_found: false,
 			user_datails: [],
-			baseUrl: axios.defaults.baseURL
 		}
 	},
 	props: {
 		username: {
 			type: String,
 			required: false
-		}
+		},
+		apiBaseURL:{
+            type: String,
+            required: true
+        }
 	},
 	methods: {
 		async getUser() {

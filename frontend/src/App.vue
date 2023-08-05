@@ -1,5 +1,9 @@
 <template>
-  <SidebarMenu :isLoggedIn="IsAuthenticated" :username="username" @UpdateTerm="onTermHandler" @onExit="logout" />
+  <SidebarMenu
+  :isLoggedIn="IsAuthenticated"
+  :username="username"
+  @UpdateTerm="onTermHandler"
+  @onExit="logout"/>
   <div>
     <router-view
     :isLoading="isLoading"
@@ -7,6 +11,8 @@
     :tasks="tasks"
     :username="username"
     :users="users"
+    :getting_users="getting_users"
+    :apiBaseURL="apiBaseURL"
     @CreateTask="CreateTask"
     @checkToggle="checkToggle"
     @deleteTask="deleteTask"
@@ -29,6 +35,7 @@ export default {
       username: '',
       user_id: '',
       isLoading: false,
+      apiBaseURL: axios.defaults.baseURL,
       tasks: [],
       term: '',
       users:[],
@@ -83,7 +90,7 @@ export default {
         password: password,
       }
       try {
-        const response = await axios.post('/api/v1/users/', formData)
+        await axios.post('/api/v1/users/', formData)
         this.$router.push('/login')
       } catch (error) {
         alert(error.message)
@@ -111,19 +118,36 @@ export default {
     },
     async searchForUser() {
       try {
-        const response = await axios.get(`/api/users/?search=${this.term}`)
-        this.users = response.data
         this.getting_users = true
+        const response = await axios.get(`/api/users/?search=${this.term}`)
+        const profiles = await axios.get('/api/profiles/')
+        response.data.forEach(e =>{
+          const profile = profiles.data.find(profile => profile.user === e.id);
+          const user = {
+              id: e.id,
+              first_name: e.first_name,
+              last_name: e.last_name,
+              email: e.email,
+              username: e.username,
+              profile_photo: profile.profile_photo,
+              bio: profile.bio
+          }
+          this.users.push(user)
+      })
       } catch (error) {
         console.log(error.message);
       } finally {
         this.getting_users = false
       }
+     
     },
     onTermHandler(term) {
       this.term = term
-      if(this.term.length > 3 || this.term){
+      const currentPath = this.$router.currentRoute._rawValue.href
+      if(this.term.length > 3){
         this.searchForUser()
+      }
+      if(currentPath != '/result' && this.term.length > 3){
         this.$router.push('/result')
       }
     },

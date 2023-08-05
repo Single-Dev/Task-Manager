@@ -13,7 +13,10 @@
         <ul class="nav-list" style="overflow: visible">
           <li id="links_search" v-if="isSearch" @click="isOpened = true">
             <i class="bx bx-search"/>
-            <input type="text" placeholder="Search for user"
+            <input
+            type="text"
+            placeholder="Search for user"
+            min="3"
             @input="$emit('UpdateTerm', $event.target.value)"
             >
             <span data-target="links_search" class="tooltip">
@@ -127,12 +130,6 @@ export default {
       ]
     }
   },
-  // methods:{
-  //   UpdateTerm(e){
-  //     this.term= e.target.value
-  //     this.Term(this.term)
-  //   }
-  // },
   computed: {
     cssVars() {
       return {

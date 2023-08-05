@@ -10,8 +10,9 @@
                         <loader/>
                     </div>
                     <div v-else v-for="sharedTask in sharedTasks" class="col col-xl-10">
-                      <sharedItem 
+                      <sharedItem
                       :sharedTask="sharedTask"
+                      :apiBaseURL="apiBaseURL"
                       />
                     </div>
                 </div>
@@ -24,6 +25,12 @@ import axios from 'axios'
 import sharedItem from '@/components/shared/sharedItem.vue'
 export default {
     name: 'sharedTasks',
+    props:{
+        apiBaseURL:{
+            type: String,
+            required: true
+        }
+    },
     data() {
         return {
             sharedTasks:[],

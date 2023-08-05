@@ -37,13 +37,16 @@ export default {
         sharedTask:{
             type: Array,
             required: true
+        },
+        apiBaseURL:{
+            type: String,
+            required: true
         }
     },
     data() {
         return {
             SharedTaskUsers:[],
             sharedTaskOwner: '',
-            apiBaseURL: axios.defaults.baseURL
         }
     },
     methods: {
