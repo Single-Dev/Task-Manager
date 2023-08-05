@@ -34,10 +34,6 @@ export default {
             {
                 title: "Completed",
                 name:'completed'
-            },
-            {
-                title: "Schedule",
-                name:'schedule'
             }
             ]
         }

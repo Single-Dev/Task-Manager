@@ -10,13 +10,13 @@
                     <div class="mx-4">
                         <input
                         @click="$emit('checkToggle', task)"
-                        v-if="task.reminder == null" class="form-check-input my-2" type="checkbox" :checked="task.done"/>
-                        <label
-                        @click="$emit('checkToggle', task)"
-                        >{{ task.name }}</label>
-                    </div>
-                    <div v-if="task.reminder">
-                        {{ task.reminder }}
+                        class="form-check-input my-2"
+                        type="checkbox"
+                        :checked="task.done"/>
+
+                        <label @click="$emit('checkToggle', task)">
+                        {{ task.name }}
+                        </label>
                     </div>
                     <div>
                         <router-link class="fa-solid fa-pen text-dark" :to="'/task/' + task.id"></router-link>

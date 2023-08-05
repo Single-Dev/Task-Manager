@@ -59,8 +59,6 @@ export default {
                     return arr.filter(c => c.done == true)
                 case 'active':
                     return arr.filter(c => c.done == false && c.reminder == null)
-                case 'schedule':
-                    return arr.filter(c => c.reminder)
                 default:
                     return arr
             }

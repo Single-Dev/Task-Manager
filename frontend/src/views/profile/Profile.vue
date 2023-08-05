@@ -205,7 +205,6 @@ export default {
 	methods: {
 		async getUser() {
 			try {
-				this.isLoading = true
 				const users = await axios.get('/api/users/')
 				this.profile_username = this.$route.params.username
 				users.data.forEach(e => {
@@ -216,8 +215,6 @@ export default {
 			} catch (error) {
 				this.user_found = false
 				console.log(error.message);
-			} finally {
-				this.isLoading = false
 			}
 		},
 		async getUserDetails() {
@@ -231,10 +228,8 @@ export default {
 					username: user.data.username,
 					first_name: user.data.first_name,
 					last_name: user.data.last_name,
-					gender: user.data.gender,
 					profile_photo: profile.data.profile_photo,
 					bio: profile.data.bio,
-					verifyed: profile.data.verifyed,
 					instagram: profile.data.instagram,
 					twitter: profile.data.twitter,
 					facebook: profile.data.facebook,

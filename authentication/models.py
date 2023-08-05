@@ -1,9 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
-GENDER = (('man', 'Man'), ('woman', 'Woman'))
-
-
 class CustomUser(AbstractUser):
     id = models.AutoField(primary_key=True)
     email = models.EmailField(
@@ -14,11 +11,7 @@ class CustomUser(AbstractUser):
     username = models.CharField(max_length=100, unique=True)
     first_name = models.CharField(max_length=200, blank=True)
     last_name = models.CharField(max_length=200, blank=True)
-    gender = models.CharField(max_length=10, choices=GENDER, blank=True)
-    is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
-    is_staff = models.BooleanField(default=False)
-    last_login = models.DateTimeField(null=True)
     
     def __str__(self):
         return self.username
@@ -34,7 +27,6 @@ class Profile(models.Model):
     user = models.OneToOneField(CustomUser(), on_delete=models.CASCADE)
     profile_photo = models.ImageField(default="profile/profile.jpg", upload_to="profile", null=True, blank=True)
     bio = models.CharField(max_length=100, null=True, blank=True, default="")
-    verifyed = models.BooleanField(default=False)
     instagram = models.CharField(max_length=150, null=True, blank=True)
     twitter = models.CharField(max_length=150, null=True, blank=True)
     github = models.CharField(max_length=150, null=True, blank=True)
