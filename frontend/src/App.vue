@@ -118,6 +118,7 @@ export default {
     },
     async searchForUser() {
       try {
+        this.users = [];
         this.getting_users = true
         const response = await axios.get(`/api/users/?search=${this.term}`)
         const profiles = await axios.get('/api/profiles/')

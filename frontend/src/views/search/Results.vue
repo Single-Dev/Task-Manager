@@ -11,7 +11,23 @@
                             <loader />
                         </div>
                         <div v-else>
-                            {{ users }}
+                            <ul class="list-group mb-0">
+                                <li v-for="user in users" class="list-group-item d-flex align-items-center border-0 mb-2 rounded mt-3 justify-content-between">
+                                    <div class="mx-4">
+                                        <img
+                                        :src="apiBaseURL + user.profile_photo"
+                                        alt="avatar"
+                                        class="img-fluid rounded-circle me-1"
+                                        width="35">
+                                    </div>
+                                    <div>
+                                        <h6 class="m-0">{{ user.first_name }}</h6>
+                                    </div>
+                                    <div>
+                                        <router-link class="text-dark" :to="'/@'+ user.username ">@{{ user.username }}</router-link>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -30,6 +46,10 @@ export default {
         users: {
             type: Array,
             required: true,
+        },
+        apiBaseURL:{
+            type: String,
+            required: true
         }
     }
 }
@@ -45,5 +65,7 @@ export default {
     width: 800px;
     box-shadow: 0px 8px 60px -10px rgba(13, 28, 39, 0.6);
 }
-
+.card li{
+    background-color: #f4f6f7;
+}
 </style>
