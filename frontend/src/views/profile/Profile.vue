@@ -372,7 +372,7 @@ a:hover {
 	border-radius: 50%;
 	overflow: hidden;
 	position: relative;
-	z-index: 4;
+	z-index: 3;
 	box-shadow: 0px 5px 50px 0px #6c44fc, 0px 0px 0px 7px rgba(107, 74, 255, 0.5);
 }
 

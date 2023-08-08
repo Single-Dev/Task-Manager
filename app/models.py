@@ -21,7 +21,7 @@ class Task(models.Model):
 class SharedTask(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=15)
-    task = models.ManyToManyField(Task,related_name="task", symmetrical=False)
+    tasks = models.ManyToManyField(Task,related_name="task", symmetrical=False)
     users = models.ManyToManyField(User,blank=True, related_name="sharred", symmetrical=False)
     created_on = models.DateTimeField(("Craeted on"), default=timezone.now)
     def __str__(self):
