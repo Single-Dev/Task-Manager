@@ -1,5 +1,5 @@
 <template>
-    <div class="card" style="border-radius: 15px;">
+    <div class="card mt-2">
         <div class="card-body p-4">
             <h3 class="mb-3">{{ sharedTask.name }}</h3>
             <p class="small mb-0"><i class="fas fa-star fa-lg text-warning"></i> <span class="mx-2">|</span>
@@ -81,5 +81,7 @@ export default {
 }
 </script>
 <style>
-    
+    .card{
+        border-radius: 15px !important;
+    }
 </style>

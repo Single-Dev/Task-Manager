@@ -116,6 +116,16 @@ def SharedTasksApiView(request):
     shared_task = SharedTask.objects.filter(users=request.user)
     serializer = SharedTaskSerializer(shared_task, many=True)
     return Response(serializer.data)
+    
+@api_view(['POST'])
+@permission_classes((permissions.AllowAny,))
+def CreateSharedTaskApiView(request):
+    serializer = SharedTaskSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    else:
+        return Response(serializer.error_messages)
 
 @api_view(["GET"])
 @permission_classes((permissions.AllowAny, ))

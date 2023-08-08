@@ -1,27 +1,32 @@
 <template>
-    <div>
-        <section class="vh-100 gradient-custom">
-            <div class="container py-5 h-100 main">
-                <div class="row d-flex justify-content-center align-items-center h-100">
-                    <div v-if="!sharedTasks.length && !isLoading">
-                        <h1>Topilmadi...</h1>
+    <div class="gradient-custom">
+        <section class="d-flex justify-content-center align-items-center">
+            <div class="row">
+                <div class="ps-r">
+                    <div class="div">
+                        <button @click="btnToggle" class="btn btn-outline-dark">Add</button>
                     </div>
-                    <div class="d-flex justify-content-center" v-else-if="isLoading">
-                        <loader />
-                    </div>
-                    <div v-else v-for="sharedTask in sharedTasks" class="col col-xl-10">
-                        <sharedItem :sharedTask="sharedTask" :apiBaseURL="apiBaseURL" />
-                    </div>
-                    <button @click="editProfileBtn" class="btn btn-outline-dark w-50">Add <i class="fas fa-add"></i></button>
-                  
-                    <div class="div p-5">
-                        <form class="card-form p-2">
-                            <div class="form__container p-2">
-                                <input type="text" class="form-control" placeholder="Shared Task Name">
-                                <input type="text" class="form-control mb-2 mt-2" placeholder="">
-                                <input type="text" class="form-control" placeholder="">
+                    <div class="card-form">
+                        <form @submit.prevent>
+                            <input type="text" class="form-control" v-model="name" placeholder="Shared Task Name">
+                            <input type="number" class="form-control mt-2 mb-2" v-model="tasks">
+                            <input type="number" class="form-control" v-model="users">
+                            <div class="d-flex mt-2">
+                                <button class="btn btn-dark w-50 mr-2" @click="addSharedTask">Add</button>
+                                <button class="btn btn-outline-danger w-50" @click="btnToggle">Cancel</button>
                             </div>
                         </form>
+                    </div>
+                </div>
+                <div v-if="!sharedTasks.length && !isLoading">
+                    <h2>Topilmadi..</h2>
+                </div>
+                <div v-else-if="isLoading">
+                    <loader />
+                </div>
+                <div v-else>
+                    <div v-for="sharedTask in sharedTasks">
+                        <sharedItem :sharedTask="sharedTask" />
                     </div>
                 </div>
             </div>
@@ -33,9 +38,16 @@ import axios from 'axios'
 import sharedItem from '@/components/shared/sharedItem.vue'
 export default {
     name: 'sharedTasks',
+    components: {
+        sharedItem
+    },
     props: {
         apiBaseURL: {
             type: String,
+            required: true
+        },
+        user_id: {
+            type: Number,
             required: true
         }
     },
@@ -44,14 +56,11 @@ export default {
             sharedTasks: [],
             isLoading: false,
             owner: '',
-            name:'',
-            tasks:'',
-            users:'',
+            name: '',
+            tasks: '',
+            users: '',
             created_on: ''
         }
-    },
-    components: {
-        sharedItem
     },
     methods: {
         async getSharedTasks() {
@@ -65,10 +74,30 @@ export default {
                 this.isLoading = false
             }
         },
-        editProfileBtn() {
-			let card = document.querySelector('.div')
-			card.classList.toggle('active')
-		},
+        async addSharedTask() {
+            const formData = {
+                owner: this.user_id,
+                name: this.name,
+                tasks: [this.tasks],
+                users: [this.users],
+                created_on: new Date()
+            }
+
+            try {
+                const response = await axios.post('/api/add-shared-task/', formData)
+                this.sharedTasks.push(response.data)
+                this.isLoading = true
+            } catch (error) {
+                alert(error.message)
+            } finally {
+                this.isLoading = false
+            }
+            this.btnToggle()
+        },
+        btnToggle() {
+            let card = document.querySelector('.card-form')
+            card.classList.toggle('active')
+        },
     },
     mounted() {
         this.getSharedTasks()
@@ -78,32 +107,40 @@ export default {
 <style scoped>
 .gradient-custom {
     width: 100%;
-    height: auto;
+    height: auto !important;
+    padding: 20px 0px;
     background-image: linear-gradient(-20deg, #ff2846 0%, #6944ff 100%);
 }
 
-.main{
+.ps-r {
     position: relative;
-}
-.div{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    opacity: -1;
-    transition: 500ms;
-    transition-delay: 50ms;
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.card-form{
+.div{
+    padding: 20px 0px;
+}
+
+.card-form {
     width: 580px;
+    padding: 10px;
+    position: absolute;
+    top: 20px;
+    opacity: 0;
+    z-index: -1;
+    transition: 500ms;
     background: #fff;
     border-radius: 12px;
     box-shadow: 0px 8px 60px -10px rgba(13, 28, 39, 0.6);
 }
 
-.active{
-    opacity: 1;
-}
+/* .card-form{
+} */
 
+.active {
+    opacity: 1 !important;
+    z-index: 2;
+}
 </style>

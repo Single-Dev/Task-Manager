@@ -17,6 +17,7 @@ urlpatterns = [
   path('create-task/', CreateTaskApiView, name='post_task'), #Create
   path('updata/<int:pk>/', UpdataTaskApiView, name='updata_task'), #Updata
   path('delete/<int:pk>/', DeleteTaskApiView, name='delete_task'), #Delete
-  path('shared-tasks/', SharedTasksApiView, name='shared_taskw'), # Read
+  path('shared-tasks/', SharedTasksApiView, name='shared_tasks'), # Read
+  path('add-shared-task/', CreateSharedTaskApiView, name='shared_tasks'), # Post
   path('shared-tasks/<int:pk>/', SharedTaskApiView, name='shared_task'), # Read
 ]
