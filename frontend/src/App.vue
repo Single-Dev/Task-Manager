@@ -1,5 +1,6 @@
 <template>
   <SidebarMenu
+  v-if="screen_window_width > 380"
   :isLoggedIn="IsAuthenticated"
   :username="username"
   @UpdateTerm="onTermHandler"
@@ -39,7 +40,8 @@ export default {
       tasks: [],
       term: '',
       users:[],
-      getting_users: false
+      getting_users: false,
+      screen_window_width:window.screen.width
     }
   },
   methods: {
@@ -189,7 +191,7 @@ export default {
       } catch (error) {
         alert(error.message)
       }
-    },
+    }
   },
   mounted() {
     this.beforeCrete()

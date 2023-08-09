@@ -1,6 +1,7 @@
 <template >
-    <form @submit.prevent class="w-75 text-center p-5">
-        <div class="p-5 card mx-4 mx-md-5">
+    <div class="d-flex justify-content-center align-items-center vh-100">
+        <form @submit.prevent class="text-center lm-p-2">
+        <div class="p-5 card">
             <h2>Login</h2>
             <!-- Email input -->
             <div class="form-outline mb-4">
@@ -55,6 +56,7 @@
             </div>
         </div>
     </form>
+    </div>
 </template>
 <script>
 import axios from 'axios'

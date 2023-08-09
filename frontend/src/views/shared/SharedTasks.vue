@@ -91,6 +91,9 @@ export default {
                 alert(error.message)
             } finally {
                 this.isLoading = false
+                this.name = ''
+                this.tasks = ''
+                this.users = ''
             }
             this.btnToggle()
         },
