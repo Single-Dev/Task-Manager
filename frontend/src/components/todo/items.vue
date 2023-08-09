@@ -9,7 +9,7 @@
                 <li class="list-group-item d-flex align-items-center border-0 mb-2 rounded mt-3 justify-content-between">
                     <div class="mx-4">
                         <input
-                        @click="$emit('checkToggle', task)"
+                        @input="$emit('checkToggle', task)"
                         class="form-check-input my-2"
                         type="checkbox"
                         :checked="task.done"/>
@@ -19,7 +19,7 @@
                         </label>
                     </div>
                     <div>
-                        <router-link class="fa-solid fa-pen text-dark" :to="'/task/' + task.id"></router-link>
+                        <router-link class="fa-solid fa-eye text-dark" :to="'/task/' + task.id"></router-link>
                         <i @click="$emit('deleteTask', task)" class="mx-4 text-danger fa-solid fa-trash"></i>
                     </div>
                 </li>
@@ -33,10 +33,6 @@ export default {
         tasks: {
             type: Object,
             required: false
-        },
-        user_id: {
-            type: Number,
-            required: true
         }
     }
 }

@@ -45,7 +45,7 @@ export default {
     }
   },
   methods: {
-    async getMe() {
+    getMe() {
       axios.get('/api/v1/users/me/')
         .then(response => {
           this.username = response.data.username

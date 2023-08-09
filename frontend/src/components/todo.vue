@@ -12,7 +12,7 @@
                             <div v-if="isLoading" class="d-flex justify-content-center p-5">
                                 <loader />
                             </div>
-                            <content v-else :tasks="onFilterHandler(tasks, filter)" :user_id="user_id"
+                            <items v-else :tasks="onFilterHandler(tasks, filter)" :user_id="user_id"
                                 @checkToggle="$emit('checkToggle', $event)" @deleteTask="$emit('deleteTask', $event)" />
                         </div>
                     </div>
@@ -25,13 +25,13 @@
 <script>
 import addTask from '@/components/todo/addTask.vue'
 import Filter from '@/components/todo/filter.vue'
-import content from '@/components/todo/content.vue'
+import items from '@/components/todo/items.vue'
 
 export default {
     components: {
         addTask,
         Filter,
-        content
+        items
     },
     data() {
         return {

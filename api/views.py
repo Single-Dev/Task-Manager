@@ -119,7 +119,7 @@ def SharedTasksApiView(request):
     
 @api_view(['POST'])
 @permission_classes((permissions.AllowAny,))
-def CreateSharedTaskApiView(request):
+def CreateSharedToDoApiView(request):
     serializer = SharedTaskSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
@@ -129,7 +129,14 @@ def CreateSharedTaskApiView(request):
 
 @api_view(["GET"])
 @permission_classes((permissions.AllowAny, ))
-def SharedTaskApiView(request, pk):
+def SharedToDoApiView(request, pk):
     shared_task = SharedTask.objects.filter(users=request.user).get(id=pk)
     serializer = SharedTaskSerializer(shared_task, many=False)
     return Response(serializer.data)
+
+@api_view(["GET"])
+@permission_classes((permissions.AllowAny, ))
+def SharedTasksListApiView(request, pk):
+    shared_task = SharedTask.objects.filter(users=request.user).get(id=pk)
+    serializer = SharedTaskSerializer(shared_task, many=False)
+    return Response(serializer.data.tasks)
