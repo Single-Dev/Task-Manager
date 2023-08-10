@@ -137,6 +137,6 @@ def SharedToDoApiView(request, pk):
 @api_view(["GET"])
 @permission_classes((permissions.AllowAny, ))
 def SharedTasksListApiView(request, pk):
-    shared_task = SharedTask.objects.filter(users=request.user).get(id=pk)
+    shared_task = SharedTask.objects.get(id=pk)
     serializer = SharedTaskSerializer(shared_task, many=False)
-    return Response(serializer.data.tasks)
+    return Response(serializer.data)

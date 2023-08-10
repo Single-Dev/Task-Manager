@@ -52,6 +52,23 @@ export default {
                 this.isLoading = true
                 const response = await axios.get(`/api/shared-tasks/${this.$route.params.pk}/`)
                 this.SharedTaskDetails = response.data
+                // console.log(this.SharedTaskDetails[[Target]]);
+                const nestedTasks = this.SharedTaskDetails.tasks; // Assuming this is an array of arrays
+                const flattenedTasks = [].concat(...nestedTasks);
+                console.log(flattenedTasks);
+                for (const taskId of flattenedTasks) {
+                    const response = await axios.get(`/api/tasks/${taskId}/`);
+                    this.tasks.push(response.data);
+                }
+                // flattenedTasks.forEach(element => {
+                //     axios.get(`/api/tasks${element}`)
+                //         .then(response => {
+                //             console.log(response);
+                //         })
+                //         .catch(error => {
+                //             // this.$router.push('/login')
+                //         })
+                // });
             } catch (error) {
                 console.log(error);
             } finally {
@@ -59,13 +76,15 @@ export default {
             }
         },
         // getSharedTasks() {
-        //     this.tasks = []
-        //     // let arr = JSON.parse(JSON.stringify(this.SharedTaskDetails))
-        //     let p =this.SharedTaskDetails.isArray
-        //     // Object.prototype.toString.call(p) // [object Array]
-        //     // Array.isArray(p) 
-
-
+        //     this.SharedTaskDetails.tasks.forEach(element => {
+        //         axios.get(`/api/tasks${element}`)
+        //             .then(response => {
+        //                 console.log(response);
+        //             })
+        //             .catch(error => {
+        //                 // this.$router.push('/login')
+        //             })
+        //     });
         // },
         onFilterHandler(arr, filter) {
             switch (filter) {
