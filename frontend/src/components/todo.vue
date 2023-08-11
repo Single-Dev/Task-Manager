@@ -12,7 +12,7 @@
                             <div v-if="isLoading" class="d-flex justify-content-center p-5">
                                 <loader />
                             </div>
-                            <items v-else :tasks="onFilterHandler(tasks, filter)" :user_id="user_id"
+                            <items v-else :tasks="onFilterHandler(tasks, filter)"
                                 @checkToggle="$emit('checkToggle', $event)" @deleteTask="$emit('deleteTask', $event)" />
                         </div>
                     </div>

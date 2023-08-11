@@ -11,13 +11,16 @@
                                 <p>Craeted by <router-link :to="'/@' + SharedTaskDetails.owner">{{ SharedTaskDetails.owner
                                 }}</router-link> Craeted on: {{ SharedTaskDetails.created_on }}</p>
                             </div>
-                            <addSharedTask />
+                            <addSharedTask :user_id="user_id" @CreateTask="$emit('CreateTask', $event)"/>
 
                             <Filter :UpdateFilterHandler="UpdateFilterHandler" :filterName="filter" />
                             <div v-if="isLoading" class="d-flex justify-content-center p-5">
                                 <loader />
                             </div>
-                            <shareditems v-else :tasks="tasks" />
+                            <shareditems v-else
+                            :tasks="onFilterHandler(tasks, filter)"
+                            @checkToggle="$emit('checkToggle', $event)"
+                            @deleteTask="$emit('deleteTask', $event)" />
                         </div>
                     </div>
 
@@ -28,7 +31,7 @@
 </template>
 <script>
 import axios from 'axios';
-import addSharedTask from '@/components/shared/addSharedTask.vue'
+import addSharedTask from '@/components/todo/addTask.vue'
 import Filter from '@/components/todo/filter.vue'
 import shareditems from '@/components/todo/items.vue'
 export default {
@@ -37,6 +40,12 @@ export default {
         addSharedTask,
         Filter,
         shareditems
+    },
+    props:{
+        user_id: {
+            type: Number,
+            required: true
+        },
     },
     data() {
         return {
@@ -52,40 +61,17 @@ export default {
                 this.isLoading = true
                 const response = await axios.get(`/api/shared-tasks/${this.$route.params.pk}/`)
                 this.SharedTaskDetails = response.data
-                // console.log(this.SharedTaskDetails[[Target]]);
                 const nestedTasks = this.SharedTaskDetails.tasks; // Assuming this is an array of arrays
                 const flattenedTasks = [].concat(...nestedTasks);
-                console.log(flattenedTasks);
                 for (const taskId of flattenedTasks) {
                     const response = await axios.get(`/api/tasks/${taskId}/`);
-                    this.tasks.push(response.data);
                 }
-                // flattenedTasks.forEach(element => {
-                //     axios.get(`/api/tasks${element}`)
-                //         .then(response => {
-                //             console.log(response);
-                //         })
-                //         .catch(error => {
-                //             // this.$router.push('/login')
-                //         })
-                // });
             } catch (error) {
                 console.log(error);
             } finally {
                 this.isLoading = false
             }
         },
-        // getSharedTasks() {
-        //     this.SharedTaskDetails.tasks.forEach(element => {
-        //         axios.get(`/api/tasks${element}`)
-        //             .then(response => {
-        //                 console.log(response);
-        //             })
-        //             .catch(error => {
-        //                 // this.$router.push('/login')
-        //             })
-        //     });
-        // },
         onFilterHandler(arr, filter) {
             switch (filter) {
                 case 'completed':
@@ -99,10 +85,12 @@ export default {
         UpdateFilterHandler(filter) {
             this.filter = filter
         },
+        async CreateTask(item) {
+            console.log(item);
+        },
     },
     mounted() {
         this.getSharedTaskDetails()
-        // this.getSharedTasks()
     },
 }
 </script>
