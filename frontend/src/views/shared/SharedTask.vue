@@ -11,7 +11,7 @@
                                 <p>Craeted by <router-link :to="'/@' + SharedTaskDetails.owner">{{ SharedTaskDetails.owner
                                 }}</router-link> Craeted on: {{ SharedTaskDetails.created_on }}</p>
                             </div>
-                            <addSharedTask :user_id="user_id" @CreateTask="$emit('CreateTask', $event)"/>
+                            <addSharedTask :user_id="user_id"  @CreateTask="CreateTask"/>
 
                             <Filter :UpdateFilterHandler="UpdateFilterHandler" :filterName="filter" />
                             <div v-if="isLoading" class="d-flex justify-content-center p-5">
@@ -20,7 +20,8 @@
                             <shareditems v-else
                             :tasks="onFilterHandler(tasks, filter)"
                             @checkToggle="$emit('checkToggle', $event)"
-                            @deleteTask="$emit('deleteTask', $event)" />
+                            @deleteTask="deleteTask"
+                            />
                         </div>
                     </div>
 
@@ -65,6 +66,7 @@ export default {
                 const flattenedTasks = [].concat(...nestedTasks);
                 for (const taskId of flattenedTasks) {
                     const response = await axios.get(`/api/tasks/${taskId}/`);
+                    this.tasks.push(response.data)
                 }
             } catch (error) {
                 console.log(error);
@@ -86,8 +88,31 @@ export default {
             this.filter = filter
         },
         async CreateTask(item) {
-            console.log(item);
+            try {
+                const taskInfo = await axios.post('/api/create-task/', item)
+                this.tasks.unshift(taskInfo.data)
+                this.SharedTaskDetails.tasks.unshift(taskInfo.data.id)
+                await axios.post(`/api/updata/shared-todo/${this.$route.params.pk}/`, this.SharedTaskDetails)
+            } catch (error) {
+                alert(error.message)
+            }
         },
+        async deleteTask(item) {
+            try {
+                // await axios.delete(`/api/delete/${item.id}/`, item)
+                this.tasks = this.tasks.filter(c => c.id != item.id)
+                const formData = {
+                    name: this.SharedTaskDetails.name,
+                    owner: this.SharedTaskDetails.owner,
+                    users: this.SharedTaskDetails.users,
+                    tasks: this.SharedTaskDetails.tasks.filter(c => c.id != item.id),
+                }
+                console.log(formData.tasks);
+                await axios.post(`/api/updata/shared-todo/${this.$route.params.pk}/`, formData)
+            } catch (error) {
+                alert(error.message)
+            }
+        }
     },
     mounted() {
         this.getSharedTaskDetails()

@@ -140,3 +140,14 @@ def SharedTasksListApiView(request, pk):
     shared_task = SharedTask.objects.get(id=pk)
     serializer = SharedTaskSerializer(shared_task, many=False)
     return Response(serializer.data)
+
+@api_view(['POST'])
+@permission_classes((permissions.AllowAny,))
+def UpdataSharedToDoApiView(request, pk):
+    shared_todos = SharedTask.objects.get(id=pk)
+    serializer = SharedTaskSerializer(instance=shared_todos, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    else:
+        return Response(serializer.error_messages)
