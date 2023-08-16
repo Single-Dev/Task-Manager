@@ -190,6 +190,7 @@ export default {
         this.tasks = this.tasks.filter(c => c.id != item.id)
       } catch (error) {
         alert(error.message)
+        this.getTasks()
       }
     }
   },

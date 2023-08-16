@@ -113,6 +113,7 @@ export default {
     height: auto !important;
     padding: 20px 0px;
     background-image: linear-gradient(-20deg, #ff2846 0%, #6944ff 100%);
+    padding-bottom:430px;
 }
 
 .ps-r {

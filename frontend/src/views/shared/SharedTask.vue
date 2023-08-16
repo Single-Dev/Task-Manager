@@ -8,8 +8,6 @@
                         <div class="card-body p-5">
                             <div>
                                 <h1>{{ SharedTaskDetails.name }}</h1>
-                                <p>Craeted by <router-link :to="'/@' + SharedTaskDetails.owner">{{ SharedTaskDetails.owner
-                                }}</router-link> Craeted on: {{ SharedTaskDetails.created_on }}</p>
                             </div>
                             <addSharedTask :user_id="user_id"  @CreateTask="CreateTask"/>
 
@@ -99,16 +97,8 @@ export default {
         },
         async deleteTask(item) {
             try {
-                // await axios.delete(`/api/delete/${item.id}/`, item)
+                await axios.delete(`/api/delete/${item.id}/`, item)
                 this.tasks = this.tasks.filter(c => c.id != item.id)
-                const formData = {
-                    name: this.SharedTaskDetails.name,
-                    owner: this.SharedTaskDetails.owner,
-                    users: this.SharedTaskDetails.users,
-                    tasks: this.SharedTaskDetails.tasks.filter(c => c.id != item.id),
-                }
-                console.log(formData.tasks);
-                await axios.post(`/api/updata/shared-todo/${this.$route.params.pk}/`, formData)
             } catch (error) {
                 alert(error.message)
             }
@@ -119,6 +109,12 @@ export default {
     },
 }
 </script>
-<style lang="">
-    
+<style scoped>
+.gradient-custom {
+    width: 100%;
+    height: auto !important;
+    padding: 20px 0px;
+    background-image: linear-gradient(-20deg, #ff2846 0%, #6944ff 100%);
+    padding-bottom:360px;
+}
 </style>

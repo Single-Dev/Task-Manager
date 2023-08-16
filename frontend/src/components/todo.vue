@@ -1,5 +1,5 @@
 <template>
-    <section class="vh-100 gradient-custom">
+    <section class="gradient-custom">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col col-xl-10">
@@ -74,6 +74,7 @@ export default {
     width: 100%;
     height: auto;
     background-image: linear-gradient(-20deg, #ff2846 0%, #6944ff 100%);
+    padding-bottom:360px ;
 }
 
 .card{
