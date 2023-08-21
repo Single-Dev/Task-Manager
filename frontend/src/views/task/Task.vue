@@ -2,11 +2,11 @@
     <div class="vh-100 gradient-custom d-flex justify-content-center align-items-center">
             <div class="card-box p-3">
                 <div>
+                    <h4>{{ taskDetails.name }}</h4>
                     <div class="d-flex justify-content-between align-items-center p-3">
-                        <!-- <input type="checkbox" class="form-check-input mb-3" :checked="taskDetails.done"> -->
-                        <h6>{{ taskDetails.name }}</h6>
-                        <p>{{ taskDetails.created_on }}</p>
+                        <h6>Id: {{ taskDetails.id }}</h6>
                         <p>status: {{ taskDetails.done }}</p>
+                        <p>created on: {{ taskDetails.created_on }}</p>
                     </div>
                     <div class="caption text-left">
                         <p>{{ taskDetails.caption }}</p>

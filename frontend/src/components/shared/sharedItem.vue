@@ -75,8 +75,8 @@ export default {
             }
     },
     mounted() {
-        this.getUsers()
-        this.getSharedTaskOwnerInfo()
+        // this.getUsers()
+        // this.getSharedTaskOwnerInfo()
     },
 }
 </script>

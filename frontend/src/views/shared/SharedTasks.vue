@@ -9,8 +9,9 @@
                     <div class="card-form">
                         <form @submit.prevent>
                             <input type="text" class="form-control" v-model="name" placeholder="Shared Task Name">
-                            <input type="number" class="form-control mt-2 mb-2" v-model="tasks">
-                            <input type="number" class="form-control" v-model="users">
+                            <input type="number" class="form-control mt-2 mb-2" v-model="tasks" placeholder="Task id. e.g. 1">
+                            <input type="text" class="form-control" placeholder="e.g. username, username_1">
+                            
                             <div class="d-flex mt-2">
                                 <button class="btn btn-dark w-50 mr-2" @click="addSharedTask">Add</button>
                                 <button class="btn btn-outline-danger w-50" @click="btnToggle">Cancel</button>
@@ -46,6 +47,10 @@ export default {
             type: String,
             required: true
         },
+        users: {
+            type: Array,
+            required: true
+        },
         user_id: {
             type: Number,
             required: true
@@ -58,7 +63,7 @@ export default {
             owner: '',
             name: '',
             tasks: '',
-            users: '',
+            users: [],
             created_on: ''
         }
     },
@@ -75,6 +80,13 @@ export default {
             }
         },
         async addSharedTask() {
+            try {
+                const userInfo = await axios.get(`/api/users/bekzodbek/`)
+                this.users.push(userInfo.data.id)
+                console.log(this.users);
+            } catch (error) {
+                console.log(error.message);
+            }
             const formData = {
                 owner: this.user_id,
                 name: this.name,
@@ -100,6 +112,7 @@ export default {
         btnToggle() {
             let card = document.querySelector('.card-form')
             card.classList.toggle('active')
+            console.log(this.users);
         },
     },
     mounted() {
