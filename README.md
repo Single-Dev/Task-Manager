@@ -20,65 +20,65 @@
 ### We used django for the backend part of the site because it is fast, high quality and provides smooth service to many users
 
 #### Users' data:
-    ##### You can get all users
-        /api/users/
+##### You can get all users
+    /api/users/
 
-    ##### You can get a user by the username
-        /api/users/{username}/
+##### You can get a user by the username
+    /api/users/{username}/
 
-    ##### You can get a user by the id
-        /api/user/id/{id}/
-        
-    ##### You can updata a user by the id:
-        /api/users/updata/{id}/
+##### You can get a user by the id
+    /api/user/id/{id}/
+    
+##### You can updata a user by the id:
+    /api/users/updata/{id}/
 
 #### Profies:
 
-    ##### You can get all profiles
-        /api/profiles/
+##### You can get all profiles
+    /api/profiles/
 
-    ##### You can get a profile by the username
-        /api/profiles/{username}/
+##### You can get a profile by the username
+    /api/profiles/{username}/
 
-    ##### You can updata a profile by the username:
-        /api/profiles/updata/{username}/
+##### You can updata a profile by the username:
+    /api/profiles/updata/{username}/
 
 #### Tasks
 
-    ##### You can get all task
-        /api/tasks/
+##### You can get all task
+    /api/tasks/
 
-    ##### You can a task by the id:
-        /api/task/{id}/
+##### You can a task by the id:
+    /api/task/{id}/
 
-    ##### You can post a task:
-        /api/create-task/
+##### You can post a task:
+    /api/create-task/
 
-    ##### More details
-        {
-            owner: 1,
-            name: 'ToDo',
-            caption: 'caption',
-            done: false,
-            created_on: new Date()
-        }
+##### More details
+    {
+        owner: 1,
+        name: 'ToDo',
+        caption: 'caption',
+        done: false,
+        created_on: new Date()
+    }
 
-    ##### You can updata a task by the id:
-        /api/updata/{id}/
+##### You can updata a task by the id:
+    /api/updata/{id}/
 
-    ##### You can delete a task by the id:
-        /api/delete/{id}/
+##### You can delete a task by the id:
+    /api/delete/{id}/
 
 #### Shared Tasks
 
-    ##### You can get all shared tasks
-        /api/shared-tasks/
+##### You can get all shared tasks
+    /api/shared-tasks/
 
-    ##### You can get a shared task by the id
-        /api/shared-tasks/{id}
+##### You can get a shared task by the id
+    /api/shared-tasks/{id}
 
-    ##### You can updata a shared task by the id
-        /api/updata/shared-todo/{id}/
+##### You can updata a shared task by the id
+    /api/updata/shared-todo/{id}/
 
-    ##### You can get a task by the shared task id
-        /api/shared-tasks-list/{id}
+##### You can get a task by the shared task id
+    /api/shared-tasks-list/{id}
