@@ -20,11 +20,19 @@
 ### We used django for the backend part of the site because it is fast, high quality and provides smooth service to many users
 
 #### Users' data:
-##### You can get all
-        ``/api/users/``
-##### You can get one by username
-        ``/api/users/{username}/``
-##### You can get one by id
-        ``/api/user/id/{id}/``
-##### You can updata by user id:
-        ``users/updata/{id}/``
+##### You can get all users
+    /api/users/
+##### You can get a user by the username
+    /api/users/{username}/
+##### You can get a user by the id
+    /api/user/id/{id}/
+##### You can updata user by the id:
+    /api/users/updata/{id}/
+#### Profies:
+##### You can get all profiles
+    /api/profiles/
+##### You can get a profile by the username
+    /api/profiles/{username}/
+##### You can updata a profile by the username:
+    /api/profiles/updata/{username}/
+
