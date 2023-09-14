@@ -26,7 +26,7 @@
     /api/users/{username}/
 ##### You can get a user by the id
     /api/user/id/{id}/
-##### You can updata user by the id:
+##### You can updata a user by the id:
     /api/users/updata/{id}/
 #### Profies:
 ##### You can get all profiles
@@ -35,4 +35,22 @@
     /api/profiles/{username}/
 ##### You can updata a profile by the username:
     /api/profiles/updata/{username}/
+#### Tasks
+##### You can get all task
+    /api/tasks/
+##### You can a task by the id:
+    /api/task/{id}/
 
+##### You can create a task:
+    /api/create-task/
+##### More details
+    {
+        owner: 1,
+        name: 'ToDo',
+        caption: 'caption',
+        done: false,
+        created_on: new Date()
+    }
+
+##### You can a task by the id:
+    /api/task/{id}/
