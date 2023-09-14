@@ -3,12 +3,28 @@
 ## Frontend
 ### Task Manager's interface is very comfortable and very awsome because we used for interface from vue. That's create comfortable interface for users and developers can create quickly vue app so we decided use from vue
 
-![Alt text](<static/screenshots/Skrinshot 2023-09-06 184638.png>)
+![home](<static/screenshots/Skrinshot 2023-09-06 184638.png>)
+#### Home
+![profile](<static/screenshots/Skrinshot 2023-09-06 184727.png>)
+#### Profile
+![search](<static/screenshots/Skrinshot 2023-09-06 185106.png>)
+#### Search for users
+![sharedtasks](<static/screenshots/Skrinshot 2023-09-06 185047.png>)
+#### Shared Tasks
+![login](<static/screenshots/Skrinshot 2023-09-06 185407.png>)
+#### SignIn
+![signup](<static/screenshots/Skrinshot 2023-09-06 185424.png>)
+#### SignUp
 
-![Alt text](<static/screenshots/Skrinshot 2023-09-06 184727.png>)
+## Backend
+### We used django for the backend part of the site because it is fast, high quality and provides smooth service to many users
 
-![Alt text](<static/screenshots/Skrinshot 2023-09-06 185106.png>)
-
-![Alt text](<static/screenshots/Skrinshot 2023-09-06 185407.png>)
-
-![Alt text](<static/screenshots/Skrinshot 2023-09-06 185424.png>)
+#### Users' data:
+##### You can get all
+        ``/api/users/``
+##### You can get one by username
+        ``/api/users/{username}/``
+##### You can get one by id
+        ``/api/user/id/{id}/``
+##### You can updata by user id:
+        ``users/updata/{id}/``
