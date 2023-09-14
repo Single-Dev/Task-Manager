@@ -3,18 +3,18 @@
 ## Frontend
 ### Task Manager's interface is very comfortable and very awsome because we used for interface from vue. That's create comfortable interface for users and developers can create quickly vue app so we decided use from vue
 
-![home](<static/screenshots/Skrinshot 2023-09-06 184638.png>)
 #### Home
-![profile](<static/screenshots/Skrinshot 2023-09-06 184727.png>)
+![home](<static/screenshots/Skrinshot 2023-09-06 184638.png>)
 #### Profile
-![search](<static/screenshots/Skrinshot 2023-09-06 185106.png>)
+![profile](<static/screenshots/Skrinshot 2023-09-06 184727.png>)
 #### Search for users
-![sharedtasks](<static/screenshots/Skrinshot 2023-09-06 185047.png>)
+![search](<static/screenshots/Skrinshot 2023-09-06 185106.png>)
 #### Shared Tasks
+![sharedtasks](<static/screenshots/Skrinshot 2023-09-06 185047.png>)
+#### Login
 ![login](<static/screenshots/Skrinshot 2023-09-06 185407.png>)
-#### SignIn
-![signup](<static/screenshots/Skrinshot 2023-09-06 185424.png>)
 #### SignUp
+![signup](<static/screenshots/Skrinshot 2023-09-06 185424.png>)
 
 ## Backend
 ### We used django for the backend part of the site because it is fast, high quality and provides smooth service to many users
