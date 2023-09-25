@@ -16,6 +16,31 @@
 #### SignUp
 ![signup](<static/screenshots/Skrinshot 2023-09-06 185424.png>)
 
+## Launch
+### You should install this repository
+
+#### First of all create environment for `backend`
+    python -m venv .{venv name}
+#### and then activate it
+    .{venv name}/Scripts/Activate
+#### and install necessary apps
+    pip install -r requirements.txt
+#### you must migrate
+    python manage.py makemigrations authentication
+    python manage.py migrate
+#### now you must migrate all
+    python manage.py makemigrations
+    python manage.py migrate
+#### finally you can run django app
+    python manage.py runserver 8000
+#### Now you must install some apps for `frontend`
+##### first you must change directory
+    cd frontend
+##### install apps
+    npm install
+#### finally you can run vue app
+    npm run serve
+
 ## Backend
 ### We used django for the backend part of the site because it is fast, high quality and provides smooth service to many users
 
