@@ -13,6 +13,7 @@ urlpatterns = [
   path('profiles/<int:user>/', ProfileApiView, name='profile'), #Read
   path('profiles/updata/<int:user>/', UpdataProfileApiView, name='updata_profile'), #Updata
   path('tasks/', TasksApiView, name='tasks'), #Read
+  path('search-task/', SearchTaskApiView, name='task_search'), #Read
   path('tasks/<int:pk>/', TaskApiView, name='task'), #Read
   path('create-task/', CreateTaskApiView, name='post_task'), #Create
   path('updata/<int:pk>/', UpdataTaskApiView, name='updata_task'), #Updata

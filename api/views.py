@@ -73,6 +73,14 @@ def TasksApiView(request):
     else:
         return Response({"detail": "Authentication credentials were not provided."})
 
+class TasksListView(generics.ListAPIView):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['id', 'name', 'caption']
+
+SearchTaskApiView = TasksListView.as_view()
+
 @api_view(["GET"])
 @permission_classes((permissions.AllowAny, ))
 def TaskApiView(request, pk):

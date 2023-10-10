@@ -9,7 +9,7 @@
                     <div class="card-form">
                         <form @submit.prevent>
                             <input type="text" class="form-control" v-model="name" placeholder="Shared Task Name">
-                            <input type="number" class="form-control mt-2 mb-2" v-model="tasks" placeholder="Task id. e.g. 1">
+                            <input type="number" class="form-control mt-2 mb-2" placeholder="Task id. e.g. 1">
                             <input type="text" class="form-control" placeholder="e.g. username, username_1">
                             
                             <div class="d-flex mt-2">
