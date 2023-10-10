@@ -114,9 +114,14 @@ export default {
             card.classList.toggle('active')
             console.log(this.users);
         },
+        async test() {
+            const r = await axios.get('/api/search-task/?search=Do')
+            console.log(r);
+        }
     },
     mounted() {
-        this.getSharedTasks()
+        this.getSharedTasks(),
+        this.test()
     },
 }
 </script>

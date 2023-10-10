@@ -74,11 +74,20 @@ def TasksApiView(request):
         return Response({"detail": "Authentication credentials were not provided."})
 
 class TasksListView(generics.ListAPIView):
-    queryset = Task.objects.all()
     serializer_class = TaskSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ['id', 'name', 'caption']
 
+    def get_queryset(self):
+        queryset = Task.objects.filter(owner=self.request.user.id)
+        search_param = self.request.query_params.get('search', None)
+        
+        if search_param:
+            # If a search parameter is provided, filter the queryset
+            queryset = queryset.filter(name__icontains=search_param)
+        
+        return queryset
+        
 SearchTaskApiView = TasksListView.as_view()
 
 @api_view(["GET"])
