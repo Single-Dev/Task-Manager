@@ -63,6 +63,7 @@ def UpdataProfileApiView(request, user):
         return Response(serializer.data)
     return Response(serializer.errors)
 #---------- Task api ----------------
+
 @api_view(["GET"])
 @permission_classes((permissions.AllowAny, ))
 def TasksApiView(request):
@@ -76,7 +77,7 @@ def TasksApiView(request):
 class TasksListView(generics.ListAPIView):
     serializer_class = TaskSerializer
     filter_backends = [filters.SearchFilter]
-    search_fields = ['id', 'name', 'caption']
+    search_fields = ['name']
 
     def get_queryset(self):
         queryset = Task.objects.filter(owner=self.request.user.id)

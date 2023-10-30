@@ -86,7 +86,7 @@ export default {
         },
         async SearchForTasks(term) {
             try {
-                const response = await axios.get(`/api/tasks-list/?search=${term}`)
+                const response = await axios.get(`/api/search-task/?search=${term}`)
                 console.log(response.data);
             } catch (error) {
                 console.log(error.message);
