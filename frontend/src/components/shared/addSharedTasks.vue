@@ -6,13 +6,19 @@
         <div class="card-form">
             <form @submit.prevent>
                 <input type="text" class="form-control" v-model="name" placeholder="Shared Task Name">
-                <input type="number" class="form-control mt-2 mb-2" placeholder="Task id. e.g. 1">
+                <input
+                type="text"
+                class="form-control mt-2 mb-2"
+                placeholder="Tasks"
+                @input="UpdateTasksTerm"
+                v-model="tasks_term"
+                >
                 <input
                 type="text"
                 class="form-control"
                 placeholder="e.g. username, username_1"
-                @input="UpdateTerm"
-                v-model="term"
+                @input="UpdateUsersTerm"
+                v-model="users_term"
                 >
 
                 <div class="d-flex mt-2">
@@ -30,7 +36,8 @@ export default {
         return {
             users:[],
             name: '',
-            term: ''
+            users_term: '',
+            tasks_term: ''
         }
     },
     methods: {
@@ -69,13 +76,29 @@ export default {
             card.classList.toggle('active')
             console.log(this.users);
         },
-        async test(term) {
-            const r = await axios.get(`/api/users/?search=${this.term}`)
-            console.log(r);
+        async SearchForUser(term) {
+            try {
+                const response = await axios.get(`/api/users/?search=${term}`)
+                console.log(response.data);
+            } catch (error) {
+                console.log(error.message);
+            }
         },
-        UpdateTerm(e) {
-            this.term= e.target.value
-            this.test(this.term)
+        async SearchForTasks(term) {
+            try {
+                const response = await axios.get(`/api/tasks-list/?search=${term}`)
+                console.log(response.data);
+            } catch (error) {
+                console.log(error.message);
+            }
+        },
+        UpdateUsersTerm(e) {
+            this.users_term= e.target.value
+            this.SearchForUser(this.users_term)
+        },
+        UpdateTasksTerm(e) {
+            this.tasks_term= e.target.value
+            this.SearchForTasks(this.tasks_term)
         },
     },
 }
