@@ -1,6 +1,5 @@
 <template>
   <SidebarMenu
-  v-if="screen_window_width > 380"
   :isLoggedIn="IsAuthenticated"
   :username="username"
   @UpdateTerm="onTermHandler"
@@ -18,7 +17,8 @@
     @checkToggle="checkToggle"
     @deleteTask="deleteTask"
     @Login="Login"
-    @Signup="Signup" />
+    @Signup="Signup"
+    />
   </div>
 </template>
 
@@ -41,7 +41,6 @@ export default {
       term: '',
       users:[],
       getting_users: false,
-      screen_window_width:window.screen.width
     }
   },
   methods: {
