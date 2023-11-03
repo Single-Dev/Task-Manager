@@ -13,6 +13,9 @@
                 @input="UpdateTasksTerm"
                 v-model="tasks_term"
                 >
+                <div class="card">
+                    {{ searched_tasks }}
+                </div>
                 <input
                 type="text"
                 class="form-control"
@@ -37,7 +40,9 @@ export default {
             users:[],
             name: '',
             users_term: '',
-            tasks_term: ''
+            tasks_term: '',
+            searched_tasks:[],
+            searched_users:'',
         }
     },
     methods: {
@@ -86,19 +91,26 @@ export default {
         },
         async SearchForTasks(term) {
             try {
+                this.searched_tasks = []
                 const response = await axios.get(`/api/search-task/?search=${term}`)
+                this.searched_tasks = response.data
                 console.log(response.data);
             } catch (error) {
                 console.log(error.message);
+            } finally{
+            }
+        },
+        UpdateTasksTerm(e) {
+            this.tasks_term= e.target.value
+            if(this.tasks_term.length > 3){
+                this.SearchForTasks(this.tasks_term)
             }
         },
         UpdateUsersTerm(e) {
             this.users_term= e.target.value
-            this.SearchForUser(this.users_term)
-        },
-        UpdateTasksTerm(e) {
-            this.tasks_term= e.target.value
-            this.SearchForTasks(this.tasks_term)
+            if(this.users_term.length > 3){
+                this.SearchForUser(this.users_term)
+            }
         },
     },
 }

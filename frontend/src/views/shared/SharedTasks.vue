@@ -64,8 +64,7 @@ export default {
         
     },
     mounted() {
-        this.getSharedTasks(),
-        this.test()
+        this.getSharedTasks()
     },
 }
 </script>
