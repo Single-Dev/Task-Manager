@@ -6,24 +6,22 @@
         <div class="card-form">
             <form @submit.prevent>
                 <input type="text" class="form-control" v-model="name" placeholder="Shared Task Name">
-                <input
-                type="text"
-                class="form-control mt-2 mb-2"
-                placeholder="Tasks"
-                @input="UpdateTasksTerm"
-                v-model="tasks_term"
-                >
-                <div class="card">
+                <input type="text" class="form-control mt-2 mb-2" placeholder="Tasks" @input="UpdateTasksTerm"
+                    v-model="tasks_term">
+                <div class="card" v-if="searched_tasks.length > 0">
                     {{ searched_tasks }}
+                    <div v-for="searched_task in searched_tasks">
+                        <div class="d-flex justify-content-beetwen">
+                            <input type="checkbox" v-model="searched_task.selected">
+                            <p>{{ searched_task.name }}</p>
+                        </div>
+                    </div>
                 </div>
-                <input
-                type="text"
-                class="form-control"
-                placeholder="e.g. username, username_1"
-                @input="UpdateUsersTerm"
-                v-model="users_term"
-                >
-
+                <input type="text" class="form-control" placeholder="e.g. username, username_1" @input="UpdateUsersTerm"
+                    v-model="users_term">
+                <div class="card" v-if="users.length > 0">
+                    {{ users }}
+                </div>
                 <div class="d-flex mt-2">
                     <button class="btn btn-dark w-50 mr-2" @click="addSharedTask">Add</button>
                     <button class="btn btn-outline-danger w-50" @click="btnToggle">Cancel</button>
@@ -37,12 +35,12 @@ import axios from 'axios'
 export default {
     data() {
         return {
-            users:[],
+            users: [],
             name: '',
             users_term: '',
             tasks_term: '',
-            searched_tasks:[],
-            searched_users:'',
+            searched_tasks: [],
+            searched_users: '',
         }
     },
     methods: {
@@ -83,7 +81,23 @@ export default {
         },
         async SearchForUser(term) {
             try {
+                this.users = [];
                 const response = await axios.get(`/api/users/?search=${term}`)
+                const profiles = await axios.get('/api/profiles/')
+                response.data.forEach(e => {
+                    const profile = profiles.data.find(profile => profile.user === e.id);
+                    const user = {
+                        id: e.id,
+                        first_name: e.first_name,
+                        last_name: e.last_name,
+                        email: e.email,
+                        username: e.username,
+                        profile_photo: profile.profile_photo,
+                        bio: profile.bio,
+                        selected: false
+                    }
+                    this.users.push(user)
+                })
                 console.log(response.data);
             } catch (error) {
                 console.log(error.message);
@@ -93,22 +107,33 @@ export default {
             try {
                 this.searched_tasks = []
                 const response = await axios.get(`/api/search-task/?search=${term}`)
-                this.searched_tasks = response.data
+                response.data.forEach(e => {
+                    const tasks = {
+                        id: e.id,
+                        name: e.name,
+                        caption: e.caption,
+                        done: e.done,
+                        created_on: e.created_on,
+                        owner: e.owner,
+                        selected: false,
+                    }
+                    this.searched_tasks.push(tasks)
+                })
                 console.log(response.data);
             } catch (error) {
                 console.log(error.message);
-            } finally{
+            } finally {
             }
         },
         UpdateTasksTerm(e) {
-            this.tasks_term= e.target.value
-            if(this.tasks_term.length > 3){
+            this.tasks_term = e.target.value
+            if (this.tasks_term.length > 3) {
                 this.SearchForTasks(this.tasks_term)
             }
         },
         UpdateUsersTerm(e) {
-            this.users_term= e.target.value
-            if(this.users_term.length > 3){
+            this.users_term = e.target.value
+            if (this.users_term.length > 3) {
                 this.SearchForUser(this.users_term)
             }
         },
