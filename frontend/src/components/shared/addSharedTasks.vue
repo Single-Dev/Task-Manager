@@ -19,8 +19,13 @@
                 </div>
                 <input type="text" class="form-control" placeholder="e.g. username, username_1" @input="UpdateUsersTerm"
                     v-model="users_term">
-                <div class="card" v-if="users.length > 0">
-                    {{ users }}
+                <div class="card" v-if="searched_users.length > 0">
+                    <div class="p-1" v-for="searched_user in searched_users">
+                        <input type="checkbox" v-model="searched_user.selected">
+                        <img :src="apiBaseURL + searched_user.profile_photo" alt="avatar" class="img-fluid rounded-circle me-1" width="35">
+                        <p>{{ searched_user.first_name }}</p>
+                        <a :href="'/@'+ searched_user.username">@{{ searched_user.username }}</a>
+                    </div>
                 </div>
                 <div class="d-flex mt-2">
                     <button class="btn btn-dark w-50 mr-2" @click="addSharedTask">Add</button>
@@ -40,7 +45,13 @@ export default {
             users_term: '',
             tasks_term: '',
             searched_tasks: [],
-            searched_users: '',
+            searched_users: [],
+        }
+    },
+    props:{
+        apiBaseURL:{
+            type:String,
+            required: true
         }
     },
     methods: {
@@ -81,7 +92,7 @@ export default {
         },
         async SearchForUser(term) {
             try {
-                this.users = [];
+                this.searched_users = [];
                 const response = await axios.get(`/api/users/?search=${term}`)
                 const profiles = await axios.get('/api/profiles/')
                 response.data.forEach(e => {
@@ -89,16 +100,13 @@ export default {
                     const user = {
                         id: e.id,
                         first_name: e.first_name,
-                        last_name: e.last_name,
-                        email: e.email,
                         username: e.username,
                         profile_photo: profile.profile_photo,
-                        bio: profile.bio,
                         selected: false
                     }
-                    this.users.push(user)
+                    this.searched_users.push(user)
+                    console.log(user)
                 })
-                console.log(response.data);
             } catch (error) {
                 console.log(error.message);
             }
@@ -111,9 +119,7 @@ export default {
                     const tasks = {
                         id: e.id,
                         name: e.name,
-                        caption: e.caption,
                         done: e.done,
-                        created_on: e.created_on,
                         owner: e.owner,
                         selected: false,
                     }
