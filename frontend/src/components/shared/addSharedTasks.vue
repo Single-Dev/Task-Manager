@@ -9,11 +9,11 @@
                 <input type="text" class="form-control mt-2 mb-2" placeholder="Tasks" @input="UpdateTasksTerm"
                     v-model="tasks_term">
                 <div class="card" v-if="searched_tasks.length > 0">
-                    {{ searched_tasks }}
-                    <div v-for="searched_task in searched_tasks">
-                        <div class="d-flex justify-content-beetwen">
+                    <div class="p-1" v-for="searched_task in searched_tasks">
+                        <div class="d-flex justify-content-around align-items-center">
                             <input type="checkbox" v-model="searched_task.selected">
-                            <p>{{ searched_task.name }}</p>
+                            <p class="paragaph">{{ searched_task.name }}</p>
+                            <p class="paragaph">status: {{ searched_task.done }}</p>
                         </div>
                     </div>
                 </div>
@@ -140,6 +140,8 @@ export default {
     },
 }
 </script>
-<style lang="">
-    
+<style scoped>
+    .paragaph{
+        margin-top: 15px;
+    }
 </style>
