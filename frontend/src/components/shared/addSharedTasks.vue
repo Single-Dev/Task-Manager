@@ -1,31 +1,43 @@
 <template>
-    <div class="ps-r">
-        <div class="div">
-            <button @click="btnToggle" class="btn btn-outline-dark">Add</button>
-        </div>
+    <div class="div">
+        <button @click="btnToggle" class="btn btn-outline-dark">Add</button>
+    </div>
+    <div class="box">
         <div class="card-form">
             <form @submit.prevent>
                 <input type="text" class="form-control" v-model="name" placeholder="Shared Task Name">
                 <input type="text" class="form-control mt-2 mb-2" placeholder="Tasks" @input="UpdateTasksTerm"
                     v-model="tasks_term">
                 <div class="card" v-if="searched_tasks.length > 0">
-                    <div class="p-1" v-for="searched_task in searched_tasks">
-                        <div class="d-flex justify-content-around align-items-center">
-                            <input type="checkbox" v-model="searched_task.selected">
-                            <p class="paragaph">{{ searched_task.name }}</p>
-                            <p class="paragaph">status: {{ searched_task.done }}</p>
-                        </div>
-                    </div>
+                    <ul class="list-group mb-0">
+                        <li v-for="task in searched_tasks"
+                            class="list-group-item d-flex align-items-center border-0 mb-2 rounded mt-3 justify-content-between">
+                            <div class="mx-2 d-flex align-items-center justify-content-around">
+                                <input type="checkbox" v-model="task.selected">
+                                <h6>{{ task.name }}</h6>
+                                <h6>status: {{ task.done }}</h6>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
                 <input type="text" class="form-control" placeholder="e.g. username, username_1" @input="UpdateUsersTerm"
                     v-model="users_term">
                 <div class="card" v-if="searched_users.length > 0">
-                    <div class="p-1" v-for="searched_user in searched_users">
-                        <input type="checkbox" v-model="searched_user.selected">
-                        <img :src="apiBaseURL + searched_user.profile_photo" alt="avatar" class="img-fluid rounded-circle me-1" width="35">
-                        <p>{{ searched_user.first_name }}</p>
-                        <a :href="'/@'+ searched_user.username">@{{ searched_user.username }}</a>
-                    </div>
+                    <ul class="list-group mb-0">
+                        <li v-for="user in searched_users"
+                            class="list-group-item d-flex align-items-center border-0 mb-2 rounded mt-3 justify-content-between">
+                            <div class="mx-2 d-flex align-items-center">
+                                <input type="checkbox" v-model="user.selected">
+                                <img :src="apiBaseURL + user.profile_photo" alt="avatar"
+                                    class="img-fluid rounded-circle me-1 ml-2" width="35">
+                                <h6 class="m-0">{{ user.first_name }}</h6>
+                            </div>
+
+                            <div>
+                                <router-link class="text-dark" :to="'/@' + user.username">@{{ user.username }}</router-link>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
                 <div class="d-flex mt-2">
                     <button class="btn btn-dark w-50 mr-2" @click="addSharedTask">Add</button>
@@ -48,9 +60,9 @@ export default {
             searched_users: [],
         }
     },
-    props:{
-        apiBaseURL:{
-            type:String,
+    props: {
+        apiBaseURL: {
+            type: String,
             required: true
         }
     },
@@ -88,7 +100,6 @@ export default {
         btnToggle() {
             let card = document.querySelector('.card-form')
             card.classList.toggle('active')
-            console.log(this.users);
         },
         async SearchForUser(term) {
             try {
@@ -147,7 +158,16 @@ export default {
 }
 </script>
 <style scoped>
-    .paragaph{
-        margin-top: 15px;
-    }
+.box {
+    box-shadow: 0px 8px 60px -10px rgba(13, 28, 39, 0.6);
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 15px;
+}
+
+.card li {
+    background-color: #f4f6f7;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
 </style>
