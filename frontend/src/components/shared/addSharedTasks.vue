@@ -8,16 +8,24 @@
                 <input type="text" class="form-control" v-model="name" placeholder="Shared Task Name">
                 <input type="text" class="form-control mt-2 mb-2" placeholder="Tasks" @input="UpdateTasksTerm"
                     v-model="tasks_term">
-                <div class="card" v-if="searched_tasks.length > 0">
+                <div class="card">
                     <ul class="list-group mb-0">
-                        <li v-for="task in searched_tasks"
-                            class="list-group-item d-flex align-items-center border-0 mb-2 rounded mt-3 justify-content-between">
-                            <div class="mx-2 d-flex align-items-center justify-content-around">
-                                <input type="checkbox" v-model="task.selected">
-                                <h6>{{ task.name }}</h6>
-                                <h6>status: {{ task.done }}</h6>
-                            </div>
-                        </li>
+                        <div v-if="!searched_tasks.length && !isTasksLoading">
+                            <h6 v-if="tasks_term.length > 0">Topilmadi...</h6>
+                        </div>
+                        <div v-else-if="isTasksLoading" class="d-flex justify-content-center align-items-center p-2">
+                            <loader />
+                        </div>
+                        <div v-else>
+                            <li v-for="task in searched_tasks"
+                                class="list-group-item d-flex align-items-center border-0 mb-2 rounded mt-3 justify-content-between">
+                                <div class="mx-2 d-flex align-items-center justify-content-around">
+                                    <input type="checkbox" v-model="task.selected">
+                                    <h6>{{ task.name }}</h6>
+                                    <h6>status: {{ task.done }}</h6>
+                                </div>
+                            </li>
+                        </div>
                     </ul>
                 </div>
                 <input type="text" class="form-control" placeholder="e.g. username, username_1" @input="UpdateUsersTerm"
@@ -58,6 +66,8 @@ export default {
             tasks_term: '',
             searched_tasks: [],
             searched_users: [],
+            isTasksLoading: false,
+            isUsersLoading: false
         }
     },
     props: {
@@ -125,6 +135,7 @@ export default {
         async SearchForTasks(term) {
             try {
                 this.searched_tasks = []
+                this.isTasksLoading = true
                 const response = await axios.get(`/api/search-task/?search=${term}`)
                 response.data.forEach(e => {
                     const tasks = {
@@ -140,6 +151,7 @@ export default {
             } catch (error) {
                 console.log(error.message);
             } finally {
+                this.isTasksLoading = false
             }
         },
         UpdateTasksTerm(e) {
