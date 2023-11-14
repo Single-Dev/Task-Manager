@@ -17,14 +17,19 @@
                             <loader />
                         </div>
                         <div v-else>
+                            <div v-for="task in toAddTasks">
+                                <span>{{ task.id }}</span>
+                            </div>
                             <li v-for="task in searched_tasks"
                                 class="list-group-item d-flex align-items-center border-0 mb-2 rounded mt-3 justify-content-between">
                                 <div class="mx-2 d-flex align-items-center justify-content-around">
-                                    <input type="checkbox" v-model="task.selected">
+                                    <input type="checkbox" v-model="task.selected"
+                                    >
                                     <h6>{{ task.name }}</h6>
                                     <h6>status: {{ task.done }}</h6>
                                 </div>
                             </li>
+                            <button class="w-100 btn btn-outline-info"  @click="toAddTasksFunc">Add</button>
                         </div>
                     </ul>
                 </div>
@@ -67,7 +72,9 @@ export default {
             searched_tasks: [],
             searched_users: [],
             isTasksLoading: false,
-            isUsersLoading: false
+            isUsersLoading: false,
+            toAddTasks: [],
+            toAddUsers: []
         }
     },
     props: {
@@ -77,7 +84,14 @@ export default {
         }
     },
     methods: {
-        async addSharedTask() {
+        toAddTasksFunc() {
+            this.toAddTasks = []
+            this.searched_tasks.forEach(e=>{
+                if(e.selected == true){
+                    this.toAddTasks.push(e)
+                    console.log(this.toAddTasks);
+                }
+            })
             // try {
             //     const userInfo = await axios.get(`/api/users/bekzodbek/`)
             //     this.users.push(userInfo.data.id)
@@ -85,27 +99,27 @@ export default {
             // } catch (error) {
             //     console.log(error.message);
             // }
-            const formData = {
-                owner: this.user_id,
-                name: this.name,
-                // tasks: [this.tasks],
-                // users: [this.users],
-                created_on: new Date()
-            }
+            // const formData = {
+            //     owner: this.user_id,
+            //     name: this.name,
+            //     // tasks: [this.tasks],
+            //     // users: [this.users],
+            //     created_on: new Date()
+            // }
 
-            try {
-                const response = await axios.post('/api/add-shared-task/', formData)
-                this.sharedTasks.push(response.data)
-                this.isLoading = true
-            } catch (error) {
-                alert(error.message)
-            } finally {
-                this.isLoading = false
-                // this.name = ''
-                // this.tasks = ''
-                // this.users = ''
-            }
-            this.btnToggle()
+            // try {
+            //     const response = await axios.post('/api/add-shared-task/', formData)
+            //     this.sharedTasks.push(response.data)
+            //     this.isLoading = true
+            // } catch (error) {
+            //     alert(error.message)
+            // } finally {
+            //     this.isLoading = false
+            //     // this.name = ''
+            //     // this.tasks = ''
+            //     // this.users = ''
+            // }
+            // this.btnToggle()
         },
         btnToggle() {
             let card = document.querySelector('.card-form')
@@ -147,7 +161,6 @@ export default {
                     }
                     this.searched_tasks.push(tasks)
                 })
-                console.log(response.data);
             } catch (error) {
                 console.log(error.message);
             } finally {
