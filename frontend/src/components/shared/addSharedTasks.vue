@@ -8,7 +8,7 @@
                 <input type="text" class="form-control" v-model="name" placeholder="Shared Task Name">
                 <input type="text" class="form-control mt-2 mb-2" placeholder="Tasks" @input="UpdateTasksTerm"
                     v-model="tasks_term">
-                <div class="card">
+                <div class="card" v-if="searched_tasks.length > 0">
                     <ul class="list-group mb-0">
                         <div v-if="!searched_tasks.length && !isTasksLoading">
                             <h6 v-if="tasks_term.length > 0">Topilmadi...</h6>
@@ -17,8 +17,8 @@
                             <loader />
                         </div>
                         <div v-else>
-                            <div v-for="task in toAddTasks">
-                                <span>{{ task.id }}</span>
+                            <div v-for="task in toAddTasks" class="d-flex">
+                                    <span class="border m-2 rounded p-2">{{ task.name }}</span>
                             </div>
                             <li v-for="task in searched_tasks"
                                 class="list-group-item d-flex align-items-center border-0 mb-2 rounded mt-3 justify-content-between">
@@ -33,7 +33,7 @@
                         </div>
                     </ul>
                 </div>
-                <input type="text" class="form-control" placeholder="e.g. username, username_1" @input="UpdateUsersTerm"
+                <input type="text" class="form-control" placeholder="Username" @input="UpdateUsersTerm"
                     v-model="users_term">
                 <div class="card" v-if="searched_users.length > 0">
                     <ul class="list-group mb-0">
