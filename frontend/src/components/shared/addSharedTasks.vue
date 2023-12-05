@@ -2,7 +2,7 @@
     <div class="div">
         <button @click="btnToggle" class="btn btn-outline-dark">Add</button>
     </div>
-    <div class="box w-50">
+    <div class="box">
         <div class="card-form">
             <form @submit.prevent>
                 <input type="text" class="form-control" v-model="name" placeholder="Shared Task Name">
@@ -188,6 +188,9 @@ export default {
 }
 </script>
 <style scoped>
+body{
+    transition: 5s;
+}
 .box {
     box-shadow: 0px 8px 60px -10px rgba(13, 28, 39, 0.6);
     background-color: #fff;
