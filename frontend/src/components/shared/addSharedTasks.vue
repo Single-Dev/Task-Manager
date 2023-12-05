@@ -2,7 +2,7 @@
     <div class="div">
         <button @click="btnToggle" class="btn btn-outline-dark">Add</button>
     </div>
-    <div class="box">
+    <div class="box w-50">
         <div class="card-form">
             <form @submit.prevent>
                 <input type="text" class="form-control" v-model="name" placeholder="Shared Task Name">
@@ -17,8 +17,13 @@
                             <loader />
                         </div>
                         <div v-else>
-                            <div v-for="task in toAddTasks" class="d-flex">
-                                    <span class="border m-2 rounded p-2">{{ task.name }}</span>
+                            <div class="d-flex flex-wrap">
+                                <div v-for="task in toAddTasks">
+                                    <div class="border m-2 rounded p-2">
+                                        {{ task.name }}
+                                        <i class="fas fa-close text-danger"></i>
+                                    </div>
+                                </div>
                             </div>
                             <li v-for="task in searched_tasks"
                                 class="list-group-item d-flex align-items-center border-0 mb-2 rounded mt-3 justify-content-between">
