@@ -27,14 +27,13 @@
                             </div>
                             <li v-for="task in searched_tasks"
                                 class="list-group-item d-flex align-items-center border-0 mb-2 rounded mt-3 justify-content-between">
-                                <div class="mx-2 d-flex align-items-center justify-content-around">
-                                    <input type="checkbox" v-model="task.selected"
-                                    >
                                     <h6>{{ task.name }}</h6>
-                                    <h6>status: {{ task.done }}</h6>
-                                </div>
+                                    <div class="d-flex align-items-center">
+                                        <h6 class="mx-2">status: {{ task.done }}</h6>
+                                        <input type="checkbox" v-model="task.selected">
+                                    </div>
                             </li>
-                            <button class="w-100 btn btn-outline-info"  @click="toAddTasksFunc">Add</button>
+                            <button class="w-100 btn btn-outline-info my-2"  @click="toAddTasksFunc">Add</button>
                         </div>
                     </ul>
                 </div>
