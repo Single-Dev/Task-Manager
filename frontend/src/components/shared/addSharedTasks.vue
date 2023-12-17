@@ -45,16 +45,16 @@
                         <li v-for="user in searched_users"
                             class="list-group-item d-flex align-items-center border-0 mb-2 rounded mt-3 justify-content-between">
                             <div class="mx-2 d-flex align-items-center">
-                                <input type="checkbox" v-model="user.selected">
                                 <img :src="apiBaseURL + user.profile_photo" alt="avatar"
                                     class="img-fluid rounded-circle me-1 ml-2" width="35">
                                 <h6 class="m-0">{{ user.first_name }}</h6>
                             </div>
-
                             <div>
-                                <router-link class="text-dark" :to="'/@' + user.username">@{{ user.username }}</router-link>
+                                <router-link class="text-dark mx-2" :to="'/@' + user.username">@{{ user.username }}</router-link>
+                                <input type="checkbox" v-model="user.selected">
                             </div>
                         </li>
+                        <button class="btn btn-outline-info" @click="toAddUsersFunc">Add</button>
                     </ul>
                 </div>
                 <div class="d-flex mt-2">
@@ -125,6 +125,16 @@ export default {
             //     // this.users = ''
             // }
             // this.btnToggle()
+        },
+        toAddUsersFunc(){
+            this.toAddUsers = []
+            this.searched_users.forEach(e=>{
+                if(e.selected == true){
+                    this.toAddUsers.push(e)
+                    console.log(this.toAddUsers);
+                }
+            })
+            console.log(this.toAddUsers);
         },
         btnToggle() {
             let card = document.querySelector('.card-form')
