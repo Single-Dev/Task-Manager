@@ -40,20 +40,37 @@
                 </div>
                 <input type="text" class="form-control" placeholder="Username" @input="UpdateUsersTerm"
                     v-model="users_term">
+
                 <div class="card" v-if="searched_users.length > 0">
                     <ul class="list-group mb-0">
-                        <li v-for="user in searched_users"
-                            class="list-group-item d-flex align-items-center border-0 mb-2 rounded mt-3 justify-content-between">
-                            <div class="mx-2 d-flex align-items-center">
-                                <img :src="apiBaseURL + user.profile_photo" alt="avatar"
-                                    class="img-fluid rounded-circle me-1 ml-2" width="35">
-                                <h6 class="m-0">{{ user.first_name }}</h6>
+                        <div v-if="!searched_users.length && !isUsersLoading">
+                            <h6 v-if="users_term.length > 0">Topilmadi...</h6>
+                        </div>
+                        <div v-else-if="isUsersLoading" class="d-flex justify-content-center align-items-center p-2">
+                            <loader />
+                        </div>
+                        <div v-else>
+                            <div class="d-flex flex-wrap">
+                                <div v-for="user in toAddUsers">
+                                    <div class="border m-2 rounded p-2">
+                                        @{{ user.username }}
+                                        <i class="fas fa-close text-danger"></i>
+                                    </div>
+                                </div>
                             </div>
-                            <div>
-                                <router-link class="text-dark mx-2" :to="'/@' + user.username">@{{ user.username }}</router-link>
-                                <input type="checkbox" v-model="user.selected">
-                            </div>
-                        </li>
+                            <li v-for="user in searched_users"
+                                class="list-group-item d-flex align-items-center border-0 mb-2 rounded mt-3 justify-content-between">
+                                <div class="mx-2 d-flex align-items-center">
+                                    <img :src="apiBaseURL + user.profile_photo" alt="avatar"
+                                        class="img-fluid rounded-circle me-1 ml-2" width="35">
+                                    <h6 class="m-0">{{ user.first_name }}</h6>
+                                </div>
+                                <div>
+                                    <router-link class="text-dark mx-2" :to="'/@' + user.username">@{{ user.username }}</router-link>
+                                    <input type="checkbox" v-model="user.selected">
+                                </div>
+                            </li>
+                        </div>
                         <button class="btn btn-outline-info" @click="toAddUsersFunc">Add</button>
                     </ul>
                 </div>
@@ -142,6 +159,7 @@ export default {
         },
         async SearchForUser(term) {
             try {
+                this.isUsersLoading = true
                 this.searched_users = [];
                 const response = await axios.get(`/api/users/?search=${term}`)
                 const profiles = await axios.get('/api/profiles/')
@@ -159,12 +177,14 @@ export default {
                 })
             } catch (error) {
                 console.log(error.message);
+            } finally{
+                this.isUsersLoading = false
             }
         },
         async SearchForTasks(term) {
             try {
-                this.searched_tasks = []
                 this.isTasksLoading = true
+                this.searched_tasks = []
                 const response = await axios.get(`/api/search-task/?search=${term}`)
                 response.data.forEach(e => {
                     const tasks = {
