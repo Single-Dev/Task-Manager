@@ -2,7 +2,7 @@
     <div class="gradient-custom">
         <section class="d-flex justify-content-center align-items-center">
             <div class="row">
-                <addSharedTasksVue :apiBaseURL="apiBaseURL"/>
+                <addSharedTasksVue :apiBaseURL="apiBaseURL" :user_id="user_id"/>
                 <div v-if="!sharedTasks.length && !isLoading">
                     <h2>Topilmadi..</h2>
                 </div>

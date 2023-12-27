@@ -74,7 +74,7 @@
                     </ul>
                 </div>
                 <div class="d-flex mt-2">
-                    <button class="btn btn-dark w-50 mr-2" @click="addSharedTask">Add</button>
+                    <button class="btn btn-dark w-50 mr-2" @click="submitForm">Add</button>
                     <button class="btn btn-outline-danger w-50" @click="btnToggle">Cancel</button>
                 </div>
             </form>
@@ -102,9 +102,28 @@ export default {
         apiBaseURL: {
             type: String,
             required: true
+        },
+        user_id:{
+            type: Number,
+            required: true
         }
     },
     methods: {
+        async submitForm(){
+            const formData = {
+                owner: this.user_id,
+                name: this.name,
+                tasks: this.toAddTasks,
+                users: this.toAddUsers,
+                created_on: new Date()
+            }
+            try {
+                const response =  await axios.post('/api/add-shared-task/', formData)
+                console.log(response);
+            } catch (error) {
+                alert(error.message)
+            }
+        },
         toAddTasksFunc() {
             this.toAddTasks = []
             this.searched_tasks.forEach(e=>{
