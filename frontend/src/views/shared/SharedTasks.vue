@@ -101,9 +101,6 @@ export default {
     box-shadow: 0px 8px 60px -10px rgba(13, 28, 39, 0.6);
 }
 
-/* .card-form{
-} */
-
 .active {
     opacity: 1 !important;
     z-index: 2;
