@@ -20,7 +20,7 @@
                             <div class="d-flex flex-wrap">
                                 <div v-for="task in toAddTasks">
                                     <div class="border m-2 rounded p-2">
-                                        {{ task.name }}
+                                        Id:{{ task }}
                                         <i class="fas fa-close text-danger"></i>
                                     </div>
                                 </div>
@@ -52,7 +52,7 @@
                             <div class="d-flex flex-wrap">
                                 <div v-for="user in toAddUsers">
                                     <div class="border m-2 rounded p-2">
-                                        @{{ user.username }}
+                                        Id:{{ user }}
                                         <i class="fas fa-close text-danger"></i>
                                     </div>
                                 </div>
@@ -122,13 +122,15 @@ export default {
                 console.log(response);
             } catch (error) {
                 alert(error.message)
+            } finally{
+                this.$router.push('/shared-tasks')
             }
         },
         toAddTasksFunc() {
             this.toAddTasks = []
             this.searched_tasks.forEach(e=>{
                 if(e.selected == true){
-                    this.toAddTasks.push(e)
+                    this.toAddTasks.push(e.id)
                     console.log(this.toAddTasks);
                 }
             })
@@ -165,7 +167,7 @@ export default {
             this.toAddUsers = []
             this.searched_users.forEach(e=>{
                 if(e.selected == true){
-                    this.toAddUsers.push(e)
+                    this.toAddUsers.push(e.id)
                     console.log(this.toAddUsers);
                 }
             })
@@ -177,8 +179,8 @@ export default {
         },
         async SearchForUser(term) {
             try {
-                this.isUsersLoading = true
                 this.searched_users = [];
+                this.isUsersLoading = true
                 const response = await axios.get(`/api/users/?search=${term}`)
                 const profiles = await axios.get('/api/profiles/')
                 response.data.forEach(e => {
@@ -239,11 +241,9 @@ export default {
 body{
     transition: 5s;
 }
-.box {
-    box-shadow: 0px 8px 60px -10px rgba(13, 28, 39, 0.6);
-    background-color: #fff;
-    padding: 15px;
-    border-radius: 15px;
+
+.div{
+    margin-top: 50px;
 }
 
 .card li {
@@ -251,4 +251,23 @@ body{
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
 }
+
+.card-form {
+    width: 580px;
+    padding: 10px;
+    position: absolute;
+    top: 20px;
+    opacity: 0;
+    z-index: -1;
+    transition: 500ms;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0px 8px 60px -10px rgba(13, 28, 39, 0.6);
+}
+
+.active {
+    opacity: 1 !important;
+    z-index: 2;
+}
+
 </style>

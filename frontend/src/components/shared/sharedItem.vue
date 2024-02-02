@@ -3,7 +3,7 @@
         <div class="card-body p-4">
             <h3 class="mb-3">{{ sharedTask.name }}</h3>
             <p class="small mb-0"><i class="fas fa-star fa-lg text-warning"></i> <span class="mx-2">|</span>
-                Public <span class="mx-2">|</span> Created by <strong>{{sharedTaskOwner}}</strong> on {{ sharedTask.created_on }}
+                Public <span class="mx-2">|</span> Created by <strong><router-link :to="'/@' + sharedTaskOwner">@{{ sharedTaskOwner }}</router-link></strong> on {{ sharedTask.created_on }}
             </p>
             <hr class="my-4">
             <div class="d-flex justify-content-start align-items-center">
@@ -76,7 +76,7 @@ export default {
     },
     mounted() {
         // this.getUsers()
-        // this.getSharedTaskOwnerInfo()
+        this.getSharedTaskOwnerInfo()
     },
 }
 </script>
