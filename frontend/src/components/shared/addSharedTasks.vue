@@ -126,53 +126,6 @@ export default {
                 this.$router.push('/shared-tasks')
             }
         },
-        toAddTasksFunc() {
-            this.toAddTasks = []
-            this.searched_tasks.forEach(e=>{
-                if(e.selected == true){
-                    this.toAddTasks.push(e.id)
-                    console.log(this.toAddTasks);
-                }
-            })
-            // try {
-            //     const userInfo = await axios.get(`/api/users/bekzodbek/`)
-            //     this.users.push(userInfo.data.id)
-            //     console.log(this.users);
-            // } catch (error) {
-            //     console.log(error.message);
-            // }
-            // const formData = {
-            //     owner: this.user_id,
-            //     name: this.name,
-            //     // tasks: [this.tasks],
-            //     // users: [this.users],
-            //     created_on: new Date()
-            // }
-
-            // try {
-            //     const response = await axios.post('/api/add-shared-task/', formData)
-            //     this.sharedTasks.push(response.data)
-            //     this.isLoading = true
-            // } catch (error) {
-            //     alert(error.message)
-            // } finally {
-            //     this.isLoading = false
-            //     // this.name = ''
-            //     // this.tasks = ''
-            //     // this.users = ''
-            // }
-            // this.btnToggle()
-        },
-        toAddUsersFunc(){
-            this.toAddUsers = []
-            this.searched_users.forEach(e=>{
-                if(e.selected == true){
-                    this.toAddUsers.push(e.id)
-                    console.log(this.toAddUsers);
-                }
-            })
-            console.log(this.toAddUsers);
-        },
         btnToggle() {
             let card = document.querySelector('.card-form')
             card.classList.toggle('active')
@@ -233,6 +186,25 @@ export default {
             if (this.users_term.length > 3) {
                 this.SearchForUser(this.users_term)
             }
+        },
+        toAddTasksFunc() {
+            this.toAddTasks = []
+            this.searched_tasks.forEach(e=>{
+                if(e.selected == true){
+                    this.toAddTasks.push(e.id)
+                }
+            })
+            this.tasks_term = ''
+        },
+        toAddUsersFunc(){
+            this.toAddUsers = []
+            this.searched_users.forEach(e=>{
+                if(e.selected == true){
+                    this.toAddUsers.push(e.id)
+                    console.log(this.toAddUsers);
+                }
+            })
+            console.log(this.toAddUsers);
         },
     },
 }
